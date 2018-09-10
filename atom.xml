@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://araid0628.github.io/"/>
-  <updated>2018-09-09T07:07:47.559Z</updated>
+  <updated>2018-09-10T05:19:55.576Z</updated>
   <id>https://araid0628.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用插件和IDM下载百度云盘</title>
+    <link href="https://araid0628.github.io/2018/09/10/%E4%BD%BF%E7%94%A8%E6%8F%92%E4%BB%B6%E5%92%8CIDM%E4%B8%8B%E8%BD%BD%E7%99%BE%E5%BA%A6%E4%BA%91%E7%9B%98/"/>
+    <id>https://araid0628.github.io/2018/09/10/使用插件和IDM下载百度云盘/</id>
+    <published>2018-09-10T04:58:54.000Z</published>
+    <updated>2018-09-10T05:19:55.576Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>在某度云上保存了很多课程，但因为某度对于网盘速度的限制，只能寻找破解版某度云盘下载文件。听说破解版最近不好使了，在网上查找了很多方法，发现只有利用Chrome的插件和IDM才能达到最理想的下载效果。</p><h3 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h3><ul><li>Chrome浏览器</li><li>IDM下载器（(Integrated Data Multiplexer）</li><li>扩展程序 BaiduPan Explorer</li></ul><h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ul><li>安装上述软件</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h3&gt;&lt;p&gt;在某度云上保存了很多课程，但因为某度对于网盘速度的限制，只能寻找破解版某度云盘下载文件。听说破解版最近不好使了，在网上查找了很多方法，发现只
+      
+    
+    </summary>
+    
+      <category term="技巧" scheme="https://araid0628.github.io/categories/%E6%8A%80%E5%B7%A7/"/>
+    
+    
+      <category term="IDM" scheme="https://araid0628.github.io/tags/IDM/"/>
+    
+      <category term="插件" scheme="https://araid0628.github.io/tags/%E6%8F%92%E4%BB%B6/"/>
+    
+  </entry>
   
   <entry>
     <title>你好，Hexo</title>
