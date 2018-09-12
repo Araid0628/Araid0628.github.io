@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://araid0628.github.io/"/>
-  <updated>2018-09-10T11:22:12.510Z</updated>
+  <updated>2018-09-12T08:56:02.934Z</updated>
   <id>https://araid0628.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://araid0628.github.io/2018/09/10/%E4%BD%BF%E7%94%A8%E6%8F%92%E4%BB%B6%E5%92%8CIDM%E4%B8%8B%E8%BD%BD%E7%99%BE%E5%BA%A6%E4%BA%91%E7%9B%98/"/>
     <id>https://araid0628.github.io/2018/09/10/使用插件和IDM下载百度云盘/</id>
     <published>2018-09-10T04:58:54.000Z</published>
-    <updated>2018-09-10T11:22:12.510Z</updated>
+    <updated>2018-09-12T08:56:02.934Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>在某度云上保存了很多课程，但因为某度对于网盘速度的限制，只能寻找破解版某度云盘下载文件。听说破解版最近不好使了，在网上查找了很多方法，发现只有利用Chrome的插件和IDM才能达到最理想的下载效果。</p><h3 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h3><ul><li>Chrome浏览器</li><li>IDM下载器（(Integrated Data Multiplexer）</li><li>扩展程序 BaiduPan Explorer</li></ul><h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ul><li>安装上述软件</li></ul>]]></content>
+    <content type="html"><![CDATA[<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>在某度云上保存了很多课程，但因为某度对于网盘速度的限制，只能寻找破解版某度云盘下载文件。听说破解版最近不好使了，在网上查找了很多方法，发现只有利用Chrome的插件和IDM才能达到最理想的下载效果。</p><h3 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h3><ul><li>Chrome浏览器</li><li>IDM下载器（(Integrated Data Multiplexer）</li><li>扩展程序 BaiduPan Explorer</li></ul><h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ul><li>安装上述软件</li><li>使用插件抓取链接<br><img src="images/idm1.png" alt="链接"></li><li>使用IDM下载即可</li></ul>]]></content>
     
     <summary type="html">
     
