@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://araid0628.github.io/"/>
-  <updated>2018-09-19T12:46:29.075Z</updated>
+  <updated>2018-09-19T13:06:09.811Z</updated>
   <id>https://araid0628.github.io/</id>
   
   <author>
@@ -17,16 +17,33 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>数据挖掘WEEK1作业</title>
+    <title>数据挖掘 Week1作业</title>
     <link href="https://araid0628.github.io/2018/09/19/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98WEEK1%E4%BD%9C%E4%B8%9A/"/>
     <id>https://araid0628.github.io/2018/09/19/数据挖掘WEEK1作业/</id>
     <published>2018-09-19T12:46:29.000Z</published>
-    <updated>2018-09-19T12:46:29.075Z</updated>
+    <updated>2018-09-19T13:06:09.811Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="第一周作业要求"><a href="#第一周作业要求" class="headerlink" title="第一周作业要求"></a>第一周作业要求</h3><p>2组  人工搜集中国科学院院士、中国工程院院士的名单，在百度自动获取院士个人主页url，编写爬虫采集院士人类学、学位、研究方向和国家科技奖数据，设计数据库表，保存数据。</p><h3 id="小组分工"><a href="#小组分工" class="headerlink" title="小组分工"></a>小组分工</h3><p>CHY：科学院院士信息抓取<br>ZBC：数据到MySQL<br>me：工程院院士信息抓取</p>]]></content>
     
     <summary type="html">
     
+      
+      
+        &lt;h3 id=&quot;第一周作业要求&quot;&gt;&lt;a href=&quot;#第一周作业要求&quot; class=&quot;headerlink&quot; title=&quot;第一周作业要求&quot;&gt;&lt;/a&gt;第一周作业要求&lt;/h3&gt;&lt;p&gt;2组  人工搜集中国科学院院士、中国工程院院士的名单，在百度自动获取院士个人主页url，编写爬虫采集
+      
+    
     </summary>
     
+      <category term="作业" scheme="https://araid0628.github.io/categories/%E4%BD%9C%E4%B8%9A/"/>
+    
+    
+      <category term="数据挖掘" scheme="https://araid0628.github.io/tags/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/"/>
+    
+      <category term="正则表达式" scheme="https://araid0628.github.io/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    
+      <category term="爬虫" scheme="https://araid0628.github.io/tags/%E7%88%AC%E8%99%AB/"/>
+    
+      <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
     
   </entry>
   
@@ -35,7 +52,7 @@
     <link href="https://araid0628.github.io/2018/09/10/%E4%BD%BF%E7%94%A8%E6%8F%92%E4%BB%B6%E5%92%8CIDM%E4%B8%8B%E8%BD%BD%E7%99%BE%E5%BA%A6%E4%BA%91%E7%9B%98/"/>
     <id>https://araid0628.github.io/2018/09/10/使用插件和IDM下载百度云盘/</id>
     <published>2018-09-10T04:58:54.000Z</published>
-    <updated>2018-09-12T08:56:02.934Z</updated>
+    <updated>2018-09-19T12:53:52.835Z</updated>
     
     <content type="html"><![CDATA[<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>在某度云上保存了很多课程，但因为某度对于网盘速度的限制，只能寻找破解版某度云盘下载文件。听说破解版最近不好使了，在网上查找了很多方法，发现只有利用Chrome的插件和IDM才能达到最理想的下载效果。</p><h3 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h3><ul><li>Chrome浏览器</li><li>IDM下载器（(Integrated Data Multiplexer）</li><li>扩展程序 BaiduPan Explorer</li></ul><h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ul><li>安装上述软件</li><li>使用插件抓取链接<br><img src="images/idm1.png" alt="链接"></li><li>使用IDM下载即可</li></ul>]]></content>
     
