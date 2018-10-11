@@ -81,16 +81,16 @@
 
 
 
-<meta name="description" content="某不知名985研一在读">
+<meta name="description" content="南京某不知名985研一在读">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Fu&#39;s Workshop">
 <meta property="og:url" content="https://araid0628.github.io/index.html">
 <meta property="og:site_name" content="Fu&#39;s Workshop">
-<meta property="og:description" content="某不知名985研一在读">
+<meta property="og:description" content="南京某不知名985研一在读">
 <meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Fu&#39;s Workshop">
-<meta name="twitter:description" content="某不知名985研一在读">
+<meta name="twitter:description" content="南京某不知名985研一在读">
 
 
 
@@ -391,9 +391,55 @@
       
         
           
-            <h3 id="第一周作业要求"><a href="#第一周作业要求" class="headerlink" title="第一周作业要求"></a>第一周作业要求</h3><p>2组  人工搜集中国科学院院士、中国工程院院士的名单，在百度自动获取院士个人主页url，编写爬虫采集院士人类学、学位、研究方向和国家科技奖数据，设计数据库表，保存数据。</p>
+            <h3 id="第一周作业要求"><a href="#第一周作业要求" class="headerlink" title="第一周作业要求"></a>第一周作业要求</h3><p>2组<br>人工搜集中国科学院院士、中国工程院院士的名单，在百度自动获取院士个人主页url，编写爬虫采集院士人类学、学位、研究方向和国家科技奖数据，设计数据库表，保存数据。</p>
 <h3 id="小组分工"><a href="#小组分工" class="headerlink" title="小组分工"></a>小组分工</h3><p>CHY：科学院院士信息抓取<br>ZBC：数据到MySQL<br>me：工程院院士信息抓取</p>
+<h3 id="Step1-网站分析"><a href="#Step1-网站分析" class="headerlink" title="Step1 网站分析"></a>Step1 网站分析</h3><p>中国工程院院士名单：<a href="http://www.cae.cn/cae/html/main/col48/column_48_1.html" target="_blank" rel="noopener">http://www.cae.cn/cae/html/main/col48/column_48_1.html</a> 可以看到所有学部的院士信息已经汇总在一个网页中，后续编写爬虫抓取个人主页url很方便。<br><img src="images/week1_p1.png" alt="view-sourse"></p>
+<h3 id="Step2-抓取url"><a href="#Step2-抓取url" class="headerlink" title="Step2 抓取url"></a>Step2 抓取url</h3><p>在编写爬虫时用到了XPath，XPath 是一门在 XML 文档中查找信息的语言。XPath 用于在 XML 文档中通过元素和属性进行导航。</p>
+<ul>
+<li>XPath 使用路径表达式在 XML 文档中进行导航</li>
+<li>XPath 包含一个标准函数库</li>
+<li>XPath 是 XSLT 中的主要元素</li>
+<li>XPath 是一个 W3C 标准<br>在这里通过XPath的语法分别抓取li标签下的herf的内容和text的内容，以获得院士个人主页的url和院士的姓名，存储在list中。<pre><code> 
+def getURL():                #抓取工程院院士的URL和姓名
+  page = urllib.request.urlopen('http://www.cae.cn/cae/html/main/col48/column_48_1.html')
+  html = page.read()
+  urlList = []
+  sel = Selector(text=html, type="html")
+  urlList = sel.xpath('//li[re:test(@class, "name_list")]//@href').extract()
+  nameList = sel.xpath('//li[re:test(@class, "name_list")]//a/text()').extract()
+  #print(url)
+  i = 0
+  for i in range(len(urlList)):
+      urlList[i] = "http://www.cae.cn" + urlList[i]
+  return urlList, nameList
+  #print(url)
+</code></pre>
 
+</li>
+</ul>
+<h3 id="Step3-抓取个人信息"><a href="#Step3-抓取个人信息" class="headerlink" title="Step3 抓取个人信息"></a>Step3 抓取个人信息</h3><p>接着仍使用XPath语法从urlList中依次爬取院士主页的个人信息。<br><img src="images/week1_p2.png" alt="view-sourse2"></p>
+<pre><code>
+    infoPage = urllib.request.urlopen(academyURL)
+    infoHTML = infoPage.read()
+    infoSelect = Selector(text=infoHTML, type="html")
+    info = infoSelect.xpath('//div[@class="intro"]/p/text()').extract()[0]
+    return info
+</code></pre>
+
+<h3 id="Step4-信息提取"><a href="#Step4-信息提取" class="headerlink" title="Step4 信息提取"></a>Step4 信息提取</h3><p>可以发现院士信息页中大部分信息描述具有某些规律，比如描述院士在某个专业方面的成就时的描述会采用“金属材料及粉末冶金专家”、“耳鼻咽喉学专家”等以“专家”、“学家”结尾的格式，可以通过正则表达式和findall()函数找出对应的描述。</p>
+<pre><code>
+    pattern = re.compile(r'(\d{4}年(?:\d{1,2}月)?(?:\d{0,2}日)?)(?:(?:出生)|(?:生，)|(?:生于)|(?:出生于))')
+    birthday = pattern.findall(c)
+
+    pattern2 = re.compile(r'^.*?(?:(?:学家)|(?:专家))')
+    direction = pattern2.findall(c)
+
+    pattern3 = re.compile(r'(?:获)[^(?:。)]+(?:奖)')
+    award = pattern3.findall(c)
+
+    pattern4 = re.compile(r'博士|硕士|学士')
+    degree = pattern4.findall(c)
+</code></pre>
           
         
       
@@ -907,7 +953,7 @@
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <p class="site-author-name" itemprop="name">Fu Hanlin</p>
-              <p class="site-description motion-element" itemprop="description">某不知名985研一在读</p>
+              <p class="site-description motion-element" itemprop="description">南京某不知名985研一在读</p>
           </div>
 
           <nav class="site-state motion-element">
