@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://araid0628.github.io/"/>
-  <updated>2018-10-12T03:02:41.174Z</updated>
+  <updated>2018-10-12T03:06:32.818Z</updated>
   <id>https://araid0628.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://araid0628.github.io/2018/10/12/Latex%E6%B8%B2%E6%9F%93%E6%B5%8B%E8%AF%95/"/>
     <id>https://araid0628.github.io/2018/10/12/Latex渲染测试/</id>
     <published>2018-10-12T02:06:12.000Z</published>
-    <updated>2018-10-12T03:02:41.174Z</updated>
+    <updated>2018-10-12T03:06:32.818Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><p>首先需要安装Mathjax插件，MathJax是一款运行在浏览器中的开源的数学符号渲染引擎，使用MathJax可以方便的在浏览器中显示数学公式，不需要使用图片。目前，MathJax可以解析Latex、MathML和ASCIIMathML的标记语言。(Wiki)</p><pre><code> npm install hexo-math –save</code></pre><h3 id="更换渲染引擎"><a href="#更换渲染引擎" class="headerlink" title="更换渲染引擎"></a>更换渲染引擎</h3><p>接着要更换Hexo的markdown渲染引擎</p><pre><code> npm uninstall hexo-renderer-marked –save npm install hexo-renderer-kramed –save</code></pre><h3 id="更改配置文件"><a href="#更改配置文件" class="headerlink" title="更改配置文件"></a>更改配置文件</h3><p>进入到主题目录，找到_config.yml文件，把mathjax默认的值改为true</p><pre><code> # MathJax Supportmathjax:  enable: true  per_page: true  #cdn: //cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML  cdn: //cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML</code></pre><h3 id="写博客"><a href="#写博客" class="headerlink" title="写博客"></a>写博客</h3><p>在每次编写需要使用LaTeX渲染的博客文章中，需要在Front-matter里打开mathjax开关</p><h2 id=""><a href="#" class="headerlink" title=" "></a><pre><code> </code></pre></h2><p>title: test<br>abbrlink: 7717490f<br>date: 2018-10-12 10:06:12<br>tags:</p><h2 id="mathjax-true"><a href="#mathjax-true" class="headerlink" title="mathjax: true"></a>mathjax: true</h2><p>&lt;/code&gt;&lt;/pre&gt;</p><h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><pre><code> $T(n) = \Theta(n)$</code></pre>]]></content>
+    <content type="html"><![CDATA[<h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><p>首先需要安装Mathjax插件，MathJax是一款运行在浏览器中的开源的数学符号渲染引擎，使用MathJax可以方便的在浏览器中显示数学公式，不需要使用图片。目前，MathJax可以解析Latex、MathML和ASCIIMathML的标记语言。(Wiki)</p><pre><code> npm install hexo-math –save</code></pre><h3 id="更换渲染引擎"><a href="#更换渲染引擎" class="headerlink" title="更换渲染引擎"></a>更换渲染引擎</h3><p>接着要更换Hexo的markdown渲染引擎</p><pre><code> npm uninstall hexo-renderer-marked –save npm install hexo-renderer-kramed –save</code></pre><h3 id="更改配置文件"><a href="#更改配置文件" class="headerlink" title="更改配置文件"></a>更改配置文件</h3><p>进入到主题目录，找到_config.yml文件，把mathjax默认的值改为true</p><pre><code> # MathJax Supportmathjax:  enable: true  per_page: true  #cdn: //cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML  cdn: //cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML</code></pre><h3 id="写博客"><a href="#写博客" class="headerlink" title="写博客"></a>写博客</h3><p>在每次编写需要使用LaTeX渲染的博客文章中，需要在Front-matter里打开mathjax开关</p><pre><code> title: testabbrlink: 7717490fdate: 2018-10-12 10:06:12tags:mathjax: true</code></pre><h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p><pre><code> $T(n) = \Theta(n)$</code></pre><br>$T(n) = \Theta(n)$</p>]]></content>
     
     <summary type="html">
     
