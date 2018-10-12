@@ -81,17 +81,17 @@
 
 
 
-<meta name="description" content="$T(n) = \Theta(n)$">
+<meta name="description" content="安装插件首先需要安装Mathjax插件，MathJax是一款运行在浏览器中的开源的数学符号渲染引擎，使用MathJax可以方便的在浏览器中显示数学公式，不需要使用图片。目前，MathJax可以解析Latex、MathML和ASCIIMathML的标记语言。(Wiki)   npm install hexo-math –save   更换渲染引擎接着要更换Hexo的markdown渲染引擎   np">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Latex渲染测试">
+<meta property="og:title" content="使用Hexo进行Latex公式渲染测试">
 <meta property="og:url" content="https://araid0628.github.io/2018/10/12/Latex渲染测试/index.html">
 <meta property="og:site_name" content="Fu&#39;s Workshop">
-<meta property="og:description" content="$T(n) = \Theta(n)$">
+<meta property="og:description" content="安装插件首先需要安装Mathjax插件，MathJax是一款运行在浏览器中的开源的数学符号渲染引擎，使用MathJax可以方便的在浏览器中显示数学公式，不需要使用图片。目前，MathJax可以解析Latex、MathML和ASCIIMathML的标记语言。(Wiki)   npm install hexo-math –save   更换渲染引擎接着要更换Hexo的markdown渲染引擎   np">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-12T02:07:30.316Z">
+<meta property="og:updated_time" content="2018-10-12T03:02:41.174Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Latex渲染测试">
-<meta name="twitter:description" content="$T(n) = \Theta(n)$">
+<meta name="twitter:title" content="使用Hexo进行Latex公式渲染测试">
+<meta name="twitter:description" content="安装插件首先需要安装Mathjax插件，MathJax是一款运行在浏览器中的开源的数学符号渲染引擎，使用MathJax可以方便的在浏览器中显示数学公式，不需要使用图片。目前，MathJax可以解析Latex、MathML和ASCIIMathML的标记语言。(Wiki)   npm install hexo-math –save   更换渲染引擎接着要更换Hexo的markdown渲染引擎   np">
 
 
 
@@ -127,7 +127,7 @@
 
 
 
-  <title>Latex渲染测试 | Fu's Workshop</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>使用Hexo进行Latex公式渲染测试 | Fu's Workshop</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -315,7 +315,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Latex渲染测试</h1>
+          <h1 class="post-title" itemprop="name headline">使用Hexo进行Latex公式渲染测试</h1>
         
 
         <div class="post-meta">
@@ -370,8 +370,33 @@
       
 
       
-        <p>$T(n) = \Theta(n)$</p>
+        <h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><p>首先需要安装Mathjax插件，MathJax是一款运行在浏览器中的开源的数学符号渲染引擎，使用MathJax可以方便的在浏览器中显示数学公式，不需要使用图片。目前，MathJax可以解析Latex、MathML和ASCIIMathML的标记语言。(Wiki)</p>
+<pre><code> 
+npm install hexo-math –save
+</code></pre>
 
+<h3 id="更换渲染引擎"><a href="#更换渲染引擎" class="headerlink" title="更换渲染引擎"></a>更换渲染引擎</h3><p>接着要更换Hexo的markdown渲染引擎</p>
+<pre><code> 
+npm uninstall hexo-renderer-marked –save 
+npm install hexo-renderer-kramed –save
+</code></pre>
+
+<h3 id="更改配置文件"><a href="#更改配置文件" class="headerlink" title="更改配置文件"></a>更改配置文件</h3><p>进入到主题目录，找到_config.yml文件，把mathjax默认的值改为true</p>
+<pre><code> 
+# MathJax Support
+mathjax:
+  enable: true
+  per_page: true
+  #cdn: //cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML
+  cdn: //cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+</code></pre>
+
+<h3 id="写博客"><a href="#写博客" class="headerlink" title="写博客"></a>写博客</h3><p>在每次编写需要使用LaTeX渲染的博客文章中，需要在Front-matter里打开mathjax开关</p>
+<h2 id=""><a href="#" class="headerlink" title=" "></a><pre><code> </code></pre></h2><p>title: test<br>abbrlink: 7717490f<br>date: 2018-10-12 10:06:12<br>tags:</p>
+<h2 id="mathjax-true"><a href="#mathjax-true" class="headerlink" title="mathjax: true"></a>mathjax: true</h2><p>&lt;/code&gt;&lt;/pre&gt;</p>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><pre><code> 
+$T(n) = \Theta(n)$
+</code></pre>
       
     </div>
     
@@ -455,8 +480,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -551,6 +585,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装插件"><span class="nav-number">1.</span> <span class="nav-text">安装插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更换渲染引擎"><span class="nav-number">2.</span> <span class="nav-text">更换渲染引擎</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更改配置文件"><span class="nav-number">3.</span> <span class="nav-text">更改配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#写博客"><span class="nav-number">4.</span> <span class="nav-text">写博客</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number"></span> <span class="nav-text"> </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mathjax-true"><span class="nav-number"></span> <span class="nav-text">mathjax: true</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#测试"><span class="nav-number">1.</span> <span class="nav-text">测试</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1073,7 +1123,42 @@
         onPopupClose();
       }
     });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>
@@ -1091,21 +1176,8 @@
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-
-
-
   
 
-  
-
-  
-
-  
-  
-
-  
 
   
 

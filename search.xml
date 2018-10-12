@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[Latex渲染测试]]></title>
+    <title><![CDATA[使用Hexo进行Latex公式渲染测试]]></title>
     <url>%2F2018%2F10%2F12%2FLatex%E6%B8%B2%E6%9F%93%E6%B5%8B%E8%AF%95%2F</url>
-    <content type="text"><![CDATA[$T(n) = \Theta(n)$]]></content>
+    <content type="text"><![CDATA[安装插件首先需要安装Mathjax插件，MathJax是一款运行在浏览器中的开源的数学符号渲染引擎，使用MathJax可以方便的在浏览器中显示数学公式，不需要使用图片。目前，MathJax可以解析Latex、MathML和ASCIIMathML的标记语言。(Wiki) npm install hexo-math –save 更换渲染引擎接着要更换Hexo的markdown渲染引擎 npm uninstall hexo-renderer-marked –save npm install hexo-renderer-kramed –save 更改配置文件进入到主题目录，找到_config.yml文件，把mathjax默认的值改为true # MathJax Support mathjax: enable: true per_page: true #cdn: //cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML cdn: //cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML 写博客在每次编写需要使用LaTeX渲染的博客文章中，需要在Front-matter里打开mathjax开关 title: testabbrlink: 7717490fdate: 2018-10-12 10:06:12tags: mathjax: true&lt;/code&gt;&lt;/pre&gt; 测试 $T(n) = \Theta(n)$]]></content>
   </entry>
   <entry>
     <title><![CDATA[数据挖掘 Week1作业]]></title>
