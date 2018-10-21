@@ -298,6 +298,156 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://araid0628.github.io/2018/10/21/《机器学习实战》SVM补充内容/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Fu Hanlin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fu's Workshop">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/21/《机器学习实战》SVM补充内容/" itemprop="url">《机器学习实战》SVM补充内容</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-21T20:28:49+08:00">
+                2018年10月21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>对于《机器学习实战》一书SVM章节程序清单6-2 简化版SVM算法中部分代码的数学原理补充</p>
+<p><pre><code>
+    if(labelMat[i] != labelMat[j]):
+        L = max(0, alphas[j]-alphas[i])
+        H = min(C, C+alphas[j]-alphas[i])
+    else:
+        L = max(0, alphas[j]+alphas[i]-C)
+        H = min(C, C+alphas[j]-alphas[i])
+</code></pre><br>这段代码在《机器学习实战》书中只说明了保证alpha在0与C之间，根据约束条件$0\leq\alpha$_i$\leqC i=1,2$，实际上是单变量的最优化问题。<br><img src="images/SVM1_p1.png" alt="李航《统计学习实战》P130"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://araid0628.github.io/2018/10/12/Latex渲染测试/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1115,7 +1265,7 @@ def getURL():                #抓取工程院院士的URL和姓名
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1126,7 +1276,7 @@ def getURL():                #抓取工程院院士的URL和姓名
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1137,7 +1287,7 @@ def getURL():                #抓取工程院院士的URL和姓名
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

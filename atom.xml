@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://araid0628.github.io/"/>
-  <updated>2018-10-12T03:06:32.818Z</updated>
+  <updated>2018-10-21T12:42:31.199Z</updated>
   <id>https://araid0628.github.io/</id>
   
   <author>
@@ -17,11 +17,41 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>《机器学习实战》SVM补充内容</title>
+    <link href="https://araid0628.github.io/2018/10/21/%E3%80%8A%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98%E3%80%8BSVM%E8%A1%A5%E5%85%85%E5%86%85%E5%AE%B9/"/>
+    <id>https://araid0628.github.io/2018/10/21/《机器学习实战》SVM补充内容/</id>
+    <published>2018-10-21T12:28:49.000Z</published>
+    <updated>2018-10-21T12:42:31.199Z</updated>
+    
+    <content type="html"><![CDATA[<p>对于《机器学习实战》一书SVM章节程序清单6-2 简化版SVM算法中部分代码的数学原理补充</p><p><pre><code>    if(labelMat[i] != labelMat[j]):        L = max(0, alphas[j]-alphas[i])        H = min(C, C+alphas[j]-alphas[i])    else:        L = max(0, alphas[j]+alphas[i]-C)        H = min(C, C+alphas[j]-alphas[i])</code></pre><br>这段代码在《机器学习实战》书中只说明了保证alpha在0与C之间，根据约束条件$0\leq\alpha$_i$\leqC i=1,2$，实际上是单变量的最优化问题。<br><img src="images/SVM1_p1.png" alt="李航《统计学习实战》P130"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;对于《机器学习实战》一书SVM章节程序清单6-2 简化版SVM算法中部分代码的数学原理补充&lt;/p&gt;
+&lt;p&gt;&lt;pre&gt;&lt;code&gt;
+    if(labelMat[i] != labelMat[j]):
+        L = max(0, alphas[j]-alphas[
+      
+    
+    </summary>
+    
+      <category term="机器学习" scheme="https://araid0628.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="机器学习" scheme="https://araid0628.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="SVM" scheme="https://araid0628.github.io/tags/SVM/"/>
+    
+  </entry>
+  
+  <entry>
     <title>使用Hexo进行Latex公式渲染测试</title>
     <link href="https://araid0628.github.io/2018/10/12/Latex%E6%B8%B2%E6%9F%93%E6%B5%8B%E8%AF%95/"/>
     <id>https://araid0628.github.io/2018/10/12/Latex渲染测试/</id>
     <published>2018-10-12T02:06:12.000Z</published>
-    <updated>2018-10-12T03:06:32.818Z</updated>
+    <updated>2018-10-21T12:37:25.639Z</updated>
     
     <content type="html"><![CDATA[<h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><p>首先需要安装Mathjax插件，MathJax是一款运行在浏览器中的开源的数学符号渲染引擎，使用MathJax可以方便的在浏览器中显示数学公式，不需要使用图片。目前，MathJax可以解析Latex、MathML和ASCIIMathML的标记语言。(Wiki)</p><pre><code> npm install hexo-math –save</code></pre><h3 id="更换渲染引擎"><a href="#更换渲染引擎" class="headerlink" title="更换渲染引擎"></a>更换渲染引擎</h3><p>接着要更换Hexo的markdown渲染引擎</p><pre><code> npm uninstall hexo-renderer-marked –save npm install hexo-renderer-kramed –save</code></pre><h3 id="更改配置文件"><a href="#更改配置文件" class="headerlink" title="更改配置文件"></a>更改配置文件</h3><p>进入到主题目录，找到_config.yml文件，把mathjax默认的值改为true</p><pre><code> # MathJax Supportmathjax:  enable: true  per_page: true  #cdn: //cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML  cdn: //cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML</code></pre><h3 id="写博客"><a href="#写博客" class="headerlink" title="写博客"></a>写博客</h3><p>在每次编写需要使用LaTeX渲染的博客文章中，需要在Front-matter里打开mathjax开关</p><pre><code> title: testabbrlink: 7717490fdate: 2018-10-12 10:06:12tags:mathjax: true</code></pre><h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p><pre><code> $T(n) = \Theta(n)$</code></pre><br>$T(n) = \Theta(n)$</p>]]></content>
     
@@ -34,6 +64,8 @@
     
     </summary>
     
+    
+      <category term="Hexo" scheme="https://araid0628.github.io/tags/Hexo/"/>
     
   </entry>
   
