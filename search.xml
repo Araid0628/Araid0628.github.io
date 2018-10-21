@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[《机器学习实战》SVM补充内容]]></title>
     <url>%2F2018%2F10%2F21%2F%E3%80%8A%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98%E3%80%8BSVM%E8%A1%A5%E5%85%85%E5%86%85%E5%AE%B9%2F</url>
-    <content type="text"><![CDATA[对于《机器学习实战》一书SVM章节程序清单6-2 简化版SVM算法中部分代码的数学原理补充 if(labelMat[i] != labelMat[j]): L = max(0, alphas[j]-alphas[i]) H = min(C, C+alphas[j]-alphas[i]) else: L = max(0, alphas[j]+alphas[i]-C) H = min(C, C+alphas[j]-alphas[i]) 这段代码在《机器学习实战》书中只说明了保证alpha在0与C之间，根据约束条件$0\leq\alpha$_i$\leqC i=1,2$，实际上是单变量的最优化问题。]]></content>
+    <content type="text"><![CDATA[对于《机器学习实战》一书SVM章节程序清单6-2 简化版SVM算法中部分代码的数学原理补充 if(labelMat[i] != labelMat[j]): L = max(0, alphas[j]-alphas[i]) H = min(C, C+alphas[j]-alphas[i]) else: L = max(0, alphas[j]+alphas[i]-C) H = min(C, C+alphas[j]-alphas[i]) 这段代码在《机器学习实战》书中只说明了保证alpha在0与C之间，根据约束条件$0\leq\alpha_i\leq C\;i=1,2$，实际上是单变量的最优化问题。]]></content>
       <categories>
         <category>机器学习</category>
       </categories>
@@ -16,6 +16,9 @@
     <title><![CDATA[使用Hexo进行Latex公式渲染测试]]></title>
     <url>%2F2018%2F10%2F12%2FLatex%E6%B8%B2%E6%9F%93%E6%B5%8B%E8%AF%95%2F</url>
     <content type="text"><![CDATA[安装插件首先需要安装Mathjax插件，MathJax是一款运行在浏览器中的开源的数学符号渲染引擎，使用MathJax可以方便的在浏览器中显示数学公式，不需要使用图片。目前，MathJax可以解析Latex、MathML和ASCIIMathML的标记语言。(Wiki) npm install hexo-math –save 更换渲染引擎接着要更换Hexo的markdown渲染引擎 npm uninstall hexo-renderer-marked –save npm install hexo-renderer-kramed –save 更改配置文件进入到主题目录，找到_config.yml文件，把mathjax默认的值改为true # MathJax Support mathjax: enable: true per_page: true #cdn: //cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML cdn: //cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML 写博客在每次编写需要使用LaTeX渲染的博客文章中，需要在Front-matter里打开mathjax开关 title: test abbrlink: 7717490f date: 2018-10-12 10:06:12 tags: mathjax: true 测试 $T(n) = \Theta(n)$ $T(n) = \Theta(n)$]]></content>
+      <categories>
+        <category>技巧</category>
+      </categories>
       <tags>
         <tag>Hexo</tag>
       </tags>

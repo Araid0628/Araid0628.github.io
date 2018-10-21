@@ -90,7 +90,7 @@
 <meta property="og:description" content="对于《机器学习实战》一书SVM章节程序清单6-2 简化版SVM算法中部分代码的数学原理补充      if(labelMat[i] != labelMat[j]):         L = max(0, alphas[j]-alphas[i])         H = min(C, C+alphas[j]-alphas[i])     else:         L = max(0, alphas">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://araid0628.github.io/2018/10/21/《机器学习实战》SVM补充内容/images/SVM1_p1.png">
-<meta property="og:updated_time" content="2018-10-21T12:42:31.199Z">
+<meta property="og:updated_time" content="2018-10-21T12:49:43.943Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《机器学习实战》SVM补充内容">
 <meta name="twitter:description" content="对于《机器学习实战》一书SVM章节程序清单6-2 简化版SVM算法中部分代码的数学原理补充      if(labelMat[i] != labelMat[j]):         L = max(0, alphas[j]-alphas[i])         H = min(C, C+alphas[j]-alphas[i])     else:         L = max(0, alphas">
@@ -403,7 +403,7 @@
     else:
         L = max(0, alphas[j]+alphas[i]-C)
         H = min(C, C+alphas[j]-alphas[i])
-</code></pre><br>这段代码在《机器学习实战》书中只说明了保证alpha在0与C之间，根据约束条件$0\leq\alpha$_i$\leqC i=1,2$，实际上是单变量的最优化问题。<br><img src="images/SVM1_p1.png" alt="李航《统计学习实战》P130"></p>
+</code></pre><br>这段代码在《机器学习实战》书中只说明了保证alpha在0与C之间，根据约束条件$0\leq\alpha_i\leq C\;i=1,2$，实际上是单变量的最优化问题。<br><img src="images/SVM1_p1.png" alt="李航《统计学习实战》P130"></p>
 
       
     </div>
