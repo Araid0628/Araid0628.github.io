@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://araid0628.github.io/"/>
-  <updated>2018-10-21T12:49:43.943Z</updated>
+  <updated>2018-10-21T13:07:58.260Z</updated>
   <id>https://araid0628.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://araid0628.github.io/2018/10/21/%E3%80%8A%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98%E3%80%8BSVM%E8%A1%A5%E5%85%85%E5%86%85%E5%AE%B9/"/>
     <id>https://araid0628.github.io/2018/10/21/《机器学习实战》SVM补充内容/</id>
     <published>2018-10-21T12:28:49.000Z</published>
-    <updated>2018-10-21T12:49:43.943Z</updated>
+    <updated>2018-10-21T13:07:58.260Z</updated>
     
     <content type="html"><![CDATA[<p>对于《机器学习实战》一书SVM章节程序清单6-2 简化版SVM算法中部分代码的数学原理补充</p><p><pre><code>    if(labelMat[i] != labelMat[j]):        L = max(0, alphas[j]-alphas[i])        H = min(C, C+alphas[j]-alphas[i])    else:        L = max(0, alphas[j]+alphas[i]-C)        H = min(C, C+alphas[j]-alphas[i])</code></pre><br>这段代码在《机器学习实战》书中只说明了保证alpha在0与C之间，根据约束条件$0\leq\alpha_i\leq C\;i=1,2$，实际上是单变量的最优化问题。<br><img src="images/SVM1_p1.png" alt="李航《统计学习实战》P130"></p>]]></content>
     
