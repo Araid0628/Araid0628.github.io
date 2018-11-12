@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://araid0628.github.io/"/>
-  <updated>2018-10-21T13:07:58.260Z</updated>
+  <updated>2018-11-12T14:31:47.337Z</updated>
   <id>https://araid0628.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>算法导论4.5-主方法</title>
+    <link href="https://araid0628.github.io/2018/11/12/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA4-5-%E4%B8%BB%E6%96%B9%E6%B3%95/"/>
+    <id>https://araid0628.github.io/2018/11/12/算法导论4-5-主方法/</id>
+    <published>2018-11-12T14:25:12.000Z</published>
+    <updated>2018-11-12T14:31:47.337Z</updated>
+    
+    <content type="html"><![CDATA[<p>算法导论练习4.5-1<br>对下列递归式，使用主方法求出渐进紧缺界:</p><h4 id="T-n-2T-n-4-1"><a href="#T-n-2T-n-4-1" class="headerlink" title="$T(n) = 2T(n/4) + 1$"></a>$T(n) = 2T(n/4) + 1$</h4><h4 id="T-n-2T-n-4-sqrt-n"><a href="#T-n-2T-n-4-sqrt-n" class="headerlink" title="$T(n) = 2T(n/4) + \sqrt{n}$"></a>$T(n) = 2T(n/4) + \sqrt{n}$</h4><h4 id="T-n-2T-n-4-n"><a href="#T-n-2T-n-4-n" class="headerlink" title="$T(n) = 2T(n/4) + n$"></a>$T(n) = 2T(n/4) + n$</h4><h4 id="T-n-2T-n-4-n-2"><a href="#T-n-2T-n-4-n-2" class="headerlink" title="$T(n) = 2T(n/4) + n^2$"></a>$T(n) = 2T(n/4) + n^2$</h4><p>Answer：</p><h4 id="Theta-n-log-4-2-Theta-sqrt-n"><a href="#Theta-n-log-4-2-Theta-sqrt-n" class="headerlink" title="$\Theta(n^{\log_4{2}}) = \Theta(\sqrt{n})$"></a>$\Theta(n^{\log_4{2}}) = \Theta(\sqrt{n})$</h4><h4 id="Theta-n-log-4-2-lg-n-Theta-sqrt-n-lg-n"><a href="#Theta-n-log-4-2-lg-n-Theta-sqrt-n-lg-n" class="headerlink" title="$\Theta(n^{\log_4{2}}\lg{n}) = \Theta(\sqrt{n}\lg{n})$"></a>$\Theta(n^{\log_4{2}}\lg{n}) = \Theta(\sqrt{n}\lg{n})$</h4><h4 id="Theta-n"><a href="#Theta-n" class="headerlink" title="$\Theta(n)$"></a>$\Theta(n)$</h4><h4 id="Theta-n-2"><a href="#Theta-n-2" class="headerlink" title="$\Theta(n^2)$"></a>$\Theta(n^2)$</h4>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;算法导论练习4.5-1&lt;br&gt;对下列递归式，使用主方法求出渐进紧缺界:&lt;/p&gt;
+&lt;h4 id=&quot;T-n-2T-n-4-1&quot;&gt;&lt;a href=&quot;#T-n-2T-n-4-1&quot; class=&quot;headerlink&quot; title=&quot;$T(n) = 2T(n/4) + 1$&quot;&gt;&lt;/a
+      
+    
+    </summary>
+    
+      <category term="复习笔记" scheme="https://araid0628.github.io/categories/%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="算法导论" scheme="https://araid0628.github.io/tags/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA/"/>
+    
+      <category term="递归" scheme="https://araid0628.github.io/tags/%E9%80%92%E5%BD%92/"/>
+    
+  </entry>
   
   <entry>
     <title>《机器学习实战》SVM补充内容</title>

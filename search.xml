@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[算法导论4.5-主方法]]></title>
+    <url>%2F2018%2F11%2F12%2F%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA4-5-%E4%B8%BB%E6%96%B9%E6%B3%95%2F</url>
+    <content type="text"><![CDATA[算法导论练习4.5-1对下列递归式，使用主方法求出渐进紧缺界: $T(n) = 2T(n/4) + 1$$T(n) = 2T(n/4) + \sqrt{n}$$T(n) = 2T(n/4) + n$$T(n) = 2T(n/4) + n^2$Answer： $\Theta(n^{\log_4{2}}) = \Theta(\sqrt{n})$$\Theta(n^{\log_4{2}}\lg{n}) = \Theta(\sqrt{n}\lg{n})$$\Theta(n)$$\Theta(n^2)$]]></content>
+      <categories>
+        <category>复习笔记</category>
+      </categories>
+      <tags>
+        <tag>算法导论</tag>
+        <tag>递归</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[《机器学习实战》SVM补充内容]]></title>
     <url>%2F2018%2F10%2F21%2F%E3%80%8A%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98%E3%80%8BSVM%E8%A1%A5%E5%85%85%E5%86%85%E5%AE%B9%2F</url>
     <content type="text"><![CDATA[对于《机器学习实战》一书SVM章节程序清单6-2 简化版SVM算法中部分代码的数学原理补充 if(labelMat[i] != labelMat[j]): L = max(0, alphas[j]-alphas[i]) H = min(C, C+alphas[j]-alphas[i]) else: L = max(0, alphas[j]+alphas[i]-C) H = min(C, C+alphas[j]-alphas[i]) 这段代码在《机器学习实战》书中只说明了保证alpha在0与C之间，根据约束条件$0\leq\alpha_i\leq C\;i=1,2$，实际上是单变量的最优化问题。]]></content>
