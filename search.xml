@@ -5,7 +5,7 @@
     <url>%2F2018%2F11%2F12%2F%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA4-5-%E4%B8%BB%E6%96%B9%E6%B3%95%2F</url>
     <content type="text"><![CDATA[算法导论练习4.5-1对下列递归式，使用主方法求出渐进紧缺界: $T(n) = 2T(n/4) + 1$$T(n) = 2T(n/4) + \sqrt{n}$$T(n) = 2T(n/4) + n$$T(n) = 2T(n/4) + n^2$Answer： $\Theta(n^{\log_4{2}}) = \Theta(\sqrt{n})$$\Theta(n^{\log_4{2}}\lg{n}) = \Theta(\sqrt{n}\lg{n})$$\Theta(n)$$\Theta(n^2)$]]></content>
       <categories>
-        <category>复习笔记</category>
+        <category>笔记</category>
       </categories>
       <tags>
         <tag>算法导论</tag>
