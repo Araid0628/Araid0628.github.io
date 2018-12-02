@@ -327,7 +327,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/12/02/贝叶斯估计与极大似然估计的区别/" itemprop="url">贝叶斯估计与极大似然估计</a></h1>
+                <a class="post-title-link" href="/2018/12/02/贝叶斯估计与极大似然估计的区别/" itemprop="url">贝叶斯估计与最大似然估计</a></h1>
         
 
         <div class="post-meta">
@@ -402,7 +402,35 @@
         
           
             <p>贝叶斯估计：估计参数$\theta$是随机变量，根据观测数据对参数的分布进行估计，考虑先验分布。</p>
-<p>极大似然估计：参数$\theta$是未知的，根据真实数据通过最大化似然函数$\mathop{\arg\max}_{\theta}L(\theta|D)$来估计$\theta$的值</p>
+<p>最大似然估计：参数$\theta$是未知的，根据真实数据通过最大化似然函数$\mathop{\arg\max}_{\theta}L(\theta|D)$来估计$\theta$的值</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>最大似然估计</th>
+<th>贝叶斯估计</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>计算复杂度</td>
+<td>微分</td>
+<td>多重积分</td>
+</tr>
+<tr>
+<td>先验信息的信任程度</td>
+<td>不准确</td>
+<td>准确</td>
+</tr>
+<tr>
+<td>例如$p(x丨\theta)$</td>
+<td>与初始假设一致</td>
+<td>与初始假设不一致</td>
+</tr>
+</tbody>
+</table>
+</div>
 
           
         
