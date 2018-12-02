@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[贝叶斯估计与极大似然估计]]></title>
+    <url>%2F2018%2F12%2F02%2F%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1%E4%B8%8E%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%E7%9A%84%E5%8C%BA%E5%88%AB%2F</url>
+    <content type="text"><![CDATA[贝叶斯估计：估计参数$\theta$是随机变量，根据观测数据对参数的分布进行估计，考虑先验分布。 极大似然估计：参数$\theta$是未知的，根据真实数据通过最大化似然函数$\mathop{\arg\max}_{\theta}L(\theta|D)$来估计$\theta$的值]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>贝叶斯</tag>
+        <tag>极大似然估计</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[算法导论4.5-主方法]]></title>
     <url>%2F2018%2F11%2F12%2F%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA4-5-%E4%B8%BB%E6%96%B9%E6%B3%95%2F</url>
     <content type="text"><![CDATA[算法导论练习4.5-1对下列递归式，使用主方法求出渐进紧缺界: $T(n) = 2T(n/4) + 1$$T(n) = 2T(n/4) + \sqrt{n}$$T(n) = 2T(n/4) + n$$T(n) = 2T(n/4) + n^2$Answer： $\Theta(n^{\log_4{2}}) = \Theta(\sqrt{n})$$\Theta(n^{\log_4{2}}\lg{n}) = \Theta(\sqrt{n}\lg{n})$$\Theta(n)$$\Theta(n^2)$]]></content>
