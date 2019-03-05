@@ -26,7 +26,7 @@
   </entry>
   <entry>
     <title><![CDATA[百度地图API解析]]></title>
-    <url>%2F2019%2F03%2F02%2FbaiduAPI%2F</url>
+    <url>%2F2019%2F02%2F28%2FbaiduAPI%2F</url>
     <content type="text"><![CDATA[功能简介百度地图Web服务API为开发者提供http/https接口，即开发者通过http/https形式发起检索请求，获取返回json或xml格式的检索数据。用户可以基于此开发JavaScript、C#、C++、Java等语言的地图应用。http://lbsyun.baidu.com/index.php?title=webapi文档非常全面，可以获得很多信息，包括经纬度，经纬度周边任意距离任意类型场所信息，如医院、地铁站等，为预测做准备。以正/逆地理编码服务为例。 Python如何解析API返回的json所用到的库12import jsonfrom urllib.request import urlopen, quote 获得API传回的json信息1showLocation&amp;&amp;showLocation(&#123;"status":0,"result":&#123;"location":&#123;"lng":120.75204667293927,"lat":31.27628928466111&#125;,"precise":1,"confidence":80,"comprehension":100,"level":"道路"&#125;&#125;) 1234567891011def getlnglat(address): url = 'http://api.map.baidu.com/geocoder/v2/' output = 'json' ak = '你的密钥' add = quote(address) # 由于本文城市变量为中文，为防止乱码，先用quote进行编码 uri = url + '?' + 'address=' + add + '&amp;output=' + output + '&amp;ak=' + ak print(uri) req = urlopen(uri) res = req.read().decode() # 将其他编码的字符串解码成unicode responseInfo = json.loads(res) # 对json数据进行解析 return responseInfo 取得所需的信息123add = "江苏省苏州市苏州工业园区林泉街399号东南大学软件学院" # 你所要查询的地址lat = getlnglat(add)['result']['location']['lat'] # 获得纬度lng = getlnglat(add)['result']['location']['lng'] # 获得经度 结果lat = 31.27628928466111lng = 120.75204667293927]]></content>
       <categories>
         <category>项目实训</category>
