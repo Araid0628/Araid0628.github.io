@@ -37,9 +37,9 @@
       <category term="项目实训" scheme="https://araid0628.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
     
     
-      <category term="房价预测" scheme="https://araid0628.github.io/tags/%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B/"/>
-    
       <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
+    
+      <category term="房价预测" scheme="https://araid0628.github.io/tags/%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B/"/>
     
       <category term="Pandas" scheme="https://araid0628.github.io/tags/Pandas/"/>
     
@@ -50,9 +50,9 @@
     <link href="https://araid0628.github.io/2019/03/03/housepricingweek1/"/>
     <id>https://araid0628.github.io/2019/03/03/housepricingweek1/</id>
     <published>2019-03-03T13:22:38.000Z</published>
-    <updated>2019-03-05T13:39:43.427Z</updated>
+    <updated>2019-03-05T13:45:22.341Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>寒假前已经定好了这次项目实训的题目，放假的时候群里关于房价数据爬虫的讨论随着一句“过完年再说”戛然而止，然而第一周已经结束了才空出时间来写总结。</p><h3 id="项目需求"><a href="#项目需求" class="headerlink" title="项目需求"></a>项目需求</h3><p>城市房价分析系统<br>技术类别：<br>Web，网络爬虫，数据分析<br>基本功能：<br>通过爬取链家网，我爱我家等中介机构，以及城市建设局网站数据，实现对指定城市的房价进行排序和分析，并结合一定规律进行预测<br>难易程度：中等<br>需求实现：</p><ol><li>按用户输入城市名称，爬取和显示城市不同小区，不同区域的房价，并用柱状图显示</li><li>按年份，月份，显示和分析某区域房价走向和趋势</li><li>对比相同价格下不同城市的房产品牌</li><li>对比不同城市房价走向，并进行归类分析</li><li>实现房价波动的简单预测</li></ol><h3 id="需求理解"><a href="#需求理解" class="headerlink" title="需求理解"></a>需求理解</h3><p>1.项目是什么？<br>一个Web，可以向用户展示粒度从市—行政区—具体楼盘的统计数据，可以根据用户提供的新楼盘数据做预测。<br>2.项目怎么做？<br>Java Web(Spring bot, vue.js, Echarts)<br>Python(bs4, sklearn, pandas)<br>MySQL<br>百度API（POI相关信息获取）<br>预测模型XgBoost + LR/DT, 是否采用Deep Learning视项目进度决定</p><h3 id="开发模式"><a href="#开发模式" class="headerlink" title="开发模式"></a>开发模式</h3><p>Scrum敏捷开发模式，lm担任产品经理，ltz担任技术主管，我是master。作为master在项目中要负责管理上的事务很多，经理日报，进度控制，每日组会，团建等等，对人际沟通能力是个很好的提升。组员都很自觉，分工我和lm负责数据和预测部分，另外三位负责Web。</p><h3 id="第一周进度"><a href="#第一周进度" class="headerlink" title="第一周进度"></a>第一周进度</h3><ol><li>数据部分：爬虫完成，爬取了某壳网上一线城市和二线城市的数据</li><li>Web部分：通过百度地图的控件可以在地图上显示城市和行政区的统计数据，校对经纬度花了挺久。</li><li>预测部分：数据清洗中，第二周预测模块应该能实现。</li></ol>]]></content>
+    <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>寒假前已经定好了这次项目实训的题目，放假的时候群里关于房价数据爬虫的讨论随着一句“过完年再说”戛然而止，然而第一周已经结束了才空出时间来写总结。</p><h3 id="项目需求"><a href="#项目需求" class="headerlink" title="项目需求"></a>项目需求</h3><p>城市房价分析系统<br>技术类别：<br>Web，网络爬虫，数据分析<br>基本功能：<br>通过爬取链家网，我爱我家等中介机构，以及城市建设局网站数据，实现对指定城市的房价进行排序和分析，并结合一定规律进行预测<br>难易程度：中等<br>需求实现：</p><ol><li>按用户输入城市名称，爬取和显示城市不同小区，不同区域的房价，并用柱状图显示</li><li>按年份，月份，显示和分析某区域房价走向和趋势</li><li>对比相同价格下不同城市的房产品牌</li><li>对比不同城市房价走向，并进行归类分析</li><li>实现房价波动的简单预测</li></ol><h3 id="需求理解"><a href="#需求理解" class="headerlink" title="需求理解"></a>需求理解</h3><p>1.项目是什么？<br>一个Web，可以向用户展示粒度从市—行政区—具体楼盘的统计数据，可以根据用户提供的新楼盘数据做预测。<br>2.项目怎么做？<br>Java Web(Spring bot, vue.js, Echarts)<br>Python(bs4, sklearn, pandas等)<br>MySQL<br>百度API（POI相关信息获取）<br>预测模型XgBoost + LR/DT, 是否采用Deep Learning视项目进度决定</p><h3 id="开发模式"><a href="#开发模式" class="headerlink" title="开发模式"></a>开发模式</h3><p>Scrum敏捷开发模式，lm担任产品经理，ltz担任技术主管，我是master。作为master在项目中要负责管理上的事务很多，经理日报，进度控制，每日组会，团建等等，对人际沟通能力是个很好的提升。组员都很自觉，分工我和lm负责数据和预测部分，另外三位负责Web。</p><h3 id="第一周进度"><a href="#第一周进度" class="headerlink" title="第一周进度"></a>第一周进度</h3><ol><li>数据部分：爬虫完成，爬取了某壳网上一线城市和二线城市的数据</li><li>Web部分：通过百度地图的控件可以在地图上显示城市和行政区的统计数据，校对经纬度花了挺久。</li><li>预测部分：数据清洗中，第二周预测模块应该能实现。</li></ol>]]></content>
     
     <summary type="html">
     
@@ -65,6 +65,39 @@
     
       <category term="项目实训" scheme="https://araid0628.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
     
+    
+      <category term="房价预测" scheme="https://araid0628.github.io/tags/%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>百度地图API解析</title>
+    <link href="https://araid0628.github.io/2019/03/02/baiduAPI/"/>
+    <id>https://araid0628.github.io/2019/03/02/baiduAPI/</id>
+    <published>2019-03-02T13:46:30.000Z</published>
+    <updated>2019-03-05T13:59:43.479Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="功能简介"><a href="#功能简介" class="headerlink" title="功能简介"></a>功能简介</h3><p>百度地图Web服务API为开发者提供http/https接口，即开发者通过http/https形式发起检索请求，获取返回json或xml格式的检索数据。用户可以基于此开发JavaScript、C#、C++、Java等语言的地图应用。<br><a href="http://lbsyun.baidu.com/index.php?title=webapi" target="_blank" rel="noopener">http://lbsyun.baidu.com/index.php?title=webapi</a><br>文档非常全面，可以获得很多信息，包括经纬度，经纬度周边任意距离任意类型场所信息，如医院、地铁站等，为预测做准备。<br>以正/逆地理编码服务为例。</p><h3 id="Python如何解析API返回的json"><a href="#Python如何解析API返回的json" class="headerlink" title="Python如何解析API返回的json"></a>Python如何解析API返回的json</h3><p>所用到的库<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">from</span> urllib.request <span class="keyword">import</span> urlopen, quote</span><br></pre></td></tr></table></figure></p><h3 id="获得API传回的json信息"><a href="#获得API传回的json信息" class="headerlink" title="获得API传回的json信息"></a>获得API传回的json信息</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">showLocation&amp;&amp;showLocation(&#123;"status":0,"result":&#123;"location":&#123;"lng":120.75204667293927,"lat":31.27628928466111&#125;,"precise":1,"confidence":80,"comprehension":100,"level":"道路"&#125;&#125;)</span><br></pre></td></tr></table></figure><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getlnglat</span><span class="params">(address)</span>:</span></span><br><span class="line">    url = <span class="string">'http://api.map.baidu.com/geocoder/v2/'</span></span><br><span class="line">    output = <span class="string">'json'</span></span><br><span class="line">    ak = <span class="string">'你的密钥'</span></span><br><span class="line">    add = quote(address) <span class="comment"># 由于本文城市变量为中文，为防止乱码，先用quote进行编码</span></span><br><span class="line">    uri = url + <span class="string">'?'</span> + <span class="string">'address='</span> + add  + <span class="string">'&amp;output='</span> + output + <span class="string">'&amp;ak='</span> + ak</span><br><span class="line">    print(uri)</span><br><span class="line">    req = urlopen(uri)</span><br><span class="line">    res = req.read().decode() <span class="comment"># 将其他编码的字符串解码成unicode</span></span><br><span class="line">    responseInfo = json.loads(res) <span class="comment"># 对json数据进行解析</span></span><br><span class="line">    <span class="keyword">return</span> responseInfo</span><br></pre></td></tr></table></figure><h3 id="取得所需的信息"><a href="#取得所需的信息" class="headerlink" title="取得所需的信息"></a>取得所需的信息</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">add = <span class="string">"江苏省苏州市苏州工业园区林泉街399号东南大学软件学院"</span>  <span class="comment"># 你所要查询的地址</span></span><br><span class="line">lat = getlnglat(add)[<span class="string">'result'</span>][<span class="string">'location'</span>][<span class="string">'lat'</span>]  <span class="comment"># 获得纬度</span></span><br><span class="line">lng = getlnglat(add)[<span class="string">'result'</span>][<span class="string">'location'</span>][<span class="string">'lng'</span>]  <span class="comment"># 获得经度</span></span><br></pre></td></tr></table></figure><h3 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h3><p>lat = 31.27628928466111<br>lng = 120.75204667293927</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;功能简介&quot;&gt;&lt;a href=&quot;#功能简介&quot; class=&quot;headerlink&quot; title=&quot;功能简介&quot;&gt;&lt;/a&gt;功能简介&lt;/h3&gt;&lt;p&gt;百度地图Web服务API为开发者提供http/https接口，即开发者通过http/https形式发起检索请求，获取返回js
+      
+    
+    </summary>
+    
+      <category term="项目实训" scheme="https://araid0628.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
+    
+    
+      <category term="百度" scheme="https://araid0628.github.io/tags/%E7%99%BE%E5%BA%A6/"/>
+    
+      <category term="API" scheme="https://araid0628.github.io/tags/API/"/>
+    
+      <category term="json" scheme="https://araid0628.github.io/tags/json/"/>
+    
+      <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
     
       <category term="房价预测" scheme="https://araid0628.github.io/tags/%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B/"/>
     

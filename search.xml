@@ -8,19 +8,34 @@
         <category>项目实训</category>
       </categories>
       <tags>
-        <tag>房价预测</tag>
         <tag>Python</tag>
+        <tag>房价预测</tag>
         <tag>Pandas</tag>
       </tags>
   </entry>
   <entry>
     <title><![CDATA[项目实训第一周总结]]></title>
     <url>%2F2019%2F03%2F03%2Fhousepricingweek1%2F</url>
-    <content type="text"><![CDATA[前言寒假前已经定好了这次项目实训的题目，放假的时候群里关于房价数据爬虫的讨论随着一句“过完年再说”戛然而止，然而第一周已经结束了才空出时间来写总结。 项目需求城市房价分析系统技术类别：Web，网络爬虫，数据分析基本功能：通过爬取链家网，我爱我家等中介机构，以及城市建设局网站数据，实现对指定城市的房价进行排序和分析，并结合一定规律进行预测难易程度：中等需求实现： 按用户输入城市名称，爬取和显示城市不同小区，不同区域的房价，并用柱状图显示 按年份，月份，显示和分析某区域房价走向和趋势 对比相同价格下不同城市的房产品牌 对比不同城市房价走向，并进行归类分析 实现房价波动的简单预测 需求理解1.项目是什么？一个Web，可以向用户展示粒度从市—行政区—具体楼盘的统计数据，可以根据用户提供的新楼盘数据做预测。2.项目怎么做？Java Web(Spring bot, vue.js, Echarts)Python(bs4, sklearn, pandas)MySQL百度API（POI相关信息获取）预测模型XgBoost + LR/DT, 是否采用Deep Learning视项目进度决定 开发模式Scrum敏捷开发模式，lm担任产品经理，ltz担任技术主管，我是master。作为master在项目中要负责管理上的事务很多，经理日报，进度控制，每日组会，团建等等，对人际沟通能力是个很好的提升。组员都很自觉，分工我和lm负责数据和预测部分，另外三位负责Web。 第一周进度 数据部分：爬虫完成，爬取了某壳网上一线城市和二线城市的数据 Web部分：通过百度地图的控件可以在地图上显示城市和行政区的统计数据，校对经纬度花了挺久。 预测部分：数据清洗中，第二周预测模块应该能实现。]]></content>
+    <content type="text"><![CDATA[前言寒假前已经定好了这次项目实训的题目，放假的时候群里关于房价数据爬虫的讨论随着一句“过完年再说”戛然而止，然而第一周已经结束了才空出时间来写总结。 项目需求城市房价分析系统技术类别：Web，网络爬虫，数据分析基本功能：通过爬取链家网，我爱我家等中介机构，以及城市建设局网站数据，实现对指定城市的房价进行排序和分析，并结合一定规律进行预测难易程度：中等需求实现： 按用户输入城市名称，爬取和显示城市不同小区，不同区域的房价，并用柱状图显示 按年份，月份，显示和分析某区域房价走向和趋势 对比相同价格下不同城市的房产品牌 对比不同城市房价走向，并进行归类分析 实现房价波动的简单预测 需求理解1.项目是什么？一个Web，可以向用户展示粒度从市—行政区—具体楼盘的统计数据，可以根据用户提供的新楼盘数据做预测。2.项目怎么做？Java Web(Spring bot, vue.js, Echarts)Python(bs4, sklearn, pandas等)MySQL百度API（POI相关信息获取）预测模型XgBoost + LR/DT, 是否采用Deep Learning视项目进度决定 开发模式Scrum敏捷开发模式，lm担任产品经理，ltz担任技术主管，我是master。作为master在项目中要负责管理上的事务很多，经理日报，进度控制，每日组会，团建等等，对人际沟通能力是个很好的提升。组员都很自觉，分工我和lm负责数据和预测部分，另外三位负责Web。 第一周进度 数据部分：爬虫完成，爬取了某壳网上一线城市和二线城市的数据 Web部分：通过百度地图的控件可以在地图上显示城市和行政区的统计数据，校对经纬度花了挺久。 预测部分：数据清洗中，第二周预测模块应该能实现。]]></content>
       <categories>
         <category>项目实训</category>
       </categories>
       <tags>
+        <tag>房价预测</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[百度地图API解析]]></title>
+    <url>%2F2019%2F03%2F02%2FbaiduAPI%2F</url>
+    <content type="text"><![CDATA[功能简介百度地图Web服务API为开发者提供http/https接口，即开发者通过http/https形式发起检索请求，获取返回json或xml格式的检索数据。用户可以基于此开发JavaScript、C#、C++、Java等语言的地图应用。http://lbsyun.baidu.com/index.php?title=webapi文档非常全面，可以获得很多信息，包括经纬度，经纬度周边任意距离任意类型场所信息，如医院、地铁站等，为预测做准备。以正/逆地理编码服务为例。 Python如何解析API返回的json所用到的库12import jsonfrom urllib.request import urlopen, quote 获得API传回的json信息1showLocation&amp;&amp;showLocation(&#123;"status":0,"result":&#123;"location":&#123;"lng":120.75204667293927,"lat":31.27628928466111&#125;,"precise":1,"confidence":80,"comprehension":100,"level":"道路"&#125;&#125;) 1234567891011def getlnglat(address): url = 'http://api.map.baidu.com/geocoder/v2/' output = 'json' ak = '你的密钥' add = quote(address) # 由于本文城市变量为中文，为防止乱码，先用quote进行编码 uri = url + '?' + 'address=' + add + '&amp;output=' + output + '&amp;ak=' + ak print(uri) req = urlopen(uri) res = req.read().decode() # 将其他编码的字符串解码成unicode responseInfo = json.loads(res) # 对json数据进行解析 return responseInfo 取得所需的信息123add = "江苏省苏州市苏州工业园区林泉街399号东南大学软件学院" # 你所要查询的地址lat = getlnglat(add)['result']['location']['lat'] # 获得纬度lng = getlnglat(add)['result']['location']['lng'] # 获得经度 结果lat = 31.27628928466111lng = 120.75204667293927]]></content>
+      <categories>
+        <category>项目实训</category>
+      </categories>
+      <tags>
+        <tag>百度</tag>
+        <tag>API</tag>
+        <tag>json</tag>
+        <tag>Python</tag>
         <tag>房价预测</tag>
       </tags>
   </entry>
