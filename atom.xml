@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://araid0628.github.io/"/>
-  <updated>2019-03-05T13:20:14.631Z</updated>
+  <updated>2019-03-05T13:24:28.002Z</updated>
   <id>https://araid0628.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://araid0628.github.io/2019/03/05/week123/"/>
     <id>https://araid0628.github.io/2019/03/05/week123/</id>
     <published>2019-03-05T13:04:48.000Z</published>
-    <updated>2019-03-05T13:20:14.631Z</updated>
+    <updated>2019-03-05T13:24:28.002Z</updated>
     
     <content type="html"><![CDATA[<h3 id="BUG复现"><a href="#BUG复现" class="headerlink" title="BUG复现"></a>BUG复现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train.replace(<span class="string">'%'</span>, <span class="string">''</span>, inplace=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure><p>使用replace函数的目的是：在清洗房价数据时替换掉不需要的单位，如“%”，“元/m²/月”等。但在使用函数时发现无法生效，查了网上相关信息后试了多种方法也无法解决这个问题，如先取列之后再进行replace。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train[<span class="string">"landscapingRatio"</span>].replace(<span class="string">'%'</span>, <span class="string">''</span>, inplace=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure></p><h3 id="原因推测"><a href="#原因推测" class="headerlink" title="原因推测"></a>原因推测</h3><p>dataframe中每个列中值的dtypes不同，导致无法replace。</p><h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>使用map()和lambda函数<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train[<span class="string">"landscapingRatio"</span>] = train[<span class="string">"landscapingRatio"</span>].map(<span class="keyword">lambda</span> x: x.replace(<span class="string">'%'</span>, <span class="string">''</span>))</span><br></pre></td></tr></table></figure></p><p>map() 会根据提供的函数对指定序列做映射。<br>第一个参数 function 以参数序列中的每一个元素调用 function 函数，返回包含每次 function 函数返回值的新列表。</p>]]></content>
     
@@ -40,6 +40,33 @@
       <category term="房价预测" scheme="https://araid0628.github.io/tags/%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B/"/>
     
       <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
+    
+      <category term="Pandas" scheme="https://araid0628.github.io/tags/Pandas/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>项目实训第一周总结</title>
+    <link href="https://araid0628.github.io/2019/03/03/housepricingweek1/"/>
+    <id>https://araid0628.github.io/2019/03/03/housepricingweek1/</id>
+    <published>2019-03-03T13:22:38.000Z</published>
+    <updated>2019-03-05T13:39:43.427Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>寒假前已经定好了这次项目实训的题目，放假的时候群里关于房价数据爬虫的讨论随着一句“过完年再说”戛然而止，然而第一周已经结束了才空出时间来写总结。</p><h3 id="项目需求"><a href="#项目需求" class="headerlink" title="项目需求"></a>项目需求</h3><p>城市房价分析系统<br>技术类别：<br>Web，网络爬虫，数据分析<br>基本功能：<br>通过爬取链家网，我爱我家等中介机构，以及城市建设局网站数据，实现对指定城市的房价进行排序和分析，并结合一定规律进行预测<br>难易程度：中等<br>需求实现：</p><ol><li>按用户输入城市名称，爬取和显示城市不同小区，不同区域的房价，并用柱状图显示</li><li>按年份，月份，显示和分析某区域房价走向和趋势</li><li>对比相同价格下不同城市的房产品牌</li><li>对比不同城市房价走向，并进行归类分析</li><li>实现房价波动的简单预测</li></ol><h3 id="需求理解"><a href="#需求理解" class="headerlink" title="需求理解"></a>需求理解</h3><p>1.项目是什么？<br>一个Web，可以向用户展示粒度从市—行政区—具体楼盘的统计数据，可以根据用户提供的新楼盘数据做预测。<br>2.项目怎么做？<br>Java Web(Spring bot, vue.js, Echarts)<br>Python(bs4, sklearn, pandas)<br>MySQL<br>百度API（POI相关信息获取）<br>预测模型XgBoost + LR/DT, 是否采用Deep Learning视项目进度决定</p><h3 id="开发模式"><a href="#开发模式" class="headerlink" title="开发模式"></a>开发模式</h3><p>Scrum敏捷开发模式，lm担任产品经理，ltz担任技术主管，我是master。作为master在项目中要负责管理上的事务很多，经理日报，进度控制，每日组会，团建等等，对人际沟通能力是个很好的提升。组员都很自觉，分工我和lm负责数据和预测部分，另外三位负责Web。</p><h3 id="第一周进度"><a href="#第一周进度" class="headerlink" title="第一周进度"></a>第一周进度</h3><ol><li>数据部分：爬虫完成，爬取了某壳网上一线城市和二线城市的数据</li><li>Web部分：通过百度地图的控件可以在地图上显示城市和行政区的统计数据，校对经纬度花了挺久。</li><li>预测部分：数据清洗中，第二周预测模块应该能实现。</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;寒假前已经定好了这次项目实训的题目，放假的时候群里关于房价数据爬虫的讨论随着一句“过完年再说”戛然而止，然而第一周已经结束了才空出时间来写总
+      
+    
+    </summary>
+    
+      <category term="项目实训" scheme="https://araid0628.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
+    
+    
+      <category term="房价预测" scheme="https://araid0628.github.io/tags/%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B/"/>
     
   </entry>
   
