@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Pandas处理数据时replace方法失效]]></title>
+    <url>%2F2019%2F03%2F05%2Fweek123%2F</url>
+    <content type="text"><![CDATA[BUG复现1train.replace('%', '', inplace=True) 使用replace函数的目的是：在清洗房价数据时替换掉不需要的单位，如“%”，“元/m²/月”等。但在使用函数时发现无法生效，查了网上相关信息后试了多种方法也无法解决这个问题，如先取列之后再进行replace。1train["landscapingRatio"].replace('%', '', inplace=True) 原因推测dataframe中每个列中值的dtypes不同，导致无法replace。 解决方法使用map()和lambda函数1train["landscapingRatio"] = train["landscapingRatio"].map(lambda x: x.replace('%', '')) map() 会根据提供的函数对指定序列做映射。第一个参数 function 以参数序列中的每一个元素调用 function 函数，返回包含每次 function 函数返回值的新列表。]]></content>
+      <categories>
+        <category>项目实训</category>
+      </categories>
+      <tags>
+        <tag>房价预测</tag>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[贝叶斯估计与最大似然估计]]></title>
     <url>%2F2018%2F12%2F02%2F%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1%E4%B8%8E%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%E7%9A%84%E5%8C%BA%E5%88%AB%2F</url>
     <content type="text"><![CDATA[贝叶斯估计：估计参数$\theta$是随机变量，根据观测数据对参数的分布进行估计，考虑先验分布。 最大似然估计：参数$\theta$是未知的，根据真实数据通过最大化似然函数$\mathop{\arg\max}_{\theta}L(\theta|D)$来估计$\theta$的值 最大似然估计 贝叶斯估计 计算复杂度 微分 多重积分 先验信息的信任程度 不准确 准确 例如$p(x丨\theta)$ 与初始假设一致 与初始假设不一致]]></content>
@@ -55,10 +67,10 @@
         <category>作业</category>
       </categories>
       <tags>
+        <tag>Python</tag>
         <tag>数据挖掘</tag>
         <tag>正则表达式</tag>
         <tag>爬虫</tag>
-        <tag>Python</tag>
       </tags>
   </entry>
   <entry>
