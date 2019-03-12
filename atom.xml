@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://araid0628.github.io/"/>
-  <updated>2019-03-05T13:24:28.002Z</updated>
+  <updated>2019-03-12T14:26:22.659Z</updated>
   <id>https://araid0628.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>项目实训第二周总结</title>
+    <link href="https://araid0628.github.io/2019/03/11/week2/"/>
+    <id>https://araid0628.github.io/2019/03/11/week2/</id>
+    <published>2019-03-11T13:40:06.000Z</published>
+    <updated>2019-03-12T14:26:22.659Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>第二周结束项目的大部分简单需求已经实现，超过了预期的速度。两个组员在隔壁新国大实习，我周五也要去Bosch实习了，下周要加快进度。</p><h3 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h3><p>网站的定位是面向购买新房的投资者或者有住房提升需求的买房者的功能性网站，数据分析＞房源展示。</p><h3 id="已完成的需求"><a href="#已完成的需求" class="headerlink" title="已完成的需求"></a>已完成的需求</h3><ol><li>按用户输入城市名称，爬取和显示城市不同小区，不同区域的房价，并用柱状图显示<br><img src="images/week2_1.png" alt="显示"><br>看了周一的模拟产品发布以后，发现隔壁组的UI做的很好看，扁平化设计，准备在产品功能实现后再调整。</li><li>按年份，月份，显示和分析某区域房价走向和趋势<br><img src="images/week2_2.png" alt="图表1"><br>收集到的数据的粒度到月，住建局有到天的成交数据，但是很多特征都没有就没有采集。<br><img src="images/week2_3.png" alt="图表2"><br>ECharts确实很好用，提供了一些直观、易用的交互方式以方便对所展现数据的再加工。<h3 id="待完成的需求"><a href="#待完成的需求" class="headerlink" title="待完成的需求"></a>待完成的需求</h3>预测模型的训练已经完成，为了不和其他组撞车，准备加入两个预测模块。<br>1.新楼盘开盘价预测（博文会在第三周整理后发布）<br>输入：用户输入新楼盘的一些信息，城市+小区名称（在后台调用百度地图API返回小区周边信息数据）、绿化率、容积率、车位比等数据<br>输出：该新楼盘的开盘价格<br><img src="images/Figure_2.png" alt="预测1">(基于XgBoost)<br>图中的蓝色点是训练集中上海新楼盘的真实信息，但是训练的结果和Kaggle中波士顿房价预测那题的结果相差甚远，我想有几个原因：第一是上海主城区房价过高，但是新楼盘少，新城区房价较低，新楼盘多，这些离群点让模型产生了较大误差；第二，Kaggle比赛的数据集很全，虽然说有缺失值和部分错误值，但是用Pandas完全可以解决这些小错误，我们这次预测的数据集60%来自链家，40%是自己收集的，在专业性上相差较多，导致没有比赛数据集所呈现的统计规律。<br>2.房价走势预测（博文会在第三周整理后发布）<br>输入：数据库中某城市粒度位月的历史房价<br>输出：未来一个月的房价趋势<br><img src="images/Figure_1.png" alt="预测2">（基于LSTM）</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;第二周结束项目的大部分简单需求已经实现，超过了预期的速度。两个组员在隔壁新国大实习，我周五也要去Bosch实习了，下周要加快进度。&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+      <category term="项目实训" scheme="https://araid0628.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
+    
+    
+      <category term="项目实训" scheme="https://araid0628.github.io/tags/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
+    
+  </entry>
   
   <entry>
     <title>Pandas处理数据时replace方法失效</title>
@@ -37,9 +63,9 @@
       <category term="项目实训" scheme="https://araid0628.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
     
     
-      <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
-    
       <category term="房价预测" scheme="https://araid0628.github.io/tags/%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B/"/>
+    
+      <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
     
       <category term="Pandas" scheme="https://araid0628.github.io/tags/Pandas/"/>
     
@@ -50,7 +76,7 @@
     <link href="https://araid0628.github.io/2019/03/03/housepricingweek1/"/>
     <id>https://araid0628.github.io/2019/03/03/housepricingweek1/</id>
     <published>2019-03-03T13:22:38.000Z</published>
-    <updated>2019-03-05T13:45:22.341Z</updated>
+    <updated>2019-03-12T14:26:27.339Z</updated>
     
     <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>寒假前已经定好了这次项目实训的题目，放假的时候群里关于房价数据爬虫的讨论随着一句“过完年再说”戛然而止，然而第一周已经结束了才空出时间来写总结。</p><h3 id="项目需求"><a href="#项目需求" class="headerlink" title="项目需求"></a>项目需求</h3><p>城市房价分析系统<br>技术类别：<br>Web，网络爬虫，数据分析<br>基本功能：<br>通过爬取链家网，我爱我家等中介机构，以及城市建设局网站数据，实现对指定城市的房价进行排序和分析，并结合一定规律进行预测<br>难易程度：中等<br>需求实现：</p><ol><li>按用户输入城市名称，爬取和显示城市不同小区，不同区域的房价，并用柱状图显示</li><li>按年份，月份，显示和分析某区域房价走向和趋势</li><li>对比相同价格下不同城市的房产品牌</li><li>对比不同城市房价走向，并进行归类分析</li><li>实现房价波动的简单预测</li></ol><h3 id="需求理解"><a href="#需求理解" class="headerlink" title="需求理解"></a>需求理解</h3><p>1.项目是什么？<br>一个Web，可以向用户展示粒度从市—行政区—具体楼盘的统计数据，可以根据用户提供的新楼盘数据做预测。<br>2.项目怎么做？<br>Java Web(Spring bot, vue.js, Echarts)<br>Python(bs4, sklearn, pandas等)<br>MySQL<br>百度API（POI相关信息获取）<br>预测模型XgBoost + LR/DT, 是否采用Deep Learning视项目进度决定</p><h3 id="开发模式"><a href="#开发模式" class="headerlink" title="开发模式"></a>开发模式</h3><p>Scrum敏捷开发模式，lm担任产品经理，ltz担任技术主管，我是master。作为master在项目中要负责管理上的事务很多，经理日报，进度控制，每日组会，团建等等，对人际沟通能力是个很好的提升。组员都很自觉，分工我和lm负责数据和预测部分，另外三位负责Web。</p><h3 id="第一周进度"><a href="#第一周进度" class="headerlink" title="第一周进度"></a>第一周进度</h3><ol><li>数据部分：爬虫完成，爬取了某壳网上一线城市和二线城市的数据</li><li>Web部分：通过百度地图的控件可以在地图上显示城市和行政区的统计数据，校对经纬度花了挺久。</li><li>预测部分：数据清洗中，第二周预测模块应该能实现。</li></ol>]]></content>
     
@@ -91,15 +117,15 @@
       <category term="项目实训" scheme="https://araid0628.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
     
     
+      <category term="房价预测" scheme="https://araid0628.github.io/tags/%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B/"/>
+    
+      <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
+    
       <category term="百度" scheme="https://araid0628.github.io/tags/%E7%99%BE%E5%BA%A6/"/>
     
       <category term="API" scheme="https://araid0628.github.io/tags/API/"/>
     
       <category term="json" scheme="https://araid0628.github.io/tags/json/"/>
-    
-      <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
-    
-      <category term="房价预测" scheme="https://araid0628.github.io/tags/%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B/"/>
     
   </entry>
   

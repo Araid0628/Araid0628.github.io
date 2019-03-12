@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[项目实训第二周总结]]></title>
+    <url>%2F2019%2F03%2F11%2Fweek2%2F</url>
+    <content type="text"><![CDATA[前言第二周结束项目的大部分简单需求已经实现，超过了预期的速度。两个组员在隔壁新国大实习，我周五也要去Bosch实习了，下周要加快进度。 定位网站的定位是面向购买新房的投资者或者有住房提升需求的买房者的功能性网站，数据分析＞房源展示。 已完成的需求 按用户输入城市名称，爬取和显示城市不同小区，不同区域的房价，并用柱状图显示看了周一的模拟产品发布以后，发现隔壁组的UI做的很好看，扁平化设计，准备在产品功能实现后再调整。 按年份，月份，显示和分析某区域房价走向和趋势收集到的数据的粒度到月，住建局有到天的成交数据，但是很多特征都没有就没有采集。ECharts确实很好用，提供了一些直观、易用的交互方式以方便对所展现数据的再加工。待完成的需求预测模型的训练已经完成，为了不和其他组撞车，准备加入两个预测模块。1.新楼盘开盘价预测（博文会在第三周整理后发布）输入：用户输入新楼盘的一些信息，城市+小区名称（在后台调用百度地图API返回小区周边信息数据）、绿化率、容积率、车位比等数据输出：该新楼盘的开盘价格(基于XgBoost)图中的蓝色点是训练集中上海新楼盘的真实信息，但是训练的结果和Kaggle中波士顿房价预测那题的结果相差甚远，我想有几个原因：第一是上海主城区房价过高，但是新楼盘少，新城区房价较低，新楼盘多，这些离群点让模型产生了较大误差；第二，Kaggle比赛的数据集很全，虽然说有缺失值和部分错误值，但是用Pandas完全可以解决这些小错误，我们这次预测的数据集60%来自链家，40%是自己收集的，在专业性上相差较多，导致没有比赛数据集所呈现的统计规律。2.房价走势预测（博文会在第三周整理后发布）输入：数据库中某城市粒度位月的历史房价输出：未来一个月的房价趋势（基于LSTM）]]></content>
+      <categories>
+        <category>项目实训</category>
+      </categories>
+      <tags>
+        <tag>项目实训</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Pandas处理数据时replace方法失效]]></title>
     <url>%2F2019%2F03%2F05%2Fweek123%2F</url>
     <content type="text"><![CDATA[BUG复现1train.replace('%', '', inplace=True) 使用replace函数的目的是：在清洗房价数据时替换掉不需要的单位，如“%”，“元/m²/月”等。但在使用函数时发现无法生效，查了网上相关信息后试了多种方法也无法解决这个问题，如先取列之后再进行replace。1train["landscapingRatio"].replace('%', '', inplace=True) 原因推测dataframe中每个列中值的dtypes不同，导致无法replace。 解决方法使用map()和lambda函数1train["landscapingRatio"] = train["landscapingRatio"].map(lambda x: x.replace('%', '')) map() 会根据提供的函数对指定序列做映射。第一个参数 function 以参数序列中的每一个元素调用 function 函数，返回包含每次 function 函数返回值的新列表。]]></content>
@@ -8,8 +19,8 @@
         <category>项目实训</category>
       </categories>
       <tags>
-        <tag>Python</tag>
         <tag>房价预测</tag>
+        <tag>Python</tag>
         <tag>Pandas</tag>
       </tags>
   </entry>
@@ -32,11 +43,11 @@
         <category>项目实训</category>
       </categories>
       <tags>
+        <tag>房价预测</tag>
+        <tag>Python</tag>
         <tag>百度</tag>
         <tag>API</tag>
         <tag>json</tag>
-        <tag>Python</tag>
-        <tag>房价预测</tag>
       </tags>
   </entry>
   <entry>
