@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[项目实训第二周总结]]></title>
+    <title><![CDATA[项目实训-利用XGboost进行新楼盘价格预测]]></title>
+    <url>%2F2019%2F03%2F23%2Fxgboost%2F</url>
+    <content type="text"><![CDATA[前言本来这个需求不在列表中，受到Kaggle比赛：Kaggle Boston Housing(https://www.kaggle.com/c/boston-housing)的启发，加入了这个功能。因为数据全部靠自己收集，特征也远不如比赛中的数据集多，最终预测的效果我觉得虽然误差比较大，但是也有一定的参考价值。 数据清洗和特征工程从数据库中抽取了一部分好量化的上海市数据作为基本信息，在此基础之上，引入了该楼盘周边1km范围内地铁站数量、医院数量、学校数量、商场数量（数据来自百度API，可以参见另一篇blog）和该楼盘所在区域的区域均价。从Figure1中可以看到从某壳网上爬取下来的数据中包含很多汉字、符号，还有缺失值需要填补，另外还有格式不统一的情况，所以在数据清洗上花了很多时间。对数据中的字符型数据转换：12345678# 数据预处理，填充缺失值以及特征中含有字符的转换为数值型# "price","propertyType","landscapingRatio","siteArea","floorAreaRatio","buildingArea","yearofpropertyRights",# "numPlan","parkingRatio","propertycosts","parkingSpace","hospital","metro","school","mall","id"# 住宅：1 写字楼：2 别墅：3 商业：4train.loc[train["propertyType"] == "住宅", "propertyType"] = 1train.loc[train["propertyType"] == "写字楼", "propertyType"] = 2train.loc[train["propertyType"] == "别墅", "propertyType"] = 3train.loc[train["propertyType"] == "商业", "propertyType"] = 4 对部分特征统一数据格式后，缺失值用均值进行填补：123456789101112131415train['landscapingRatio'] = train['landscapingRatio'].fillna(train.groupby('propertyType')['landscapingRatio'].transform('mean'))train['siteArea'] = train['siteArea'].fillna(train.groupby('propertyType')['siteArea'].transform('mean'))train['floorAreaRatio'] = train['floorAreaRatio'].fillna(train.groupby('propertyType')['floorAreaRatio'].transform('mean'))train['buildingArea'] = train['buildingArea'].fillna(train.groupby('propertyType')['buildingArea'].transform('mean'))train = train.fillna(0)train['yearofpropertyRights'] = train['yearofpropertyRights'].astype(float)train['numPlan'] = train['numPlan'].astype(int)train['parkingRatio'] = train['parkingRatio'].astype(float)train['propertycosts'] = train['propertycosts'].astype(float)train['parkingSpace'] = train['parkingSpace'].astype(int)train['yearofpropertyRights'] = train['yearofpropertyRights'].fillna(train.groupby('propertyType')['yearofpropertyRights'].transform('mean'))train['numPlan'] = train['numPlan'].fillna(train.groupby('propertyType')['numPlan'].transform('mean'))train['parkingRatio'] = train['parkingRatio'].fillna(train.groupby('propertyType')['parkingRatio'].transform('mean'))train['propertycosts'] = train['propertycosts'].fillna(train.groupby('propertyType')['propertycosts'].transform('mean'))train['parkingSpace'] = train['parkingSpace'].fillna(train.groupby('propertyType')['parkingSpace'].transform('mean')) XGboost简介建模预测结果]]></content>
+      <tags>
+        <tag>Python</tag>
+        <tag>项目实训</tag>
+        <tag>XGboost</tag>
+        <tag>机器学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[项目实训-第二周总结]]></title>
     <url>%2F2019%2F03%2F11%2Fweek2%2F</url>
     <content type="text"><![CDATA[前言第二周结束项目的大部分简单需求已经实现，超过了预期的速度。两个组员在隔壁新国大实习，我周五也要去Bosch实习了，下周要加快进度。 定位网站的定位是面向购买新房的投资者或者有住房提升需求的买房者的功能性网站，数据分析＞房源展示。 已完成的需求 按用户输入城市名称，爬取和显示城市不同小区，不同区域的房价，并用柱状图显示看了周一的模拟产品发布以后，发现隔壁组的UI做的很好看，扁平化设计，准备在产品功能实现后再调整。 按年份，月份，显示和分析某区域房价走向和趋势收集到的数据的粒度到月，住建局有到天的成交数据，但是很多特征都没有就没有采集。ECharts确实很好用，提供了一些直观、易用的交互方式以方便对所展现数据的再加工。待完成的需求预测模型的训练已经完成，为了不和其他组撞车，准备加入两个预测模块。1.新楼盘开盘价预测（博文会在第三周整理后发布）输入：用户输入新楼盘的一些信息，城市+小区名称（在后台调用百度地图API返回小区周边信息数据）、绿化率、容积率、车位比等数据输出：该新楼盘的开盘价格(基于XgBoost)图中的蓝色点是训练集中上海新楼盘的真实信息，但是训练的结果和Kaggle中波士顿房价预测那题的结果相差甚远，我想有几个原因：第一是上海主城区房价过高，但是新楼盘少，新城区房价较低，新楼盘多，这些离群点让模型产生了较大误差；第二，Kaggle比赛的数据集很全，虽然说有缺失值和部分错误值，但是用Pandas完全可以解决这些小错误，我们这次预测的数据集60%来自链家，40%是自己收集的，在专业性上相差较多，导致没有比赛数据集所呈现的统计规律。2.房价走势预测（博文会在第三周整理后发布）输入：数据库中某城市粒度位月的历史房价输出：未来一个月的房价趋势（基于LSTM）]]></content>
       <categories>
