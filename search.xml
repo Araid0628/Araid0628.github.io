@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Introduction]]></title>
+    <url>%2F2019%2F04%2F03%2FIntroduction%2F</url>
+    <content type="text"><![CDATA[机器学习知识点总结]]></content>
+      <tags>
+        <tag>机器学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[项目实训-利用XGboost进行新楼盘价格预测]]></title>
     <url>%2F2019%2F03%2F23%2Fxgboost%2F</url>
     <content type="text"><![CDATA[前言本来这个需求不在列表中，受到Kaggle比赛：Kaggle Boston Housing(https://www.kaggle.com/c/boston-housing)的启发，加入了这个功能。因为数据全部靠自己收集，特征也远不如比赛中的数据集多，最终预测的效果我觉得虽然误差比较大，但是也有一定的参考价值。 数据清洗和特征工程从数据库中抽取了一部分好量化的上海市数据作为基本信息，在此基础之上，引入了该楼盘周边1km范围内地铁站数量、医院数量、学校数量、商场数量（数据来自百度API，可以参见另一篇blog）和该楼盘所在区域的区域均价。从Figure1中可以看到从某壳网上爬取下来的数据中包含很多汉字、符号，还有缺失值需要填补，另外还有格式不统一的情况，所以在数据清洗上花了很多时间。对数据中的字符型数据转换：12345678# 数据预处理，填充缺失值以及特征中含有字符的转换为数值型# "price","propertyType","landscapingRatio","siteArea","floorAreaRatio","buildingArea","yearofpropertyRights",# "numPlan","parkingRatio","propertycosts","parkingSpace","hospital","metro","school","mall","id"# 住宅：1 写字楼：2 别墅：3 商业：4train.loc[train["propertyType"] == "住宅", "propertyType"] = 1train.loc[train["propertyType"] == "写字楼", "propertyType"] = 2train.loc[train["propertyType"] == "别墅", "propertyType"] = 3train.loc[train["propertyType"] == "商业", "propertyType"] = 4 对部分特征统一数据格式后，缺失值用均值进行填补：123456789101112131415train['landscapingRatio'] = train['landscapingRatio'].fillna(train.groupby('propertyType')['landscapingRatio'].transform('mean'))train['siteArea'] = train['siteArea'].fillna(train.groupby('propertyType')['siteArea'].transform('mean'))train['floorAreaRatio'] = train['floorAreaRatio'].fillna(train.groupby('propertyType')['floorAreaRatio'].transform('mean'))train['buildingArea'] = train['buildingArea'].fillna(train.groupby('propertyType')['buildingArea'].transform('mean'))train = train.fillna(0)train['yearofpropertyRights'] = train['yearofpropertyRights'].astype(float)train['numPlan'] = train['numPlan'].astype(int)train['parkingRatio'] = train['parkingRatio'].astype(float)train['propertycosts'] = train['propertycosts'].astype(float)train['parkingSpace'] = train['parkingSpace'].astype(int)train['yearofpropertyRights'] = train['yearofpropertyRights'].fillna(train.groupby('propertyType')['yearofpropertyRights'].transform('mean'))train['numPlan'] = train['numPlan'].fillna(train.groupby('propertyType')['numPlan'].transform('mean'))train['parkingRatio'] = train['parkingRatio'].fillna(train.groupby('propertyType')['parkingRatio'].transform('mean'))train['propertycosts'] = train['propertycosts'].fillna(train.groupby('propertyType')['propertycosts'].transform('mean'))train['parkingSpace'] = train['parkingSpace'].fillna(train.groupby('propertyType')['parkingSpace'].transform('mean')) XGboost简介建模预测结果]]></content>
       <tags>
+        <tag>机器学习</tag>
         <tag>Python</tag>
         <tag>项目实训</tag>
         <tag>XGboost</tag>
-        <tag>机器学习</tag>
       </tags>
   </entry>
   <entry>
