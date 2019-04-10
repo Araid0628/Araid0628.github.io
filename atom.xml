@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://araid0628.github.io/"/>
-  <updated>2019-04-10T02:15:11.025Z</updated>
+  <updated>2019-04-10T02:17:59.484Z</updated>
   <id>https://araid0628.github.io/</id>
   
   <author>
@@ -21,16 +21,16 @@
     <link href="https://araid0628.github.io/2019/04/03/Introduction/"/>
     <id>https://araid0628.github.io/2019/04/03/Introduction/</id>
     <published>2019-04-03T14:08:47.000Z</published>
-    <updated>2019-04-10T02:15:11.025Z</updated>
+    <updated>2019-04-10T02:17:59.484Z</updated>
     
-    <content type="html"><![CDATA[<p><center>机器学习知识点总结</center><br>整理了一些机器学习的知识点，在公司用TexStudio写的，持续更新中。</p><p>如果pdf无法显示请打开Google Drive的分享链接<br><a href="https://drive.google.com/file/d/1_jf56rfrX1LpQks8DNC1e4gpfHIIpyly/view?usp=sharing" target="_blank" rel="noopener">https://drive.google.com/file/d/1_jf56rfrX1LpQks8DNC1e4gpfHIIpyly/view?usp=sharing</a></p><div class="row">    <embed src="https://github.com/Araid0628/mlbook/blob/master/main.pdf" width="100%" height="550" type="application/pdf"></div> ]]></content>
+    <content type="html"><![CDATA[<p><center>机器学习知识点总结</center><br>整理了一些机器学习的知识点，在公司用TexStudio写的，持续更新中。</p><p>如果pdf无法显示请打开Google Drive的<a href="https://drive.google.com/file/d/1_jf56rfrX1LpQks8DNC1e4gpfHIIpyly/view?usp=sharing" title="With a Title" target="_blank" rel="noopener">分享链接</a>  </p><div class="row">    <embed src="https://github.com/Araid0628/mlbook/blob/master/main.pdf" width="100%" height="550" type="application/pdf"></div> ]]></content>
     
     <summary type="html">
     
       
       
         &lt;p&gt;&lt;center&gt;机器学习知识点总结&lt;/center&gt;&lt;br&gt;整理了一些机器学习的知识点，在公司用TexStudio写的，持续更新中。&lt;/p&gt;
-&lt;p&gt;如果pdf无法显示请打开Google Drive的分享链接&lt;br&gt;&lt;a href=&quot;https://drive.google.
+&lt;p&gt;如果pdf无法显示请打开Google Drive的&lt;a href=&quot;https://drive.google.com/file
       
     
     </summary>
