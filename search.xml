@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[项目实训-利用LSTM进行房价走势预测]]></title>
+    <url>%2F2019%2F04%2F10%2Flstm%2F</url>
+    <content type="text"><![CDATA[LSTM网络Long short-term memory，即LSTM。在传统的RNN中，所有的RNN都具有一种重复神经网络模块的链接形式，例如一个tanh层。LSTM的重复模块有一个不同的结构。]]></content>
+      <tags>
+        <tag>Python</tag>
+        <tag>项目实训</tag>
+        <tag>深度学习</tag>
+        <tag>LSTM</tag>
+        <tag>RNN</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[机器学习知识点总结]]></title>
     <url>%2F2019%2F04%2F03%2FIntroduction%2F</url>
-    <content type="text"><![CDATA[机器学习知识点总结整理了一些机器学习的知识点，在公司用TexStudio写的，持续更新中。 如果pdf无法显示请打开Google Drive的分享链接]]></content>
+    <content type="text"><![CDATA[机器学习知识点总结整理了一些机器学习的知识点，在公司用TexStudio写的，持续更新中。如果pdf无法显示请打开Google Drive的分享链接。]]></content>
       <tags>
         <tag>机器学习</tag>
       </tags>
