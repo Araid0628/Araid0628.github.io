@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://araid0628.github.io/"/>
-  <updated>2019-04-10T02:34:30.004Z</updated>
+  <updated>2019-04-11T13:15:14.592Z</updated>
   <id>https://araid0628.github.io/</id>
   
   <author>
@@ -17,13 +17,45 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Introduction to XGboost</title>
+    <link href="https://araid0628.github.io/2019/04/11/xgboostppt/"/>
+    <id>https://araid0628.github.io/2019/04/11/xgboostppt/</id>
+    <published>2019-04-11T13:11:22.000Z</published>
+    <updated>2019-04-11T13:15:14.592Z</updated>
+    
+    <content type="html"><![CDATA[<div class="row">    <embed src="images/quickstart.pdf" width="100%" height="550" type="application/pdf"></div>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        
+
+	&lt;div class=&quot;row&quot;&gt;
+    &lt;embed src=&quot;images/quickstart.pdf&quot; width=&quot;100%&quot; height=&quot;550&quot; type=&quot;application/pdf&quot;&gt;
+	&lt;/div&gt;
+
+
+
+      
+    
+    </summary>
+    
+    
+      <category term="机器学习" scheme="https://araid0628.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="xgboost" scheme="https://araid0628.github.io/tags/xgboost/"/>
+    
+  </entry>
+  
+  <entry>
     <title>项目实训-利用LSTM进行房价走势预测</title>
     <link href="https://araid0628.github.io/2019/04/10/lstm/"/>
     <id>https://araid0628.github.io/2019/04/10/lstm/</id>
     <published>2019-04-10T02:23:43.000Z</published>
-    <updated>2019-04-10T02:34:30.004Z</updated>
+    <updated>2019-04-11T13:10:46.859Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="LSTM网络"><a href="#LSTM网络" class="headerlink" title="LSTM网络"></a>LSTM网络</h3><p>Long short-term memory，即LSTM。在传统的RNN中，所有的RNN都具有一种重复神经网络模块的链接形式，例如一个tanh层。<br><img src="lstm/rnn1.jpg" alt="Fig1.RNN"><br>LSTM的重复模块有一个不同的结构。<br><img src="lstm/lstm1.jpg" alt="Fig2.LSTM"></p>]]></content>
+    <content type="html"><![CDATA[<h3 id="LSTM网络"><a href="#LSTM网络" class="headerlink" title="LSTM网络"></a>LSTM网络</h3><p>Long short-term memory，即LSTM。在传统的RNN中，所有的RNN都具有一种重复神经网络模块的链接形式，例如一个tanh层。<br><img src="images/rnn1.jpg" alt="Fig1.RNN"><br>LSTM的重复模块有一个不同的结构。<br><img src="images/lstm1.jpg" alt="Fig2.LSTM"></p>]]></content>
     
     <summary type="html">
     
@@ -35,9 +67,9 @@
     </summary>
     
     
-      <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
-    
       <category term="项目实训" scheme="https://araid0628.github.io/tags/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
+    
+      <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
     
       <category term="深度学习" scheme="https://araid0628.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
@@ -91,9 +123,9 @@
     
       <category term="机器学习" scheme="https://araid0628.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
-    
       <category term="项目实训" scheme="https://araid0628.github.io/tags/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
+    
+      <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
     
       <category term="XGboost" scheme="https://araid0628.github.io/tags/XGboost/"/>
     
@@ -200,13 +232,13 @@
       <category term="项目实训" scheme="https://araid0628.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
     
     
+      <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
+    
       <category term="百度" scheme="https://araid0628.github.io/tags/%E7%99%BE%E5%BA%A6/"/>
     
       <category term="API" scheme="https://araid0628.github.io/tags/API/"/>
     
       <category term="json" scheme="https://araid0628.github.io/tags/json/"/>
-    
-      <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
     
       <category term="房价预测" scheme="https://araid0628.github.io/tags/%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B/"/>
     
