@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Fu&#39;s Lab</title>
+  <title>Fu&#39;s Workshop</title>
   
   
   <link href="/atom.xml" rel="self"/>
@@ -63,9 +63,9 @@
     </summary>
     
     
-      <category term="项目实训" scheme="https://araid0628.github.io/tags/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
-    
       <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
+    
+      <category term="项目实训" scheme="https://araid0628.github.io/tags/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
     
       <category term="深度学习" scheme="https://araid0628.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
@@ -119,9 +119,9 @@
     
       <category term="机器学习" scheme="https://araid0628.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="项目实训" scheme="https://araid0628.github.io/tags/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
-    
       <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
+    
+      <category term="项目实训" scheme="https://araid0628.github.io/tags/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
     
       <category term="XGboost" scheme="https://araid0628.github.io/tags/XGboost/"/>
     
@@ -174,9 +174,9 @@
       <category term="项目实训" scheme="https://araid0628.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
     
     
-      <category term="房价预测" scheme="https://araid0628.github.io/tags/%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B/"/>
-    
       <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
+    
+      <category term="房价预测" scheme="https://araid0628.github.io/tags/%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B/"/>
     
       <category term="Pandas" scheme="https://araid0628.github.io/tags/Pandas/"/>
     
@@ -228,15 +228,15 @@
       <category term="项目实训" scheme="https://araid0628.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
     
     
-      <category term="房价预测" scheme="https://araid0628.github.io/tags/%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B/"/>
-    
-      <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
-    
       <category term="百度" scheme="https://araid0628.github.io/tags/%E7%99%BE%E5%BA%A6/"/>
     
       <category term="API" scheme="https://araid0628.github.io/tags/API/"/>
     
       <category term="json" scheme="https://araid0628.github.io/tags/json/"/>
+    
+      <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
+    
+      <category term="房价预测" scheme="https://araid0628.github.io/tags/%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B/"/>
     
   </entry>
   
