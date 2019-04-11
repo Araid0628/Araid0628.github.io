@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://araid0628.github.io/"/>
-  <updated>2019-04-11T13:15:14.592Z</updated>
+  <updated>2019-04-11T13:27:37.428Z</updated>
   <id>https://araid0628.github.io/</id>
   
   <author>
@@ -21,22 +21,18 @@
     <link href="https://araid0628.github.io/2019/04/11/xgboostppt/"/>
     <id>https://araid0628.github.io/2019/04/11/xgboostppt/</id>
     <published>2019-04-11T13:11:22.000Z</published>
-    <updated>2019-04-11T13:15:14.592Z</updated>
+    <updated>2019-04-11T13:27:37.428Z</updated>
     
-    <content type="html"><![CDATA[<div class="row">    <embed src="images/quickstart.pdf" width="100%" height="550" type="application/pdf"></div>]]></content>
+    <content type="html"><![CDATA[<p>实习的时候主管布置的任务：<br>Pls. help to prepare some material to us a training in your area.</p><ol><li>AI in picture recognition.</li><li>Model algorithm use case in different area.<br>至今还没机会讲，就当帮自己从底层梳理了一遍XGboost原理。<div class="row">    <embed src="images/quickstart.pdf" width="100%" height="550" type="application/pdf"></div></li></ol>]]></content>
     
     <summary type="html">
     
       
       
-        
-
-	&lt;div class=&quot;row&quot;&gt;
-    &lt;embed src=&quot;images/quickstart.pdf&quot; width=&quot;100%&quot; height=&quot;550&quot; type=&quot;application/pdf&quot;&gt;
-	&lt;/div&gt;
-
-
-
+        &lt;p&gt;实习的时候主管布置的任务：&lt;br&gt;Pls. help to prepare some material to us a training in your area.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;AI in picture recognition.&lt;/li&gt;
+&lt;li&gt;Model
       
     
     </summary>
@@ -178,9 +174,9 @@
       <category term="项目实训" scheme="https://araid0628.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
     
     
-      <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
-    
       <category term="房价预测" scheme="https://araid0628.github.io/tags/%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B/"/>
+    
+      <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
     
       <category term="Pandas" scheme="https://araid0628.github.io/tags/Pandas/"/>
     
@@ -232,6 +228,8 @@
       <category term="项目实训" scheme="https://araid0628.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
     
     
+      <category term="房价预测" scheme="https://araid0628.github.io/tags/%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B/"/>
+    
       <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
     
       <category term="百度" scheme="https://araid0628.github.io/tags/%E7%99%BE%E5%BA%A6/"/>
@@ -239,8 +237,6 @@
       <category term="API" scheme="https://araid0628.github.io/tags/API/"/>
     
       <category term="json" scheme="https://araid0628.github.io/tags/json/"/>
-    
-      <category term="房价预测" scheme="https://araid0628.github.io/tags/%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B/"/>
     
   </entry>
   

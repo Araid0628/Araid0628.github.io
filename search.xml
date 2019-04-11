@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[Introduction to XGboost]]></title>
     <url>%2F2019%2F04%2F11%2Fxgboostppt%2F</url>
-    <content type="text"><![CDATA[]]></content>
+    <content type="text"><![CDATA[实习的时候主管布置的任务：Pls. help to prepare some material to us a training in your area. AI in picture recognition. Model algorithm use case in different area.至今还没机会讲，就当帮自己从底层梳理了一遍XGboost原理。]]></content>
       <tags>
         <tag>机器学习</tag>
         <tag>xgboost</tag>
@@ -59,8 +59,8 @@
         <category>项目实训</category>
       </categories>
       <tags>
-        <tag>Python</tag>
         <tag>房价预测</tag>
+        <tag>Python</tag>
         <tag>Pandas</tag>
       </tags>
   </entry>
@@ -83,11 +83,11 @@
         <category>项目实训</category>
       </categories>
       <tags>
+        <tag>房价预测</tag>
         <tag>Python</tag>
         <tag>百度</tag>
         <tag>API</tag>
         <tag>json</tag>
-        <tag>房价预测</tag>
       </tags>
   </entry>
   <entry>
