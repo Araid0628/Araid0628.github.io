@@ -308,6 +308,131 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://araid0628.github.io/2019/04/14/interview1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Fu Hanlin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fu's Workshop">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/14/interview1/" itemprop="url">一个面试问题（字节跳动）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-14T12:43:35+08:00">
+                2019年04月14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>如果现在有十三个特征，把其中一个特征复制了再加进去变成第十四个特征，对权重有什么影响？</p>
+<h3 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h3><p>面试结束忘记问答案了，自己做了个实验看不出任何规律。<br>在Dataframe中复制一列已有的特征<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data_train[<span class="string">'ByteDance'</span>] = data_train[<span class="string">'avgprice'</span>]</span><br></pre></td></tr></table></figure></p>
+<p><img src="images/int1.png" alt="结果1"><br>画出特征权重直方图<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xgb.plot_importance(model)</span><br></pre></td></tr></table></figure></p>
+<p><img src="images/int2.png" alt="结果2"></p>
+<script type="math/tex; mode=display">f_{12} = 625, f_{13} = 132</script><p><img src="images/int3.png" alt="结果3"></p>
+<script type="math/tex; mode=display">f_{12} = 643</script><script type="math/tex; mode=display">\widehat{f_{12}} < f_{12}+f_{13}</script><p>所以这个问题的意义是什么？</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://araid0628.github.io/2019/04/11/xgboostppt/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1569,149 +1694,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://araid0628.github.io/2018/11/12/算法导论4-5-主方法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Fu Hanlin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fu's Workshop">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/12/算法导论4-5-主方法/" itemprop="url">算法导论4.5-主方法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-12T22:25:12+08:00">
-                2018年11月12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>算法导论练习4.5-1<br>对下列递归式，使用主方法求出渐进紧缺界:</p>
-<h4 id="T-n-2T-n-4-1"><a href="#T-n-2T-n-4-1" class="headerlink" title="$T(n) = 2T(n/4) + 1$"></a>$T(n) = 2T(n/4) + 1$</h4><h4 id="T-n-2T-n-4-sqrt-n"><a href="#T-n-2T-n-4-sqrt-n" class="headerlink" title="$T(n) = 2T(n/4) + \sqrt{n}$"></a>$T(n) = 2T(n/4) + \sqrt{n}$</h4><h4 id="T-n-2T-n-4-n"><a href="#T-n-2T-n-4-n" class="headerlink" title="$T(n) = 2T(n/4) + n$"></a>$T(n) = 2T(n/4) + n$</h4><h4 id="T-n-2T-n-4-n-2"><a href="#T-n-2T-n-4-n-2" class="headerlink" title="$T(n) = 2T(n/4) + n^2$"></a>$T(n) = 2T(n/4) + n^2$</h4><p>Answer：</p>
-<h4 id="Theta-n-log-4-2-Theta-sqrt-n"><a href="#Theta-n-log-4-2-Theta-sqrt-n" class="headerlink" title="$\Theta(n^{\log_4{2}}) = \Theta(\sqrt{n})$"></a>$\Theta(n^{\log_4{2}}) = \Theta(\sqrt{n})$</h4><h4 id="Theta-n-log-4-2-lg-n-Theta-sqrt-n-lg-n"><a href="#Theta-n-log-4-2-lg-n-Theta-sqrt-n-lg-n" class="headerlink" title="$\Theta(n^{\log_4{2}}\lg{n}) = \Theta(\sqrt{n}\lg{n})$"></a>$\Theta(n^{\log_4{2}}\lg{n}) = \Theta(\sqrt{n}\lg{n})$</h4><h4 id="Theta-n"><a href="#Theta-n" class="headerlink" title="$\Theta(n)$"></a>$\Theta(n)$</h4><h4 id="Theta-n-2"><a href="#Theta-n-2" class="headerlink" title="$\Theta(n^2)$"></a>$\Theta(n^2)$</h4>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1762,7 +1744,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1784,7 +1766,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

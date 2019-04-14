@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://araid0628.github.io/"/>
-  <updated>2019-04-11T13:27:37.428Z</updated>
+  <updated>2019-04-14T05:06:21.291Z</updated>
   <id>https://araid0628.github.io/</id>
   
   <author>
@@ -17,11 +17,37 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>一个面试问题（字节跳动）</title>
+    <link href="https://araid0628.github.io/2019/04/14/interview1/"/>
+    <id>https://araid0628.github.io/2019/04/14/interview1/</id>
+    <published>2019-04-14T04:43:35.000Z</published>
+    <updated>2019-04-14T05:06:21.291Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>如果现在有十三个特征，把其中一个特征复制了再加进去变成第十四个特征，对权重有什么影响？</p><h3 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h3><p>面试结束忘记问答案了，自己做了个实验看不出任何规律。<br>在Dataframe中复制一列已有的特征<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data_train[<span class="string">'ByteDance'</span>] = data_train[<span class="string">'avgprice'</span>]</span><br></pre></td></tr></table></figure></p><p><img src="images/int1.png" alt="结果1"><br>画出特征权重直方图<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xgb.plot_importance(model)</span><br></pre></td></tr></table></figure></p><p><img src="images/int2.png" alt="结果2"></p><script type="math/tex; mode=display">f_{12} = 625, f_{13} = 132</script><p><img src="images/int3.png" alt="结果3"></p><script type="math/tex; mode=display">f_{12} = 643</script><script type="math/tex; mode=display">\widehat{f_{12}} < f_{12}+f_{13}</script><p>所以这个问题的意义是什么？</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;问题&quot;&gt;&lt;a href=&quot;#问题&quot; class=&quot;headerlink&quot; title=&quot;问题&quot;&gt;&lt;/a&gt;问题&lt;/h3&gt;&lt;p&gt;如果现在有十三个特征，把其中一个特征复制了再加进去变成第十四个特征，对权重有什么影响？&lt;/p&gt;
+&lt;h3 id=&quot;实验&quot;&gt;&lt;a href=&quot;#
+      
+    
+    </summary>
+    
+    
+      <category term="面试" scheme="https://araid0628.github.io/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+      <category term="机器学习" scheme="https://araid0628.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Introduction to XGboost</title>
     <link href="https://araid0628.github.io/2019/04/11/xgboostppt/"/>
     <id>https://araid0628.github.io/2019/04/11/xgboostppt/</id>
     <published>2019-04-11T13:11:22.000Z</published>
-    <updated>2019-04-11T13:27:37.428Z</updated>
+    <updated>2019-04-11T13:29:01.817Z</updated>
     
     <content type="html"><![CDATA[<p>实习的时候主管布置的任务：<br>Pls. help to prepare some material to us a training in your area.</p><ol><li>AI in picture recognition.</li><li>Model algorithm use case in different area.<br>至今还没机会讲，就当帮自己从底层梳理了一遍XGboost原理。<div class="row">    <embed src="images/quickstart.pdf" width="100%" height="550" type="application/pdf"></div></li></ol>]]></content>
     
@@ -63,9 +89,9 @@
     </summary>
     
     
-      <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
-    
       <category term="项目实训" scheme="https://araid0628.github.io/tags/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
+    
+      <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
     
       <category term="深度学习" scheme="https://araid0628.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
@@ -117,11 +143,11 @@
     </summary>
     
     
-      <category term="机器学习" scheme="https://araid0628.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+      <category term="项目实训" scheme="https://araid0628.github.io/tags/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
     
       <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
     
-      <category term="项目实训" scheme="https://araid0628.github.io/tags/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
+      <category term="机器学习" scheme="https://araid0628.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
       <category term="XGboost" scheme="https://araid0628.github.io/tags/XGboost/"/>
     
@@ -228,15 +254,15 @@
       <category term="项目实训" scheme="https://araid0628.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
     
     
+      <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
+    
+      <category term="房价预测" scheme="https://araid0628.github.io/tags/%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B/"/>
+    
       <category term="百度" scheme="https://araid0628.github.io/tags/%E7%99%BE%E5%BA%A6/"/>
     
       <category term="API" scheme="https://araid0628.github.io/tags/API/"/>
     
       <category term="json" scheme="https://araid0628.github.io/tags/json/"/>
-    
-      <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
-    
-      <category term="房价预测" scheme="https://araid0628.github.io/tags/%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B/"/>
     
   </entry>
   
