@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="杂谈,">
+  <meta name="keywords" content="JSON,爬虫,">
 
 
 
@@ -81,18 +81,20 @@
 
 
 
-<meta name="description" content="某985研一在读">
-<meta name="keywords" content="杂谈">
+<meta name="description" content="引言&amp;emsp;&amp;emsp;想做这个项目的原因是因为之前买的snkrs bot附带的Discord监控到期了，不能再提供各种球鞋上新监控。刚好有朋友在做球鞋定制和公众号，未来是希望把Discord和微信小程序集成在公众号下。第一步选择先做Discord端，考虑到Discord只要把后端和Discord Bot完成就行，刚好也能先熟悉一下Nike这个接口返回的各种信息。但是Discord因为某些原因">
+<meta name="keywords" content="JSON,爬虫">
 <meta property="og:type" content="article">
-<meta property="og:title" content="你好，Hexo">
-<meta property="og:url" content="https://araid0628.github.io/2018/09/09/你好，Hexo/index.html">
+<meta property="og:title" content="SNKRS API变量解析">
+<meta property="og:url" content="https://araid0628.github.io/2019/07/14/nikeapi/index.html">
 <meta property="og:site_name" content="Fu&#39;s Workshop">
-<meta property="og:description" content="某985研一在读">
+<meta property="og:description" content="引言&amp;emsp;&amp;emsp;想做这个项目的原因是因为之前买的snkrs bot附带的Discord监控到期了，不能再提供各种球鞋上新监控。刚好有朋友在做球鞋定制和公众号，未来是希望把Discord和微信小程序集成在公众号下。第一步选择先做Discord端，考虑到Discord只要把后端和Discord Bot完成就行，刚好也能先熟悉一下Nike这个接口返回的各种信息。但是Discord因为某些原因">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-09T07:07:47.559Z">
+<meta property="og:image" content="https://araid0628.github.io/2019/07/14/nikeapi/images/IMG_3569.PNG">
+<meta property="og:updated_time" content="2019-07-14T06:09:27.181Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="你好，Hexo">
-<meta name="twitter:description" content="某985研一在读">
+<meta name="twitter:title" content="SNKRS API变量解析">
+<meta name="twitter:description" content="引言&amp;emsp;&amp;emsp;想做这个项目的原因是因为之前买的snkrs bot附带的Discord监控到期了，不能再提供各种球鞋上新监控。刚好有朋友在做球鞋定制和公众号，未来是希望把Discord和微信小程序集成在公众号下。第一步选择先做Discord端，考虑到Discord只要把后端和Discord Bot完成就行，刚好也能先熟悉一下Nike这个接口返回的各种信息。但是Discord因为某些原因">
+<meta name="twitter:image" content="https://araid0628.github.io/2019/07/14/nikeapi/images/IMG_3569.PNG">
 
 
 
@@ -122,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="https://araid0628.github.io/2018/09/09/你好，Hexo/">
+  <link rel="canonical" href="https://araid0628.github.io/2019/07/14/nikeapi/">
 
 
 
 
 
-  <title>你好，Hexo | Fu's Workshop</title>
+  <title>SNKRS API变量解析 | Fu's Workshop</title>
   
 
 
@@ -307,7 +309,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://araid0628.github.io/2018/09/09/你好，Hexo/">
+    <link itemprop="mainEntityOfPage" href="https://araid0628.github.io/2019/07/14/nikeapi/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Fu Hanlin">
@@ -324,7 +326,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">你好，Hexo</h1>
+          <h1 class="post-title" itemprop="name headline">SNKRS API变量解析</h1>
         
 
         <div class="post-meta">
@@ -336,8 +338,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-09T10:25:49+08:00">
-                2018年09月09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-14T13:16:55+08:00">
+                2019年07月14
               </time>
             
 
@@ -359,8 +361,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/杂谈/" itemprop="url" rel="index">
-                    <span itemprop="name">杂谈</span>
+                  <a href="/categories/SnkrsMonitor/" itemprop="url" rel="index">
+                    <span itemprop="name">SnkrsMonitor</span>
                   </a>
                 </span>
 
@@ -401,7 +403,18 @@
       
 
       
-        
+        <h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>&emsp;&emsp;想做这个项目的原因是因为之前买的snkrs bot附带的Discord监控到期了，不能再提供各种球鞋上新监控。刚好有朋友在做球鞋定制和公众号，未来是希望把Discord和微信小程序集成在公众号下。第一步选择先做Discord端，考虑到Discord只要把后端和Discord Bot完成就行，刚好也能先熟悉一下Nike这个接口返回的各种信息。但是Discord因为某些原因被墙了，中国的开发者很少，花了很多时间研究国外开发者写的文档，进度还是比较理想的。希望暑假后能尽快开始微信小程序的开发，这才是重点！  </p>
+<h3 id="SNKRS-API"><a href="#SNKRS-API" class="headerlink" title="SNKRS API"></a>SNKRS API</h3><p><a href="https://api.nike.com/snkrs/content/v1/?country=CN&amp;language=zh-Hans&amp;orderBy=lastUpdated&amp;offset=0" target="_blank" rel="noopener">https://api.nike.com/snkrs/content/v1/?country=CN&amp;language=zh-Hans&amp;orderBy=lastUpdated&amp;offset=0</a><br>URL其实比较容易拿到，用Wireshark对手机访问SNKRS APP时进行抓包操作就可以。当offset=0时，API会返回第1-50双球鞋的数据，offset=50时，API会返回第51-100双球鞋的数据，以此类推。通过totalRecords可以看到中国区SNKRS上一共有1468双球鞋。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">"country"</span>:<span class="string">"CN"</span>,<span class="string">"locale"</span>:<span class="string">"zh-Hans_CN"</span>,<span class="string">"channel"</span>:<span class="string">"snkrs"</span>,<span class="string">"totalRecords"</span>:<span class="number">1468</span>,<span class="string">"threads"</span>:[&#123;<span class="string">"id"</span>:<span class="string">"50307c93-04ef-4720-a5ba-d65f53595d5e"</span>,<span class="string">"threadId"</span>:<span class="string">"50307c93-04ef-4720-a5ba-d65f53595d5e"</span>,<span class="string">"interestId"</span>:<span class="string">"5c94b7ea-2a8a-3c70-97a1-e394f65c77f8"</span>,<span class="string">"name"</span>:<span class="string">"M2K Tekno"</span>,<span class="string">"lastUpdatedDate"</span>:<span class="string">"2019-07-14T04:30:25.997000"</span>,<span class="string">"lastUpdatedTime"</span>:<span class="string">"2019-07-14T04:30:25.997000"</span>,<span class="string">"publishedDate"</span>:<span class="string">"2019-06-11T02:02:43.000000"</span>,<span class="string">"restricted"</span>:false,<span class="string">"feed"</span>:<span class="string">"d879aa85-698c-41a1-b066-a8ecdf6b8a9c"</span>,<span class="string">"title"</span>:<span class="string">"Electric Volt"</span>,<span class="string">"subtitle"</span>:<span class="string">"M2K Tekno"</span>,<span class="string">"seoSlug"</span>:<span class="string">"m2k-tekno-electric-volt"</span>,<span class="string">"seoTitle"</span>:<span class="string">"Nike M2K Tekno 'Electric Volt' 发布日期"</span>,<span class="string">"seoDescription"</span>:<span class="string">"浏览并选购 Nike M2K Tekno 'Electric Volt'。抢先了解运动鞋发布新动态。"</span>,<span class="string">"tags"</span>:[<span class="string">"SPORTSWEAR"</span>,<span class="string">"M2K TEKNO GEL"</span>,<span class="string">"VOLT"</span>],<span class="string">"imageUrl"</span>:<span class="string">"https://c.static-nike.com/a/images/t_prod_ss/w_750,c_limit/itzc9whni67vdgvffry5/nike-m2k-tekno-electric-volt-release-date.jpg"</span>,<span class="string">"squareImageUrl"</span>:<span class="string">"https://c.static-nike.com/a/images/t_prod_ss/w_750,c_limit/itzc9whni67vdgvffry5/nike-m2k-tekno-electric-volt-release-date.jpg"</span>,<span class="string">"portraitImageUrl"</span>:<span class="string">"https://c.static-nike.com/a/images/t_prod_ps/w_750,c_limit/itzc9whni67vdgvffry5/nike-m2k-tekno-electric-volt-release-date.jpg"</span>,<span class="string">"relations"</span>:[&#123;<span class="string">"name"</span>:<span class="string">"RELATED"</span>,<span class="string">"threads"</span>:[<span class="string">"295a2e30-e337-4d16-a7dc-6ed37efdf6cb"</span>,<span class="string">"54b800b9-2457-4f2d-973e-0f77502cb19f"</span>]&#125;],<span class="string">"product"</span>:&#123;<span class="string">"id"</span>:<span class="string">"a13e8a5d-eed0-5a05-bac7-96913b8528eb"</span>,<span class="string">"interestId"</span>:<span class="string">"5c94b7ea-2a8a-3c70-97a1-e394f65c77f8"</span>,<span class="string">"style"</span>:<span class="string">"CI5749"</span>,<span class="string">"colorCode"</span>:<span class="string">"777"</span>,<span class="string">"globalPid"</span>:<span class="string">"12697014"</span>,<span class="string">"title"</span>:<span class="string">"Nike M2K Tekno"</span>,<span class="string">"subtitle"</span>:<span class="string">"男子运动鞋"</span>,<span class="string">"imageUrl"</span>:<span class="string">"https://secure-images.nike.com/is/image/DotCom/CI5749_777"</span>,<span class="string">"genders"</span>:[<span class="string">"MEN"</span>],<span class="string">"quantityLimit"</span>:<span class="number">10</span>,<span class="string">"merchStatus"</span>:<span class="string">"ACTIVE"</span>,<span class="string">"colorDescription"</span>:<span class="string">"荧光黄/荧光黄/荧光黄"</span>,<span class="string">"available"</span>:true,<span class="string">"publishType"</span>:<span class="string">"FLOW"</span>,<span class="string">"productType"</span>:<span class="string">"FOOTWEAR"</span>,<span class="string">"upcoming"</span>:true,<span class="string">"price"</span>:&#123;<span class="string">"msrp"</span>:<span class="number">799</span>,<span class="string">"fullRetailPrice"</span>:<span class="number">799</span>,<span class="string">"currentRetailPrice"</span>:<span class="number">799</span>,<span class="string">"onSale"</span>:false&#125;,<span class="string">"startSellDate"</span>:<span class="string">"2019-06-12T01:00:00.000000"</span>,<span class="string">"skus"</span>:[&#123;<span class="string">"id"</span>:<span class="string">"af4e2d70-66b7-5b8f-b1cd-6f25118412ec"</span>,<span class="string">"localizedSize"</span>:<span class="string">"38.5"</span>,<span class="string">"localizedSizePrefix"</span>:null,<span class="string">"nikeSize"</span>:<span class="string">"6"</span>,<span class="string">"available"</span>:false&#125;,&#123;<span class="string">"id"</span>:<span class="string">"a6198452-cea8-52b1-b4e8-9b7330ce1738"</span>,<span class="string">"localizedSize"</span>:<span class="string">"39"</span>,<span class="string">"localizedSizePrefix"</span>:null,<span class="string">"nikeSize"</span>:<span class="string">"6.5"</span>,<span class="string">"available"</span>:false&#125;,&#123;<span class="string">"id"</span>:<span class="string">"0ffd3b93-6f33-56c4-9150-e8399d48a925"</span>,<span class="string">"localizedSize"</span>:<span class="string">"40"</span>,<span class="string">"localizedSizePrefix"</span>:null,<span class="string">"nikeSize"</span>:<span class="string">"7"</span>,<span class="string">"available"</span>:true&#125;,&#123;<span class="string">"id"</span>:<span class="string">"2288c661-37d8-58d2-9420-073e84d94d42"</span>,<span class="string">"localizedSize"</span>:<span class="string">"40.5"</span>,<span class="string">"localizedSizePrefix"</span>:null,<span class="string">"nikeSize"</span>:<span class="string">"7.5"</span>,<span class="string">"available"</span>:true&#125;,&#123;<span class="string">"id"</span>:<span class="string">"61a76fb0-9f4b-5415-831d-79a7d95aacd0"</span>,<span class="string">"localizedSize"</span>:<span class="string">"41"</span>,<span class="string">"localizedSizePrefix"</span>:null,<span class="string">"nikeSize"</span>:<span class="string">"8"</span>,<span class="string">"available"</span>:true&#125;,&#123;<span class="string">"id"</span>:<span class="string">"ce9e61be-1a77-5612-9da5-d3d7c7e1b474"</span>,<span class="string">"localizedSize"</span>:<span class="string">"42"</span>,<span class="string">"localizedSizePrefix"</span>:null,<span class="string">"nikeSize"</span>:<span class="string">"8.5"</span>,<span class="string">"available"</span>:false&#125;,&#123;<span class="string">"id"</span>:<span class="string">"05d73ea3-ba82-5d5e-8272-c3c855f4eee0"</span>,<span class="string">"localizedSize"</span>:<span class="string">"42.5"</span>,<span class="string">"localizedSizePrefix"</span>:null,<span class="string">"nikeSize"</span>:<span class="string">"9"</span>,<span class="string">"available"</span>:true&#125;,&#123;<span class="string">"id"</span>:<span class="string">"d14e0a6b-2e5a-5950-a616-19354ae727d0"</span>,<span class="string">"localizedSize"</span>:<span class="string">"43"</span>,<span class="string">"localizedSizePrefix"</span>:null,<span class="string">"nikeSize"</span>:<span class="string">"9.5"</span>,<span class="string">"available"</span>:true&#125;,&#123;<span class="string">"id"</span>:<span class="string">"509c830c-d527-5836-9047-998a504e044e"</span>,<span class="string">"localizedSize"</span>:<span class="string">"44"</span>,<span class="string">"localizedSizePrefix"</span>:null,<span class="string">"nikeSize"</span>:<span class="string">"10"</span>,<span class="string">"available"</span>:true&#125;,&#123;<span class="string">"id"</span>:<span class="string">"1949e1fb-c5d5-503b-9d57-13a1b4722c10"</span>,<span class="string">"localizedSize"</span>:<span class="string">"44.5"</span>,<span class="string">"localizedSizePrefix"</span>:null,<span class="string">"nikeSize"</span>:<span class="string">"10.5"</span>,<span class="string">"available"</span>:true&#125;,&#123;<span class="string">"id"</span>:<span class="string">"d47d9cf2-08d7-5d8a-8621-924fae3bc22a"</span>,<span class="string">"localizedSize"</span>:<span class="string">"45"</span>,<span class="string">"localizedSizePrefix"</span>:null,<span class="string">"nikeSize"</span>:<span class="string">"11"</span>,<span class="string">"available"</span>:true&#125;,&#123;<span class="string">"id"</span>:<span class="string">"9f7ddf99-b7b8-5768-9311-7aed805526e9"</span>,<span class="string">"localizedSize"</span>:<span class="string">"46"</span>,<span class="string">"localizedSizePrefix"</span>:null,<span class="string">"nikeSize"</span>:<span class="string">"12"</span>,<span class="string">"available"</span>:true&#125;,&#123;<span class="string">"id"</span>:<span class="string">"9ea19342-cf46-50cd-a9f9-5dcbb45cd2fa"</span>,<span class="string">"localizedSize"</span>:<span class="string">"47.5"</span>,<span class="string">"localizedSizePrefix"</span>:null,<span class="string">"nikeSize"</span>:<span class="string">"13"</span>,<span class="string">"available"</span>:false&#125;],<span class="string">"expireDate"</span>:<span class="string">"3000-01-01T20:00:00.000000"</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="变量解析"><a href="#变量解析" class="headerlink" title="变量解析"></a>变量解析</h3><p>country: CN 中国区<br>totalRecords: 1468 SNKRS APP中记录总量<br>threads: 球鞋的所有信息，一个很长的list，中间存储的是dict。<br>以第一双鞋为例：<br><img src="images/IMG_3569.PNG" alt="Fig.1AJ13"><br>是一双AJ13，这双鞋在threads中的dict中有一些重要的信息：  </p>
+<ol>
+<li>id<br>API中标记一双球鞋的编号，主键   </li>
+<li>name<br>球鞋名称  </li>
+<li>restricted<br>是否受限，有些新球鞋是锁住的  </li>
+<li>imageUrl<br>球鞋图片，Discord中推送会用到  </li>
+<li>selectionEngine<br>LEO和DAN，2分钟和15分钟抽签模式，现在已经没有先到先得的FLOW模式了  </li>
+<li>skus<br>尺码  </li>
+</ol>
+
       
     </div>
     
@@ -418,7 +431,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/杂谈/" rel="tag"># 杂谈</a>
+            <a href="/tags/JSON/" rel="tag"># JSON</a>
+          
+            <a href="/tags/爬虫/" rel="tag"># 爬虫</a>
           
         </div>
       
@@ -431,15 +446,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/06/26/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/09/10/使用插件和IDM下载百度云盘/" rel="prev" title="使用插件和IDM下载百度云盘">
-                使用插件和IDM下载百度云盘 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -491,8 +506,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -587,6 +611,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SNKRS-API"><span class="nav-number">2.</span> <span class="nav-text">SNKRS API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量解析"><span class="nav-number">3.</span> <span class="nav-text">变量解析</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

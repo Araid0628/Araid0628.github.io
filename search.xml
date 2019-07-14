@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[SNKRS API变量解析]]></title>
+    <url>%2F2019%2F07%2F14%2Fnikeapi%2F</url>
+    <content type="text"><![CDATA[引言&emsp;&emsp;想做这个项目的原因是因为之前买的snkrs bot附带的Discord监控到期了，不能再提供各种球鞋上新监控。刚好有朋友在做球鞋定制和公众号，未来是希望把Discord和微信小程序集成在公众号下。第一步选择先做Discord端，考虑到Discord只要把后端和Discord Bot完成就行，刚好也能先熟悉一下Nike这个接口返回的各种信息。但是Discord因为某些原因被墙了，中国的开发者很少，花了很多时间研究国外开发者写的文档，进度还是比较理想的。希望暑假后能尽快开始微信小程序的开发，这才是重点！ SNKRS APIhttps://api.nike.com/snkrs/content/v1/?country=CN&amp;language=zh-Hans&amp;orderBy=lastUpdated&amp;offset=0URL其实比较容易拿到，用Wireshark对手机访问SNKRS APP时进行抓包操作就可以。当offset=0时，API会返回第1-50双球鞋的数据，offset=50时，API会返回第51-100双球鞋的数据，以此类推。通过totalRecords可以看到中国区SNKRS上一共有1468双球鞋。1&#123;"country":"CN","locale":"zh-Hans_CN","channel":"snkrs","totalRecords":1468,"threads":[&#123;"id":"50307c93-04ef-4720-a5ba-d65f53595d5e","threadId":"50307c93-04ef-4720-a5ba-d65f53595d5e","interestId":"5c94b7ea-2a8a-3c70-97a1-e394f65c77f8","name":"M2K Tekno","lastUpdatedDate":"2019-07-14T04:30:25.997000","lastUpdatedTime":"2019-07-14T04:30:25.997000","publishedDate":"2019-06-11T02:02:43.000000","restricted":false,"feed":"d879aa85-698c-41a1-b066-a8ecdf6b8a9c","title":"Electric Volt","subtitle":"M2K Tekno","seoSlug":"m2k-tekno-electric-volt","seoTitle":"Nike M2K Tekno 'Electric Volt' 发布日期","seoDescription":"浏览并选购 Nike M2K Tekno 'Electric Volt'。抢先了解运动鞋发布新动态。","tags":["SPORTSWEAR","M2K TEKNO GEL","VOLT"],"imageUrl":"https://c.static-nike.com/a/images/t_prod_ss/w_750,c_limit/itzc9whni67vdgvffry5/nike-m2k-tekno-electric-volt-release-date.jpg","squareImageUrl":"https://c.static-nike.com/a/images/t_prod_ss/w_750,c_limit/itzc9whni67vdgvffry5/nike-m2k-tekno-electric-volt-release-date.jpg","portraitImageUrl":"https://c.static-nike.com/a/images/t_prod_ps/w_750,c_limit/itzc9whni67vdgvffry5/nike-m2k-tekno-electric-volt-release-date.jpg","relations":[&#123;"name":"RELATED","threads":["295a2e30-e337-4d16-a7dc-6ed37efdf6cb","54b800b9-2457-4f2d-973e-0f77502cb19f"]&#125;],"product":&#123;"id":"a13e8a5d-eed0-5a05-bac7-96913b8528eb","interestId":"5c94b7ea-2a8a-3c70-97a1-e394f65c77f8","style":"CI5749","colorCode":"777","globalPid":"12697014","title":"Nike M2K Tekno","subtitle":"男子运动鞋","imageUrl":"https://secure-images.nike.com/is/image/DotCom/CI5749_777","genders":["MEN"],"quantityLimit":10,"merchStatus":"ACTIVE","colorDescription":"荧光黄/荧光黄/荧光黄","available":true,"publishType":"FLOW","productType":"FOOTWEAR","upcoming":true,"price":&#123;"msrp":799,"fullRetailPrice":799,"currentRetailPrice":799,"onSale":false&#125;,"startSellDate":"2019-06-12T01:00:00.000000","skus":[&#123;"id":"af4e2d70-66b7-5b8f-b1cd-6f25118412ec","localizedSize":"38.5","localizedSizePrefix":null,"nikeSize":"6","available":false&#125;,&#123;"id":"a6198452-cea8-52b1-b4e8-9b7330ce1738","localizedSize":"39","localizedSizePrefix":null,"nikeSize":"6.5","available":false&#125;,&#123;"id":"0ffd3b93-6f33-56c4-9150-e8399d48a925","localizedSize":"40","localizedSizePrefix":null,"nikeSize":"7","available":true&#125;,&#123;"id":"2288c661-37d8-58d2-9420-073e84d94d42","localizedSize":"40.5","localizedSizePrefix":null,"nikeSize":"7.5","available":true&#125;,&#123;"id":"61a76fb0-9f4b-5415-831d-79a7d95aacd0","localizedSize":"41","localizedSizePrefix":null,"nikeSize":"8","available":true&#125;,&#123;"id":"ce9e61be-1a77-5612-9da5-d3d7c7e1b474","localizedSize":"42","localizedSizePrefix":null,"nikeSize":"8.5","available":false&#125;,&#123;"id":"05d73ea3-ba82-5d5e-8272-c3c855f4eee0","localizedSize":"42.5","localizedSizePrefix":null,"nikeSize":"9","available":true&#125;,&#123;"id":"d14e0a6b-2e5a-5950-a616-19354ae727d0","localizedSize":"43","localizedSizePrefix":null,"nikeSize":"9.5","available":true&#125;,&#123;"id":"509c830c-d527-5836-9047-998a504e044e","localizedSize":"44","localizedSizePrefix":null,"nikeSize":"10","available":true&#125;,&#123;"id":"1949e1fb-c5d5-503b-9d57-13a1b4722c10","localizedSize":"44.5","localizedSizePrefix":null,"nikeSize":"10.5","available":true&#125;,&#123;"id":"d47d9cf2-08d7-5d8a-8621-924fae3bc22a","localizedSize":"45","localizedSizePrefix":null,"nikeSize":"11","available":true&#125;,&#123;"id":"9f7ddf99-b7b8-5768-9311-7aed805526e9","localizedSize":"46","localizedSizePrefix":null,"nikeSize":"12","available":true&#125;,&#123;"id":"9ea19342-cf46-50cd-a9f9-5dcbb45cd2fa","localizedSize":"47.5","localizedSizePrefix":null,"nikeSize":"13","available":false&#125;],"expireDate":"3000-01-01T20:00:00.000000"&#125; 变量解析country: CN 中国区totalRecords: 1468 SNKRS APP中记录总量threads: 球鞋的所有信息，一个很长的list，中间存储的是dict。以第一双鞋为例：是一双AJ13，这双鞋在threads中的dict中有一些重要的信息： idAPI中标记一双球鞋的编号，主键 name球鞋名称 restricted是否受限，有些新球鞋是锁住的 imageUrl球鞋图片，Discord中推送会用到 selectionEngineLEO和DAN，2分钟和15分钟抽签模式，现在已经没有先到先得的FLOW模式了 skus尺码]]></content>
+      <categories>
+        <category>SnkrsMonitor</category>
+      </categories>
+      <tags>
+        <tag>JSON</tag>
+        <tag>爬虫</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Hello World]]></title>
     <url>%2F2019%2F06%2F26%2Fhello-world%2F</url>
     <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
@@ -166,9 +178,9 @@
       </categories>
       <tags>
         <tag>Python</tag>
+        <tag>爬虫</tag>
         <tag>数据挖掘</tag>
         <tag>正则表达式</tag>
-        <tag>爬虫</tag>
       </tags>
   </entry>
   <entry>
