@@ -81,19 +81,19 @@
 
 
 
-<meta name="description" content="服务器我们组有两台服务器一直在某个小房间里吃灰，光靠工作站里的两块1080Ti算力确实不够。某天和IT一起把线接好了可以启动了，但是一看开发环境还是两年多前的，各种软件版本都比较旧了。两块Tesla P100在里面积了不少灰，曾经想把他拆下来装在台式机上后来发现台式机电源不是全模组的根本没那个供电的接口，还是放回去吧。     |GPU|Compute Capability||Tesla P100">
+<meta name="description" content="服务器我们组有两台服务器一直在某个小房间里吃灰，光靠工作站里的两块1080Ti算力确实不够。某天和IT一起把线接好了可以启动了，但是一看开发环境还是两年多前的，各种软件版本都比较旧了。两块Tesla P100在里面积了不少灰，曾经想把他拆下来装在台式机上后来发现台式机电源不是全模组的根本没那个供电的接口，还是放回去吧。     ||GPU|Compute Capability|||——-|——-|">
 <meta name="keywords" content="深度学习,配置,Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ubuntu服务器配置(tensorflow+cuda+cudnn+显卡驱动)">
 <meta property="og:url" content="https://araid0628.github.io/2019/07/26/gpu-server/index.html">
 <meta property="og:site_name" content="Fu&#39;s Workshop">
-<meta property="og:description" content="服务器我们组有两台服务器一直在某个小房间里吃灰，光靠工作站里的两块1080Ti算力确实不够。某天和IT一起把线接好了可以启动了，但是一看开发环境还是两年多前的，各种软件版本都比较旧了。两块Tesla P100在里面积了不少灰，曾经想把他拆下来装在台式机上后来发现台式机电源不是全模组的根本没那个供电的接口，还是放回去吧。     |GPU|Compute Capability||Tesla P100">
+<meta property="og:description" content="服务器我们组有两台服务器一直在某个小房间里吃灰，光靠工作站里的两块1080Ti算力确实不够。某天和IT一起把线接好了可以启动了，但是一看开发环境还是两年多前的，各种软件版本都比较旧了。两块Tesla P100在里面积了不少灰，曾经想把他拆下来装在台式机上后来发现台式机电源不是全模组的根本没那个供电的接口，还是放回去吧。     ||GPU|Compute Capability|||——-|——-|">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://araid0628.github.io/2019/07/26/gpu-server/images/20190726235204.jpg">
-<meta property="og:updated_time" content="2019-07-26T16:26:12.232Z">
+<meta property="og:updated_time" content="2019-07-26T16:28:35.880Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ubuntu服务器配置(tensorflow+cuda+cudnn+显卡驱动)">
-<meta name="twitter:description" content="服务器我们组有两台服务器一直在某个小房间里吃灰，光靠工作站里的两块1080Ti算力确实不够。某天和IT一起把线接好了可以启动了，但是一看开发环境还是两年多前的，各种软件版本都比较旧了。两块Tesla P100在里面积了不少灰，曾经想把他拆下来装在台式机上后来发现台式机电源不是全模组的根本没那个供电的接口，还是放回去吧。     |GPU|Compute Capability||Tesla P100">
+<meta name="twitter:description" content="服务器我们组有两台服务器一直在某个小房间里吃灰，光靠工作站里的两块1080Ti算力确实不够。某天和IT一起把线接好了可以启动了，但是一看开发环境还是两年多前的，各种软件版本都比较旧了。两块Tesla P100在里面积了不少灰，曾经想把他拆下来装在台式机上后来发现台式机电源不是全模组的根本没那个供电的接口，还是放回去吧。     ||GPU|Compute Capability|||——-|——-|">
 <meta name="twitter:image" content="https://araid0628.github.io/2019/07/26/gpu-server/images/20190726235204.jpg">
 
 
@@ -382,7 +382,7 @@
 
       
         <h3 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h3><p>我们组有两台服务器一直在某个小房间里吃灰，光靠工作站里的两块1080Ti算力确实不够。某天和IT一起把线接好了可以启动了，但是一看开发环境还是两年多前的，各种软件版本都比较旧了。<br><img src="images/20190726235204.jpg" alt="GPU"><br>两块Tesla P100在里面积了不少灰，曾经想把他拆下来装在台式机上后来发现台式机电源不是全模组的根本没那个供电的接口，还是放回去吧。    </p>
-<p>|GPU|Compute Capability|<br>|Tesla P100|6.0|<br>|GeForce GTX 1080 Ti|6.1|</p>
+<p>||GPU|Compute Capability|<br>||——-|——-|——-|<br>||Tesla P100|6.0|<br>||GeForce GTX 1080 Ti|6.1|</p>
 <p>Retrieved from <a href="https://developer.nvidia.com/cuda-gpus" target="_blank" rel="noopener">https://developer.nvidia.com/cuda-gpus</a><br>三四万一张的P100计算能力怎么还没有1080Ti好使呢?这个计算能力应该只是在深度学习领域。Tesla系列的专业显卡相比Geforce显卡拥有更高的计算精度，对于航空航天、药物研发等领域提供双精度（FP64）进行更加精准的计算。Tesla的显存颗粒更贵，支持高精度计算不会在读写存储时出现误差。<br>建议立刻更新到Quadro RTX 8000或者Tesla T4（没funding）    </p>
 <h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3>
       
