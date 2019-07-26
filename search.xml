@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[ubuntu服务器配置(tensorflow+cuda+cudnn+显卡驱动)]]></title>
     <url>%2F2019%2F07%2F26%2Fgpu-server%2F</url>
-    <content type="text"><![CDATA[服务器我们组有两台服务器一直在某个小房间里吃灰，光靠工作站里的两块1080Ti算力确实不够。某天和IT一起把线接好了可以启动了，但是一看开发环境还是两年多前的，各种软件版本都比较旧了。两块Tesla P100在里面积了不少灰，曾经想把他拆下来装在台式机上后来发现台式机电源不是全模组的根本没那个供电的接口，还是放回去吧。|GPU|Compute Capability||Tesla P100|6.0||GeForce GTX 1080 Ti|6.1|Retrieved from https://developer.nvidia.com/cuda-gpus三四万一张的P100计算能力怎么还没有1080Ti好使呢?这个计算能力应该只是在深度学习领域。Tesla系列的专业显卡相比Geforce显卡拥有更高的计算精度，对于航空航天、药物研发等领域提供双精度（FP64）进行更加精准的计算。Tesla的显存颗粒更贵，支持高精度计算不会在读写存储时出现误差。建议立刻更新到Quadro RTX 8000或者Tesla T4（没funding） 环境]]></content>
+    <content type="text"><![CDATA[服务器我们组有两台服务器一直在某个小房间里吃灰，光靠工作站里的两块1080Ti算力确实不够。某天和IT一起把线接好了可以启动了，但是一看开发环境还是两年多前的，各种软件版本都比较旧了。两块Tesla P100在里面积了不少灰，曾经想把他拆下来装在台式机上后来发现台式机电源不是全模组的根本没那个供电的接口，还是放回去吧。 |GPU|Compute Capability||Tesla P100|6.0||GeForce GTX 1080 Ti|6.1| Retrieved from https://developer.nvidia.com/cuda-gpus三四万一张的P100计算能力怎么还没有1080Ti好使呢?这个计算能力应该只是在深度学习领域。Tesla系列的专业显卡相比Geforce显卡拥有更高的计算精度，对于航空航天、药物研发等领域提供双精度（FP64）进行更加精准的计算。Tesla的显存颗粒更贵，支持高精度计算不会在读写存储时出现误差。建议立刻更新到Quadro RTX 8000或者Tesla T4（没funding） 环境]]></content>
       <tags>
         <tag>深度学习</tag>
         <tag>配置</tag>
@@ -18,8 +18,8 @@
         <category>SnkrsMonitor</category>
       </categories>
       <tags>
-        <tag>爬虫</tag>
         <tag>JSON</tag>
+        <tag>爬虫</tag>
       </tags>
   </entry>
   <entry>
@@ -56,8 +56,8 @@
     <url>%2F2019%2F04%2F10%2Flstm%2F</url>
     <content type="text"><![CDATA[LSTM网络Long short-term memory，即LSTM。在传统的RNN中，所有的RNN都具有一种重复神经网络模块的链接形式，例如一个tanh层。LSTM的重复模块有一个不同的结构。]]></content>
       <tags>
-        <tag>深度学习</tag>
         <tag>Python</tag>
+        <tag>深度学习</tag>
         <tag>项目实训</tag>
         <tag>LSTM</tag>
         <tag>RNN</tag>
@@ -188,9 +188,9 @@
       </categories>
       <tags>
         <tag>Python</tag>
+        <tag>爬虫</tag>
         <tag>数据挖掘</tag>
         <tag>正则表达式</tag>
-        <tag>爬虫</tag>
       </tags>
   </entry>
   <entry>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://araid0628.github.io/"/>
-  <updated>2019-07-26T16:20:52.854Z</updated>
+  <updated>2019-07-26T16:26:12.232Z</updated>
   <id>https://araid0628.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://araid0628.github.io/2019/07/26/gpu-server/"/>
     <id>https://araid0628.github.io/2019/07/26/gpu-server/</id>
     <published>2019-07-26T15:46:59.000Z</published>
-    <updated>2019-07-26T16:20:52.854Z</updated>
+    <updated>2019-07-26T16:26:12.232Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h3><p>我们组有两台服务器一直在某个小房间里吃灰，光靠工作站里的两块1080Ti算力确实不够。某天和IT一起把线接好了可以启动了，但是一看开发环境还是两年多前的，各种软件版本都比较旧了。<br><img src="images/20190726235204.jpg" alt="GPU"><br>两块Tesla P100在里面积了不少灰，曾经想把他拆下来装在台式机上后来发现台式机电源不是全模组的根本没那个供电的接口，还是放回去吧。<br>|GPU|Compute Capability|<br>|Tesla P100|6.0|<br>|GeForce GTX 1080 Ti|6.1|<br>Retrieved from <a href="https://developer.nvidia.com/cuda-gpus" target="_blank" rel="noopener">https://developer.nvidia.com/cuda-gpus</a><br>三四万一张的P100计算能力怎么还没有1080Ti好使呢?这个计算能力应该只是在深度学习领域。Tesla系列的专业显卡相比Geforce显卡拥有更高的计算精度，对于航空航天、药物研发等领域提供双精度（FP64）进行更加精准的计算。Tesla的显存颗粒更贵，支持高精度计算不会在读写存储时出现误差。<br>建议立刻更新到Quadro RTX 8000或者Tesla T4（没funding）    </p><h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3>]]></content>
+    <content type="html"><![CDATA[<h3 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h3><p>我们组有两台服务器一直在某个小房间里吃灰，光靠工作站里的两块1080Ti算力确实不够。某天和IT一起把线接好了可以启动了，但是一看开发环境还是两年多前的，各种软件版本都比较旧了。<br><img src="images/20190726235204.jpg" alt="GPU"><br>两块Tesla P100在里面积了不少灰，曾经想把他拆下来装在台式机上后来发现台式机电源不是全模组的根本没那个供电的接口，还是放回去吧。    </p><p>|GPU|Compute Capability|<br>|Tesla P100|6.0|<br>|GeForce GTX 1080 Ti|6.1|</p><p>Retrieved from <a href="https://developer.nvidia.com/cuda-gpus" target="_blank" rel="noopener">https://developer.nvidia.com/cuda-gpus</a><br>三四万一张的P100计算能力怎么还没有1080Ti好使呢?这个计算能力应该只是在深度学习领域。Tesla系列的专业显卡相比Geforce显卡拥有更高的计算精度，对于航空航天、药物研发等领域提供双精度（FP64）进行更加精准的计算。Tesla的显存颗粒更贵，支持高精度计算不会在读写存储时出现误差。<br>建议立刻更新到Quadro RTX 8000或者Tesla T4（没funding）    </p><h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3>]]></content>
     
     <summary type="html">
     
@@ -64,9 +64,9 @@
       <category term="SnkrsMonitor" scheme="https://araid0628.github.io/categories/SnkrsMonitor/"/>
     
     
-      <category term="爬虫" scheme="https://araid0628.github.io/tags/%E7%88%AC%E8%99%AB/"/>
-    
       <category term="JSON" scheme="https://araid0628.github.io/tags/JSON/"/>
+    
+      <category term="爬虫" scheme="https://araid0628.github.io/tags/%E7%88%AC%E8%99%AB/"/>
     
   </entry>
   
@@ -168,9 +168,9 @@
     </summary>
     
     
-      <category term="深度学习" scheme="https://araid0628.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
       <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
+    
+      <category term="深度学习" scheme="https://araid0628.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
       <category term="项目实训" scheme="https://araid0628.github.io/tags/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
     
@@ -479,11 +479,11 @@
     
       <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
     
+      <category term="爬虫" scheme="https://araid0628.github.io/tags/%E7%88%AC%E8%99%AB/"/>
+    
       <category term="数据挖掘" scheme="https://araid0628.github.io/tags/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/"/>
     
       <category term="正则表达式" scheme="https://araid0628.github.io/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
-    
-      <category term="爬虫" scheme="https://araid0628.github.io/tags/%E7%88%AC%E8%99%AB/"/>
     
   </entry>
   
