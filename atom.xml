@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://araid0628.github.io/"/>
-  <updated>2019-07-14T06:09:27.181Z</updated>
+  <updated>2019-07-26T16:20:52.854Z</updated>
   <id>https://araid0628.github.io/</id>
   
   <author>
@@ -17,11 +17,38 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>ubuntu服务器配置(tensorflow+cuda+cudnn+显卡驱动)</title>
+    <link href="https://araid0628.github.io/2019/07/26/gpu-server/"/>
+    <id>https://araid0628.github.io/2019/07/26/gpu-server/</id>
+    <published>2019-07-26T15:46:59.000Z</published>
+    <updated>2019-07-26T16:20:52.854Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h3><p>我们组有两台服务器一直在某个小房间里吃灰，光靠工作站里的两块1080Ti算力确实不够。某天和IT一起把线接好了可以启动了，但是一看开发环境还是两年多前的，各种软件版本都比较旧了。<br><img src="images/20190726235204.jpg" alt="GPU"><br>两块Tesla P100在里面积了不少灰，曾经想把他拆下来装在台式机上后来发现台式机电源不是全模组的根本没那个供电的接口，还是放回去吧。<br>|GPU|Compute Capability|<br>|Tesla P100|6.0|<br>|GeForce GTX 1080 Ti|6.1|<br>Retrieved from <a href="https://developer.nvidia.com/cuda-gpus" target="_blank" rel="noopener">https://developer.nvidia.com/cuda-gpus</a><br>三四万一张的P100计算能力怎么还没有1080Ti好使呢?这个计算能力应该只是在深度学习领域。Tesla系列的专业显卡相比Geforce显卡拥有更高的计算精度，对于航空航天、药物研发等领域提供双精度（FP64）进行更加精准的计算。Tesla的显存颗粒更贵，支持高精度计算不会在读写存储时出现误差。<br>建议立刻更新到Quadro RTX 8000或者Tesla T4（没funding）    </p><h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;服务器&quot;&gt;&lt;a href=&quot;#服务器&quot; class=&quot;headerlink&quot; title=&quot;服务器&quot;&gt;&lt;/a&gt;服务器&lt;/h3&gt;&lt;p&gt;我们组有两台服务器一直在某个小房间里吃灰，光靠工作站里的两块1080Ti算力确实不够。某天和IT一起把线接好了可以启动了，但是一看开
+      
+    
+    </summary>
+    
+    
+      <category term="深度学习" scheme="https://araid0628.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="配置" scheme="https://araid0628.github.io/tags/%E9%85%8D%E7%BD%AE/"/>
+    
+      <category term="Linux" scheme="https://araid0628.github.io/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
     <title>SNKRS API变量解析</title>
     <link href="https://araid0628.github.io/2019/07/14/nikeapi/"/>
     <id>https://araid0628.github.io/2019/07/14/nikeapi/</id>
     <published>2019-07-14T05:16:55.000Z</published>
-    <updated>2019-07-14T06:09:27.181Z</updated>
+    <updated>2019-07-14T06:15:04.464Z</updated>
     
     <content type="html"><![CDATA[<h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>&emsp;&emsp;想做这个项目的原因是因为之前买的snkrs bot附带的Discord监控到期了，不能再提供各种球鞋上新监控。刚好有朋友在做球鞋定制和公众号，未来是希望把Discord和微信小程序集成在公众号下。第一步选择先做Discord端，考虑到Discord只要把后端和Discord Bot完成就行，刚好也能先熟悉一下Nike这个接口返回的各种信息。但是Discord因为某些原因被墙了，中国的开发者很少，花了很多时间研究国外开发者写的文档，进度还是比较理想的。希望暑假后能尽快开始微信小程序的开发，这才是重点！  </p><h3 id="SNKRS-API"><a href="#SNKRS-API" class="headerlink" title="SNKRS API"></a>SNKRS API</h3><p><a href="https://api.nike.com/snkrs/content/v1/?country=CN&amp;language=zh-Hans&amp;orderBy=lastUpdated&amp;offset=0" target="_blank" rel="noopener">https://api.nike.com/snkrs/content/v1/?country=CN&amp;language=zh-Hans&amp;orderBy=lastUpdated&amp;offset=0</a><br>URL其实比较容易拿到，用Wireshark对手机访问SNKRS APP时进行抓包操作就可以。当offset=0时，API会返回第1-50双球鞋的数据，offset=50时，API会返回第51-100双球鞋的数据，以此类推。通过totalRecords可以看到中国区SNKRS上一共有1468双球鞋。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">"country"</span>:<span class="string">"CN"</span>,<span class="string">"locale"</span>:<span class="string">"zh-Hans_CN"</span>,<span class="string">"channel"</span>:<span class="string">"snkrs"</span>,<span class="string">"totalRecords"</span>:<span class="number">1468</span>,<span class="string">"threads"</span>:[&#123;<span class="string">"id"</span>:<span class="string">"50307c93-04ef-4720-a5ba-d65f53595d5e"</span>,<span class="string">"threadId"</span>:<span class="string">"50307c93-04ef-4720-a5ba-d65f53595d5e"</span>,<span class="string">"interestId"</span>:<span class="string">"5c94b7ea-2a8a-3c70-97a1-e394f65c77f8"</span>,<span class="string">"name"</span>:<span class="string">"M2K Tekno"</span>,<span class="string">"lastUpdatedDate"</span>:<span class="string">"2019-07-14T04:30:25.997000"</span>,<span class="string">"lastUpdatedTime"</span>:<span class="string">"2019-07-14T04:30:25.997000"</span>,<span class="string">"publishedDate"</span>:<span class="string">"2019-06-11T02:02:43.000000"</span>,<span class="string">"restricted"</span>:false,<span class="string">"feed"</span>:<span class="string">"d879aa85-698c-41a1-b066-a8ecdf6b8a9c"</span>,<span class="string">"title"</span>:<span class="string">"Electric Volt"</span>,<span class="string">"subtitle"</span>:<span class="string">"M2K Tekno"</span>,<span class="string">"seoSlug"</span>:<span class="string">"m2k-tekno-electric-volt"</span>,<span class="string">"seoTitle"</span>:<span class="string">"Nike M2K Tekno 'Electric Volt' 发布日期"</span>,<span class="string">"seoDescription"</span>:<span class="string">"浏览并选购 Nike M2K Tekno 'Electric Volt'。抢先了解运动鞋发布新动态。"</span>,<span class="string">"tags"</span>:[<span class="string">"SPORTSWEAR"</span>,<span class="string">"M2K TEKNO GEL"</span>,<span class="string">"VOLT"</span>],<span class="string">"imageUrl"</span>:<span class="string">"https://c.static-nike.com/a/images/t_prod_ss/w_750,c_limit/itzc9whni67vdgvffry5/nike-m2k-tekno-electric-volt-release-date.jpg"</span>,<span class="string">"squareImageUrl"</span>:<span class="string">"https://c.static-nike.com/a/images/t_prod_ss/w_750,c_limit/itzc9whni67vdgvffry5/nike-m2k-tekno-electric-volt-release-date.jpg"</span>,<span class="string">"portraitImageUrl"</span>:<span class="string">"https://c.static-nike.com/a/images/t_prod_ps/w_750,c_limit/itzc9whni67vdgvffry5/nike-m2k-tekno-electric-volt-release-date.jpg"</span>,<span class="string">"relations"</span>:[&#123;<span class="string">"name"</span>:<span class="string">"RELATED"</span>,<span class="string">"threads"</span>:[<span class="string">"295a2e30-e337-4d16-a7dc-6ed37efdf6cb"</span>,<span class="string">"54b800b9-2457-4f2d-973e-0f77502cb19f"</span>]&#125;],<span class="string">"product"</span>:&#123;<span class="string">"id"</span>:<span class="string">"a13e8a5d-eed0-5a05-bac7-96913b8528eb"</span>,<span class="string">"interestId"</span>:<span class="string">"5c94b7ea-2a8a-3c70-97a1-e394f65c77f8"</span>,<span class="string">"style"</span>:<span class="string">"CI5749"</span>,<span class="string">"colorCode"</span>:<span class="string">"777"</span>,<span class="string">"globalPid"</span>:<span class="string">"12697014"</span>,<span class="string">"title"</span>:<span class="string">"Nike M2K Tekno"</span>,<span class="string">"subtitle"</span>:<span class="string">"男子运动鞋"</span>,<span class="string">"imageUrl"</span>:<span class="string">"https://secure-images.nike.com/is/image/DotCom/CI5749_777"</span>,<span class="string">"genders"</span>:[<span class="string">"MEN"</span>],<span class="string">"quantityLimit"</span>:<span class="number">10</span>,<span class="string">"merchStatus"</span>:<span class="string">"ACTIVE"</span>,<span class="string">"colorDescription"</span>:<span class="string">"荧光黄/荧光黄/荧光黄"</span>,<span class="string">"available"</span>:true,<span class="string">"publishType"</span>:<span class="string">"FLOW"</span>,<span class="string">"productType"</span>:<span class="string">"FOOTWEAR"</span>,<span class="string">"upcoming"</span>:true,<span class="string">"price"</span>:&#123;<span class="string">"msrp"</span>:<span class="number">799</span>,<span class="string">"fullRetailPrice"</span>:<span class="number">799</span>,<span class="string">"currentRetailPrice"</span>:<span class="number">799</span>,<span class="string">"onSale"</span>:false&#125;,<span class="string">"startSellDate"</span>:<span class="string">"2019-06-12T01:00:00.000000"</span>,<span class="string">"skus"</span>:[&#123;<span class="string">"id"</span>:<span class="string">"af4e2d70-66b7-5b8f-b1cd-6f25118412ec"</span>,<span class="string">"localizedSize"</span>:<span class="string">"38.5"</span>,<span class="string">"localizedSizePrefix"</span>:null,<span class="string">"nikeSize"</span>:<span class="string">"6"</span>,<span class="string">"available"</span>:false&#125;,&#123;<span class="string">"id"</span>:<span class="string">"a6198452-cea8-52b1-b4e8-9b7330ce1738"</span>,<span class="string">"localizedSize"</span>:<span class="string">"39"</span>,<span class="string">"localizedSizePrefix"</span>:null,<span class="string">"nikeSize"</span>:<span class="string">"6.5"</span>,<span class="string">"available"</span>:false&#125;,&#123;<span class="string">"id"</span>:<span class="string">"0ffd3b93-6f33-56c4-9150-e8399d48a925"</span>,<span class="string">"localizedSize"</span>:<span class="string">"40"</span>,<span class="string">"localizedSizePrefix"</span>:null,<span class="string">"nikeSize"</span>:<span class="string">"7"</span>,<span class="string">"available"</span>:true&#125;,&#123;<span class="string">"id"</span>:<span class="string">"2288c661-37d8-58d2-9420-073e84d94d42"</span>,<span class="string">"localizedSize"</span>:<span class="string">"40.5"</span>,<span class="string">"localizedSizePrefix"</span>:null,<span class="string">"nikeSize"</span>:<span class="string">"7.5"</span>,<span class="string">"available"</span>:true&#125;,&#123;<span class="string">"id"</span>:<span class="string">"61a76fb0-9f4b-5415-831d-79a7d95aacd0"</span>,<span class="string">"localizedSize"</span>:<span class="string">"41"</span>,<span class="string">"localizedSizePrefix"</span>:null,<span class="string">"nikeSize"</span>:<span class="string">"8"</span>,<span class="string">"available"</span>:true&#125;,&#123;<span class="string">"id"</span>:<span class="string">"ce9e61be-1a77-5612-9da5-d3d7c7e1b474"</span>,<span class="string">"localizedSize"</span>:<span class="string">"42"</span>,<span class="string">"localizedSizePrefix"</span>:null,<span class="string">"nikeSize"</span>:<span class="string">"8.5"</span>,<span class="string">"available"</span>:false&#125;,&#123;<span class="string">"id"</span>:<span class="string">"05d73ea3-ba82-5d5e-8272-c3c855f4eee0"</span>,<span class="string">"localizedSize"</span>:<span class="string">"42.5"</span>,<span class="string">"localizedSizePrefix"</span>:null,<span class="string">"nikeSize"</span>:<span class="string">"9"</span>,<span class="string">"available"</span>:true&#125;,&#123;<span class="string">"id"</span>:<span class="string">"d14e0a6b-2e5a-5950-a616-19354ae727d0"</span>,<span class="string">"localizedSize"</span>:<span class="string">"43"</span>,<span class="string">"localizedSizePrefix"</span>:null,<span class="string">"nikeSize"</span>:<span class="string">"9.5"</span>,<span class="string">"available"</span>:true&#125;,&#123;<span class="string">"id"</span>:<span class="string">"509c830c-d527-5836-9047-998a504e044e"</span>,<span class="string">"localizedSize"</span>:<span class="string">"44"</span>,<span class="string">"localizedSizePrefix"</span>:null,<span class="string">"nikeSize"</span>:<span class="string">"10"</span>,<span class="string">"available"</span>:true&#125;,&#123;<span class="string">"id"</span>:<span class="string">"1949e1fb-c5d5-503b-9d57-13a1b4722c10"</span>,<span class="string">"localizedSize"</span>:<span class="string">"44.5"</span>,<span class="string">"localizedSizePrefix"</span>:null,<span class="string">"nikeSize"</span>:<span class="string">"10.5"</span>,<span class="string">"available"</span>:true&#125;,&#123;<span class="string">"id"</span>:<span class="string">"d47d9cf2-08d7-5d8a-8621-924fae3bc22a"</span>,<span class="string">"localizedSize"</span>:<span class="string">"45"</span>,<span class="string">"localizedSizePrefix"</span>:null,<span class="string">"nikeSize"</span>:<span class="string">"11"</span>,<span class="string">"available"</span>:true&#125;,&#123;<span class="string">"id"</span>:<span class="string">"9f7ddf99-b7b8-5768-9311-7aed805526e9"</span>,<span class="string">"localizedSize"</span>:<span class="string">"46"</span>,<span class="string">"localizedSizePrefix"</span>:null,<span class="string">"nikeSize"</span>:<span class="string">"12"</span>,<span class="string">"available"</span>:true&#125;,&#123;<span class="string">"id"</span>:<span class="string">"9ea19342-cf46-50cd-a9f9-5dcbb45cd2fa"</span>,<span class="string">"localizedSize"</span>:<span class="string">"47.5"</span>,<span class="string">"localizedSizePrefix"</span>:null,<span class="string">"nikeSize"</span>:<span class="string">"13"</span>,<span class="string">"available"</span>:false&#125;],<span class="string">"expireDate"</span>:<span class="string">"3000-01-01T20:00:00.000000"</span>&#125;</span><br></pre></td></tr></table></figure></p><h3 id="变量解析"><a href="#变量解析" class="headerlink" title="变量解析"></a>变量解析</h3><p>country: CN 中国区<br>totalRecords: 1468 SNKRS APP中记录总量<br>threads: 球鞋的所有信息，一个很长的list，中间存储的是dict。<br>以第一双鞋为例：<br><img src="images/IMG_3569.PNG" alt="Fig.1AJ13"><br>是一双AJ13，这双鞋在threads中的dict中有一些重要的信息：  </p><ol><li>id<br>API中标记一双球鞋的编号，主键   </li><li>name<br>球鞋名称  </li><li>restricted<br>是否受限，有些新球鞋是锁住的  </li><li>imageUrl<br>球鞋图片，Discord中推送会用到  </li><li>selectionEngine<br>LEO和DAN，2分钟和15分钟抽签模式，现在已经没有先到先得的FLOW模式了  </li><li>skus<br>尺码  </li></ol>]]></content>
     
@@ -37,9 +64,9 @@
       <category term="SnkrsMonitor" scheme="https://araid0628.github.io/categories/SnkrsMonitor/"/>
     
     
-      <category term="JSON" scheme="https://araid0628.github.io/tags/JSON/"/>
-    
       <category term="爬虫" scheme="https://araid0628.github.io/tags/%E7%88%AC%E8%99%AB/"/>
+    
+      <category term="JSON" scheme="https://araid0628.github.io/tags/JSON/"/>
     
   </entry>
   
@@ -141,11 +168,11 @@
     </summary>
     
     
+      <category term="深度学习" scheme="https://araid0628.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
       <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
     
       <category term="项目实训" scheme="https://araid0628.github.io/tags/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
-    
-      <category term="深度学习" scheme="https://araid0628.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
       <category term="LSTM" scheme="https://araid0628.github.io/tags/LSTM/"/>
     
@@ -452,11 +479,11 @@
     
       <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
     
-      <category term="爬虫" scheme="https://araid0628.github.io/tags/%E7%88%AC%E8%99%AB/"/>
-    
       <category term="数据挖掘" scheme="https://araid0628.github.io/tags/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/"/>
     
       <category term="正则表达式" scheme="https://araid0628.github.io/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    
+      <category term="爬虫" scheme="https://araid0628.github.io/tags/%E7%88%AC%E8%99%AB/"/>
     
   </entry>
   
