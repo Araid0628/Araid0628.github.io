@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://araid0628.github.io/"/>
-  <updated>2019-07-27T15:49:52.351Z</updated>
+  <updated>2019-10-18T07:50:24.619Z</updated>
   <id>https://araid0628.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Go语言的错误处理：panic, recocer, error, error wrapping</title>
+    <link href="https://araid0628.github.io/2019/10/17/panicRecoverDefer/"/>
+    <id>https://araid0628.github.io/2019/10/17/panicRecoverDefer/</id>
+    <published>2019-10-17T06:52:49.000Z</published>
+    <updated>2019-10-18T07:50:24.619Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="panic和recover"><a href="#panic和recover" class="headerlink" title="panic和recover"></a>panic和recover</h3><h2 id="panic"><a href="#panic" class="headerlink" title="panic"></a>panic</h2><p>func panic(v interface{})<br>引发panic有两种情况，一种是程序主动调用panic函数（e.g. panic(xxx), panic的参数是一个空接口类型，任意类型的变量都可以传递给panic），另一种是程序产生运行时错误。<br>发生panic后，程序会从调用panic的函数位置或发生panic的地方立即返回，逐层向上执行函数的defer语句，然后逐层打印函数调用堆栈，直到被recover捕获或运行到最外层函数而退出。<br><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main  </span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span>  </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">tryDefer</span><span class="params">()</span></span>&#123;  </span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">100</span>; i++&#123;  </span><br><span class="line"><span class="keyword">defer</span> fmt.Println(i)  </span><br><span class="line"><span class="keyword">if</span> i == <span class="number">30</span> &#123;  </span><br><span class="line"><span class="built_in">panic</span>(<span class="string">"print end"</span>)  </span><br><span class="line">&#125;  </span><br><span class="line">&#125;   </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">tryDefer()  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>当i循环到30时，系统会从30倒序进行Println操作，最后打印“panic: print end”。  </p><h2 id="recover"><a href="#recover" class="headerlink" title="recover"></a>recover</h2><p>func recover() interface{}<br>recover用来捕获panic，阻止panic继续向上传递。recover()只有在defer后面的函数体内被直接调用才能捕获panic终止异常，否则返回nil，异常继续向外传递。<br><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">    fmt.Println(<span class="string">"function body"</span>)</span><br><span class="line">    <span class="built_in">recover</span>()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>记得主动在程序的中使用recover()拦截运行时错误。</p><h3 id="error"><a href="#error" class="headerlink" title="error"></a>error</h3><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Package errors implements functions to manipulate errors.  </span></span><br><span class="line"><span class="keyword">package</span> errors  </span><br><span class="line"></span><br><span class="line"><span class="comment">// New returns an error that formats as the given text.  </span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">New</span><span class="params">(text <span class="keyword">string</span>)</span> <span class="title">error</span></span> &#123;  </span><br><span class="line"><span class="keyword">return</span> &amp;errorString&#123;text&#125;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="comment">// errorString is a trivial implementation of error.  </span></span><br><span class="line"><span class="keyword">type</span> errorString <span class="keyword">struct</span> &#123;  </span><br><span class="line">s <span class="keyword">string</span>  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(e *errorString)</span> <span class="title">Error</span><span class="params">()</span> <span class="title">string</span></span> &#123;  </span><br><span class="line"><span class="keyword">return</span> e.s  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>error的底层实现非常简单，所以功能也比较弱，只能返回一个字符串。Golang 1.13中引入了一个新功能Error Wrapping。  </p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;panic和recover&quot;&gt;&lt;a href=&quot;#panic和recover&quot; class=&quot;headerlink&quot; title=&quot;panic和recover&quot;&gt;&lt;/a&gt;panic和recover&lt;/h3&gt;&lt;h2 id=&quot;panic&quot;&gt;&lt;a href=&quot;#pani
+      
+    
+    </summary>
+    
+    
+      <category term="Go" scheme="https://araid0628.github.io/tags/Go/"/>
+    
+  </entry>
   
   <entry>
     <title>ubuntu服务器配置(tensorflow+cuda+cudnn+显卡驱动)</title>
@@ -64,9 +87,9 @@
       <category term="SnkrsMonitor" scheme="https://araid0628.github.io/categories/SnkrsMonitor/"/>
     
     
-      <category term="JSON" scheme="https://araid0628.github.io/tags/JSON/"/>
-    
       <category term="爬虫" scheme="https://araid0628.github.io/tags/%E7%88%AC%E8%99%AB/"/>
+    
+      <category term="JSON" scheme="https://araid0628.github.io/tags/JSON/"/>
     
   </entry>
   
@@ -170,9 +193,9 @@
     
       <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
     
-      <category term="深度学习" scheme="https://araid0628.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
       <category term="项目实训" scheme="https://araid0628.github.io/tags/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
+    
+      <category term="深度学习" scheme="https://araid0628.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
       <category term="LSTM" scheme="https://araid0628.github.io/tags/LSTM/"/>
     
@@ -479,11 +502,11 @@
     
       <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
     
-      <category term="爬虫" scheme="https://araid0628.github.io/tags/%E7%88%AC%E8%99%AB/"/>
-    
       <category term="数据挖掘" scheme="https://araid0628.github.io/tags/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/"/>
     
       <category term="正则表达式" scheme="https://araid0628.github.io/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    
+      <category term="爬虫" scheme="https://araid0628.github.io/tags/%E7%88%AC%E8%99%AB/"/>
     
   </entry>
   

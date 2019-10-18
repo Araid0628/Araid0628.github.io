@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Go语言的错误处理：panic, recocer, error, error wrapping]]></title>
+    <url>%2F2019%2F10%2F17%2FpanicRecoverDefer%2F</url>
+    <content type="text"><![CDATA[panic和recoverpanicfunc panic(v interface{})引发panic有两种情况，一种是程序主动调用panic函数（e.g. panic(xxx), panic的参数是一个空接口类型，任意类型的变量都可以传递给panic），另一种是程序产生运行时错误。发生panic后，程序会从调用panic的函数位置或发生panic的地方立即返回，逐层向上执行函数的defer语句，然后逐层打印函数调用堆栈，直到被recover捕获或运行到最外层函数而退出。12345678910111213141516package main import "fmt" func tryDefer()&#123; for i := 0; i &lt; 100; i++&#123; defer fmt.Println(i) if i == 30 &#123; panic("print end") &#125; &#125; &#125; func main() &#123; tryDefer() &#125; 当i循环到30时，系统会从30倒序进行Println操作，最后打印“panic: print end”。 recoverfunc recover() interface{}recover用来捕获panic，阻止panic继续向上传递。recover()只有在defer后面的函数体内被直接调用才能捕获panic终止异常，否则返回nil，异常继续向外传递。1234defer func()&#123; fmt.Println("function body") recover()&#125; 记得主动在程序的中使用recover()拦截运行时错误。 error12345678910111213141516// Package errors implements functions to manipulate errors. package errors // New returns an error that formats as the given text. func New(text string) error &#123; return &amp;errorString&#123;text&#125; &#125; // errorString is a trivial implementation of error. type errorString struct &#123; s string &#125;func (e *errorString) Error() string &#123; return e.s &#125; error的底层实现非常简单，所以功能也比较弱，只能返回一个字符串。Golang 1.13中引入了一个新功能Error Wrapping。]]></content>
+      <tags>
+        <tag>Go</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[ubuntu服务器配置(tensorflow+cuda+cudnn+显卡驱动)]]></title>
     <url>%2F2019%2F07%2F26%2Fgpu-server%2F</url>
     <content type="text"><![CDATA[服务器我们组有两台服务器一直在某个小房间里吃灰，光靠工作站里的两块1080Ti算力确实不够。某天和IT一起把线接好了可以启动了，但是一看开发环境还是两年多前的，各种软件版本都比较旧了。两块Tesla P100在里面积了不少灰，曾经想把他拆下来装在台式机上后来发现台式机电源不是全模组的根本没那个供电的接口，还是放回去吧。 GPU Compute Capability Tesla P100 6.0 GeForce GTX 1080 Ti 6.1 Retrieved from https://developer.nvidia.com/cuda-gpus三四万一张的P100计算能力怎么还没有1080Ti好使呢?这个计算能力应该只是在深度学习领域。Tesla系列的专业显卡相比Geforce显卡拥有更高的计算精度，对于航空航天、药物研发等领域提供双精度（FP64）进行更加精准的计算。Tesla的显存颗粒更贵，支持高精度计算不会在读写存储时出现误差。建议立刻更新到Quadro RTX 8000或者Tesla T4（没funding） 环境显卡驱动 禁用nouveau驱动Ubuntu系统集成的显卡驱动程序是nouveau，我们需要先将nouveau从linux内核卸载掉才能安装NVIDIA官方驱动。我们的服务器是纯命令行，直接执行最后一步即可。（1） 修改blacklist.conf 文件属性blacklist.conf查看属性• ll /etc/modprobe.d/blacklist.conf修改属性• sudo chmod 666 /etc/modprobe.d/blacklist.conf用vi编辑器打开• sudo vi /etc/modprobe.d/blacklist.conf• 在文件末尾添加如下几行：blacklist vga16fbblacklist nouveaublacklist rivafbblacklist rivatvblacklist nvidiafb（2）修改并保存文件后，记得把文件属性复原：• sudo chmod 644 /etc/modprobe.d/blacklist.conf更新一下内核• sudo update-initramfs -u修改后需要重启系统• reboot (重启)重启系统确认nouveau是否已经被屏蔽掉，使用lsmod命令查看，lsmod命令用于显示已经加载到内核中的模块的状态信息• lsmod | grep nouveau若已屏蔽没有任何信息 手动安装驱动提前载nvidia官网上下好了对应版本的驱动，直接用jupyter notebook传到服务器上就可以。• 进入nvidia官网 https://www.geforce.cn/drivers下载对应显卡的驱动程序，下载后的文件格式为run。• 删除原有的NVIDIA驱动程序(若没有安装忽略)• sudo apt-get remove –purge nvidia*• 进入命令行桌面给驱动文件增加可执行权限• sudo chmod a+x NVIDIA-Linux-x86_64-418.74.run（cd到文件所在文件夹。）安装• sudo sh ./NVIDIA-Linux-x86_64-418.74.run.run –no-opengl-files 检查输入nvidia-smi即可检查驱动是否安装成功。 安装CUDA 进入官网下载对应版本(https://developer.nvidia.com/cuda-downloads?target_os=Linux&amp;target_arch=x86_64&amp;target_distro=Ubuntu&amp;target_version=1804&amp;target_type=deblocal)2.运行指令需要cd到包含该文件的文件夹目录下根据官网提示指令安装即可• sudo dpkg -i cuda-repo-ubuntu1804-10-1-local-10.1.168-418.67_1.0-1_amd64.deb• sudo apt-key add /var/cuda-repo-ubuntu1804-10-1-local-10.1.168/7fa2af80.pub• sudo apt-get update• sudo apt-get install cuda 安装cuDnn 进入官网注册并下载对应的cudnn版本。(https://developer.nvidia.com/rdp/cudnn-download) 下载完成后解压文件tar -zxvf cudnn-10.1-linux-x64-v7.5.1.10.tgz 解压完成将相应的文件拷贝到对应的CUDA目录下即可（要cd到含cudnn文件的目录下）• sudo cp cuda/include/cudnn.h /usr/local/cuda/include/• sudo cp cuda/lib64/libcudnn /usr/local/cuda/lib64/• sudo chmod a+r /usr/local/cuda/include/cudnn.h• sudo chmod a+r /usr/local/cuda/lib64/libcudnn 编辑环境变量• sudo gedit ~/.bashrc将cuda的环境变量加到打开的文件最后• export LD_LIBRARY_PATH=”$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64”• export CUDA_HOME=/usr/local/cuda• export PATH=“CUDAHOME/bin:PATH”保存后，终端输入• source ~/.bashrc]]></content>
@@ -18,8 +26,8 @@
         <category>SnkrsMonitor</category>
       </categories>
       <tags>
-        <tag>JSON</tag>
         <tag>爬虫</tag>
+        <tag>JSON</tag>
       </tags>
   </entry>
   <entry>
@@ -57,8 +65,8 @@
     <content type="text"><![CDATA[LSTM网络Long short-term memory，即LSTM。在传统的RNN中，所有的RNN都具有一种重复神经网络模块的链接形式，例如一个tanh层。LSTM的重复模块有一个不同的结构。]]></content>
       <tags>
         <tag>Python</tag>
-        <tag>深度学习</tag>
         <tag>项目实训</tag>
+        <tag>深度学习</tag>
         <tag>LSTM</tag>
         <tag>RNN</tag>
       </tags>
@@ -188,9 +196,9 @@
       </categories>
       <tags>
         <tag>Python</tag>
-        <tag>爬虫</tag>
         <tag>数据挖掘</tag>
         <tag>正则表达式</tag>
+        <tag>爬虫</tag>
       </tags>
   </entry>
   <entry>

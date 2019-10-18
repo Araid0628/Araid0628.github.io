@@ -306,6 +306,131 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://araid0628.github.io/2019/10/17/panicRecoverDefer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Fu Hanlin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fu's Workshop">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/17/panicRecoverDefer/" itemprop="url">Go语言的错误处理：panic, recocer, error, error wrapping</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-17T14:52:49+08:00">
+                2019年10月17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="panic和recover"><a href="#panic和recover" class="headerlink" title="panic和recover"></a>panic和recover</h3><h2 id="panic"><a href="#panic" class="headerlink" title="panic"></a>panic</h2><p>func panic(v interface{})<br>引发panic有两种情况，一种是程序主动调用panic函数（e.g. panic(xxx), panic的参数是一个空接口类型，任意类型的变量都可以传递给panic），另一种是程序产生运行时错误。<br>发生panic后，程序会从调用panic的函数位置或发生panic的地方立即返回，逐层向上执行函数的defer语句，然后逐层打印函数调用堆栈，直到被recover捕获或运行到最外层函数而退出。<br><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main  </span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span>  </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">tryDefer</span><span class="params">()</span></span>&#123;  </span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">100</span>; i++&#123;  </span><br><span class="line">		<span class="keyword">defer</span> fmt.Println(i)  </span><br><span class="line">		<span class="keyword">if</span> i == <span class="number">30</span> &#123;  </span><br><span class="line">			<span class="built_in">panic</span>(<span class="string">"print end"</span>)  </span><br><span class="line">		&#125;  </span><br><span class="line">	&#125;   </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">	tryDefer()  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>当i循环到30时，系统会从30倒序进行Println操作，最后打印“panic: print end”。  </p>
+<h2 id="recover"><a href="#recover" class="headerlink" title="recover"></a>recover</h2><p>func recover() interface{}<br>recover用来捕获panic，阻止panic继续向上传递。recover()只有在defer后面的函数体内被直接调用才能捕获panic终止异常，否则返回nil，异常继续向外传递。<br><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">    fmt.Println(<span class="string">"function body"</span>)</span><br><span class="line">    <span class="built_in">recover</span>()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>记得主动在程序的中使用recover()拦截运行时错误。</p>
+<h3 id="error"><a href="#error" class="headerlink" title="error"></a>error</h3><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Package errors implements functions to manipulate errors.  </span></span><br><span class="line"><span class="keyword">package</span> errors  </span><br><span class="line"></span><br><span class="line"><span class="comment">// New returns an error that formats as the given text.  </span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">New</span><span class="params">(text <span class="keyword">string</span>)</span> <span class="title">error</span></span> &#123;  </span><br><span class="line">	<span class="keyword">return</span> &amp;errorString&#123;text&#125;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="comment">// errorString is a trivial implementation of error.  </span></span><br><span class="line"><span class="keyword">type</span> errorString <span class="keyword">struct</span> &#123;  </span><br><span class="line">	s <span class="keyword">string</span>  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(e *errorString)</span> <span class="title">Error</span><span class="params">()</span> <span class="title">string</span></span> &#123;  </span><br><span class="line">	<span class="keyword">return</span> e.s  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>error的底层实现非常简单，所以功能也比较弱，只能返回一个字符串。Golang 1.13中引入了一个新功能Error Wrapping。  </p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://araid0628.github.io/2019/07/26/gpu-server/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1528,152 +1653,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://araid0628.github.io/2019/03/05/week123/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Fu Hanlin">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fu's Workshop">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/05/week123/" itemprop="url">Pandas处理数据时replace方法失效</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-05T21:04:48+08:00">
-                2019年03月05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/项目实训/" itemprop="url" rel="index">
-                    <span itemprop="name">项目实训</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="BUG复现"><a href="#BUG复现" class="headerlink" title="BUG复现"></a>BUG复现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train.replace(<span class="string">'%'</span>, <span class="string">''</span>, inplace=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
-<p>使用replace函数的目的是：在清洗房价数据时替换掉不需要的单位，如“%”，“元/m²/月”等。但在使用函数时发现无法生效，查了网上相关信息后试了多种方法也无法解决这个问题，如先取列之后再进行replace。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train[<span class="string">"landscapingRatio"</span>].replace(<span class="string">'%'</span>, <span class="string">''</span>, inplace=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure></p>
-<h3 id="原因推测"><a href="#原因推测" class="headerlink" title="原因推测"></a>原因推测</h3><p>dataframe中每个列中值的dtypes不同，导致无法replace。</p>
-<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>使用map()和lambda函数<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train[<span class="string">"landscapingRatio"</span>] = train[<span class="string">"landscapingRatio"</span>].map(<span class="keyword">lambda</span> x: x.replace(<span class="string">'%'</span>, <span class="string">''</span>))</span><br></pre></td></tr></table></figure></p>
-<p>map() 会根据提供的函数对指定序列做映射。<br>第一个参数 function 以参数序列中的每一个元素调用 function 函数，返回包含每次 function 函数返回值的新列表。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1724,7 +1703,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1746,7 +1725,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">30</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

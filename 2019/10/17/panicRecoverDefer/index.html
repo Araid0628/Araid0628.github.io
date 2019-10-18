@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Go,">
 
 
 
@@ -81,16 +81,18 @@
 
 
 
-<meta name="description" content="某985研一在读">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Fu&#39;s Workshop">
-<meta property="og:url" content="https://araid0628.github.io/tags/配置/index.html">
+<meta name="description" content="panic和recoverpanicfunc panic(v interface{})引发panic有两种情况，一种是程序主动调用panic函数（e.g. panic(xxx), panic的参数是一个空接口类型，任意类型的变量都可以传递给panic），另一种是程序产生运行时错误。发生panic后，程序会从调用panic的函数位置或发生panic的地方立即返回，逐层向上执行函数的defer语句，然">
+<meta name="keywords" content="Go">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go语言的错误处理：panic, recocer, error, error wrapping">
+<meta property="og:url" content="https://araid0628.github.io/2019/10/17/panicRecoverDefer/index.html">
 <meta property="og:site_name" content="Fu&#39;s Workshop">
-<meta property="og:description" content="某985研一在读">
+<meta property="og:description" content="panic和recoverpanicfunc panic(v interface{})引发panic有两种情况，一种是程序主动调用panic函数（e.g. panic(xxx), panic的参数是一个空接口类型，任意类型的变量都可以传递给panic），另一种是程序产生运行时错误。发生panic后，程序会从调用panic的函数位置或发生panic的地方立即返回，逐层向上执行函数的defer语句，然">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-18T07:50:24.619Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Fu&#39;s Workshop">
-<meta name="twitter:description" content="某985研一在读">
+<meta name="twitter:title" content="Go语言的错误处理：panic, recocer, error, error wrapping">
+<meta name="twitter:description" content="panic和recoverpanicfunc panic(v interface{})引发panic有两种情况，一种是程序主动调用panic函数（e.g. panic(xxx), panic的参数是一个空接口类型，任意类型的变量都可以传递给panic），另一种是程序产生运行时错误。发生panic后，程序会从调用panic的函数位置或发生panic的地方立即返回，逐层向上执行函数的defer语句，然">
 
 
 
@@ -120,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://araid0628.github.io/tags/配置/">
+  <link rel="canonical" href="https://araid0628.github.io/2019/10/17/panicRecoverDefer/">
 
 
 
 
 
-  <title>标签: 配置 | Fu's Workshop</title>
+  <title>Go语言的错误处理：panic, recocer, error, error wrapping | Fu's Workshop</title>
   
 
 
@@ -155,7 +157,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left ">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -291,52 +293,157 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>配置<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://araid0628.github.io/2019/10/17/panicRecoverDefer/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Fu Hanlin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fu's Workshop">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/07/26/gpu-server/" itemprop="url">
-              
-                <span itemprop="name">ubuntu服务器配置(tensorflow+cuda+cudnn+显卡驱动)</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Go语言的错误处理：panic, recocer, error, error wrapping</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-26T23:46:59+08:00" content="2019年07月26">
-          07-26
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-17T14:52:49+08:00">
+                2019年10月17
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="panic和recover"><a href="#panic和recover" class="headerlink" title="panic和recover"></a>panic和recover</h3><h2 id="panic"><a href="#panic" class="headerlink" title="panic"></a>panic</h2><p>func panic(v interface{})<br>引发panic有两种情况，一种是程序主动调用panic函数（e.g. panic(xxx), panic的参数是一个空接口类型，任意类型的变量都可以传递给panic），另一种是程序产生运行时错误。<br>发生panic后，程序会从调用panic的函数位置或发生panic的地方立即返回，逐层向上执行函数的defer语句，然后逐层打印函数调用堆栈，直到被recover捕获或运行到最外层函数而退出。<br><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main  </span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span>  </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">tryDefer</span><span class="params">()</span></span>&#123;  </span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">100</span>; i++&#123;  </span><br><span class="line">		<span class="keyword">defer</span> fmt.Println(i)  </span><br><span class="line">		<span class="keyword">if</span> i == <span class="number">30</span> &#123;  </span><br><span class="line">			<span class="built_in">panic</span>(<span class="string">"print end"</span>)  </span><br><span class="line">		&#125;  </span><br><span class="line">	&#125;   </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">	tryDefer()  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>当i循环到30时，系统会从30倒序进行Println操作，最后打印“panic: print end”。  </p>
+<h2 id="recover"><a href="#recover" class="headerlink" title="recover"></a>recover</h2><p>func recover() interface{}<br>recover用来捕获panic，阻止panic继续向上传递。recover()只有在defer后面的函数体内被直接调用才能捕获panic终止异常，否则返回nil，异常继续向外传递。<br><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">    fmt.Println(<span class="string">"function body"</span>)</span><br><span class="line">    <span class="built_in">recover</span>()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>记得主动在程序的中使用recover()拦截运行时错误。</p>
+<h3 id="error"><a href="#error" class="headerlink" title="error"></a>error</h3><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Package errors implements functions to manipulate errors.  </span></span><br><span class="line"><span class="keyword">package</span> errors  </span><br><span class="line"></span><br><span class="line"><span class="comment">// New returns an error that formats as the given text.  </span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">New</span><span class="params">(text <span class="keyword">string</span>)</span> <span class="title">error</span></span> &#123;  </span><br><span class="line">	<span class="keyword">return</span> &amp;errorString&#123;text&#125;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="comment">// errorString is a trivial implementation of error.  </span></span><br><span class="line"><span class="keyword">type</span> errorString <span class="keyword">struct</span> &#123;  </span><br><span class="line">	s <span class="keyword">string</span>  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(e *errorString)</span> <span class="title">Error</span><span class="params">()</span> <span class="title">string</span></span> &#123;  </span><br><span class="line">	<span class="keyword">return</span> e.s  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>error的底层实现非常简单，所以功能也比较弱，只能返回一个字符串。Golang 1.13中引入了一个新功能Error Wrapping。  </p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Go/" rel="tag"># Go</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/26/gpu-server/" rel="next" title="ubuntu服务器配置(tensorflow+cuda+cudnn+显卡驱动)">
+                <i class="fa fa-chevron-left"></i> ubuntu服务器配置(tensorflow+cuda+cudnn+显卡驱动)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -344,6 +451,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -364,8 +475,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -460,6 +580,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#panic和recover"><span class="nav-number">1.</span> <span class="nav-text">panic和recover</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#panic"><span class="nav-number"></span> <span class="nav-text">panic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#recover"><span class="nav-number"></span> <span class="nav-text">recover</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#error"><span class="nav-number">1.</span> <span class="nav-text">error</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -620,6 +756,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -978,42 +1118,7 @@
         onPopupClose();
       }
     });
-  </script>
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>
@@ -1031,6 +1136,21 @@
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
   
 
 
