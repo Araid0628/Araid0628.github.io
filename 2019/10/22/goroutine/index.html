@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Go,">
 
 
 
@@ -81,16 +81,18 @@
 
 
 
-<meta name="description" content="某985研一在读">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Fu&#39;s Workshop">
-<meta property="og:url" content="https://araid0628.github.io/tags/XGboost/index.html">
+<meta name="description" content="并发和并行并发意味着程序在任意时刻都是同时运行的，在规定时间内多个请求都得到执行和处理，分时操作系统就是一种并发设计。并行意味着程序在单位时间内是同时运行的，在任一粒度时间内都具备同时执行的能力，最简单的例子就是多台机器并行处理。 协程 coroutine协程是一种用户态的轻量级线程，操作执行者是用户自身程序。协程的执行是非抢占式多任务处理，由协程主动交出控制权，多个协程可能在一个或多个线程上面运">
+<meta name="keywords" content="Go">
+<meta property="og:type" content="article">
+<meta property="og:title" content="goroutine">
+<meta property="og:url" content="https://araid0628.github.io/2019/10/22/goroutine/index.html">
 <meta property="og:site_name" content="Fu&#39;s Workshop">
-<meta property="og:description" content="某985研一在读">
+<meta property="og:description" content="并发和并行并发意味着程序在任意时刻都是同时运行的，在规定时间内多个请求都得到执行和处理，分时操作系统就是一种并发设计。并行意味着程序在单位时间内是同时运行的，在任一粒度时间内都具备同时执行的能力，最简单的例子就是多台机器并行处理。 协程 coroutine协程是一种用户态的轻量级线程，操作执行者是用户自身程序。协程的执行是非抢占式多任务处理，由协程主动交出控制权，多个协程可能在一个或多个线程上面运">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-23T06:27:34.209Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Fu&#39;s Workshop">
-<meta name="twitter:description" content="某985研一在读">
+<meta name="twitter:title" content="goroutine">
+<meta name="twitter:description" content="并发和并行并发意味着程序在任意时刻都是同时运行的，在规定时间内多个请求都得到执行和处理，分时操作系统就是一种并发设计。并行意味着程序在单位时间内是同时运行的，在任一粒度时间内都具备同时执行的能力，最简单的例子就是多台机器并行处理。 协程 coroutine协程是一种用户态的轻量级线程，操作执行者是用户自身程序。协程的执行是非抢占式多任务处理，由协程主动交出控制权，多个协程可能在一个或多个线程上面运">
 
 
 
@@ -120,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://araid0628.github.io/tags/XGboost/">
+  <link rel="canonical" href="https://araid0628.github.io/2019/10/22/goroutine/">
 
 
 
 
 
-  <title>标签: XGboost | Fu's Workshop</title>
+  <title>goroutine | Fu's Workshop</title>
   
 
 
@@ -155,7 +157,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left ">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -291,52 +293,165 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>XGboost<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://araid0628.github.io/2019/10/22/goroutine/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Fu Hanlin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fu's Workshop">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/03/23/xgboost/" itemprop="url">
-              
-                <span itemprop="name">项目实训-利用XGboost进行新楼盘价格预测</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">goroutine</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-23T18:41:24+08:00" content="2019年03月23">
-          03-23
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-22T18:21:59+08:00">
+                2019年10月22
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="并发和并行"><a href="#并发和并行" class="headerlink" title="并发和并行"></a>并发和并行</h3><p>并发意味着程序在任意时刻都是同时运行的，在规定时间内多个请求都得到执行和处理，分时操作系统就是一种并发设计。<br>并行意味着程序在单位时间内是同时运行的，在任一粒度时间内都具备同时执行的能力，最简单的例子就是多台机器并行处理。</p>
+<h3 id="协程-coroutine"><a href="#协程-coroutine" class="headerlink" title="协程 coroutine"></a>协程 coroutine</h3><p>协程是一种用户态的轻量级线程，操作执行者是用户自身程序。协程的执行是非抢占式多任务处理，由协程主动交出控制权，多个协程可能在一个或多个线程上面运行。<br>不同语言对协程的支持：  </p>
+<ol>
+<li>C++: Boost.Coroutine</li>
+<li>Java: 不支持</li>
+<li>Python: async def(e.g. Discord中向频道用户发送消息)<h3 id="goroutine"><a href="#goroutine" class="headerlink" title="goroutine"></a>goroutine</h3>操作系统本身具备并发处理能力，但是进程切换的代价过高。所以Go语言在语言层面再构筑一级调度，将并发的粒度降低（编译器/解释器/虚拟机层面）。<br>goroutine是建立在线程之上的轻量级的抽象，它允许我们以非常低的代价在同一个地址空间中并行地执行多个函数或者方法。在golang中创建一个goroutine只要使用go+匿名/有名函数的形式就可以启动。  <figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">import</span> (  </span><br><span class="line">	<span class="string">"fmt"</span>  </span><br><span class="line">	<span class="string">"runtime"</span>  </span><br><span class="line">	<span class="string">"time"</span>  </span><br><span class="line">)  </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++&#123;  </span><br><span class="line">		<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">(i <span class="keyword">int</span>)</span></span> &#123;  </span><br><span class="line">			<span class="keyword">for</span>&#123;  </span><br><span class="line">				fmt.Printf(<span class="string">"Hello from"</span> +  </span><br><span class="line">                    <span class="string">"goroutine from %d\n"</span>, i)  </span><br><span class="line"></span><br><span class="line">                <span class="comment">// 设置或查询可以并发执行的goroutine数目</span></span><br><span class="line">				fmt.Println(<span class="string">"GOMAXPROCS="</span>, runtime.GOMAXPROCS(<span class="number">0</span>))  </span><br><span class="line">			&#125;  </span><br><span class="line">		&#125;(i)  </span><br><span class="line">	&#125;  </span><br><span class="line">	time.Sleep(time.Minute)  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="goroutine特性"><a href="#goroutine特性" class="headerlink" title="goroutine特性"></a>goroutine特性</h3><ul>
+<li>go的执行是非阻塞的，不会等待。</li>
+<li>go后面函数的返回值会被忽略。</li>
+<li>调度器不能保证多个goroutine的执行次序，所有的goroutine是平等地调度和执行的。</li>
+<li>Go程序会单独为main函数创建一个goroutine</li>
+</ul>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Go/" rel="tag"># Go</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/17/panicRecoverDefer/" rel="next" title="Go语言的错误处理：panic, recocer, error, error wrapping">
+                <i class="fa fa-chevron-left"></i> Go语言的错误处理：panic, recocer, error, error wrapping
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -344,6 +459,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -364,8 +483,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -460,6 +588,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#并发和并行"><span class="nav-number">1.</span> <span class="nav-text">并发和并行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#协程-coroutine"><span class="nav-number">2.</span> <span class="nav-text">协程 coroutine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#goroutine"><span class="nav-number">3.</span> <span class="nav-text">goroutine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#goroutine特性"><span class="nav-number">4.</span> <span class="nav-text">goroutine特性</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -620,6 +764,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -978,42 +1126,7 @@
         onPopupClose();
       }
     });
-  </script>
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>
@@ -1031,6 +1144,21 @@
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
   
 
 

@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[goroutine]]></title>
+    <url>%2F2019%2F10%2F22%2Fgoroutine%2F</url>
+    <content type="text"><![CDATA[并发和并行并发意味着程序在任意时刻都是同时运行的，在规定时间内多个请求都得到执行和处理，分时操作系统就是一种并发设计。并行意味着程序在单位时间内是同时运行的，在任一粒度时间内都具备同时执行的能力，最简单的例子就是多台机器并行处理。 协程 coroutine协程是一种用户态的轻量级线程，操作执行者是用户自身程序。协程的执行是非抢占式多任务处理，由协程主动交出控制权，多个协程可能在一个或多个线程上面运行。不同语言对协程的支持： C++: Boost.Coroutine Java: 不支持 Python: async def(e.g. Discord中向频道用户发送消息)goroutine操作系统本身具备并发处理能力，但是进程切换的代价过高。所以Go语言在语言层面再构筑一级调度，将并发的粒度降低（编译器/解释器/虚拟机层面）。goroutine是建立在线程之上的轻量级的抽象，它允许我们以非常低的代价在同一个地址空间中并行地执行多个函数或者方法。在golang中创建一个goroutine只要使用go+匿名/有名函数的形式就可以启动。 12345678910111213141516171819202122package main import ( "fmt" "runtime" "time" ) func main() &#123; for i := 0; i &lt; 1000; i++&#123; go func(i int) &#123; for&#123; fmt.Printf("Hello from" + "goroutine from %d\n", i) // 设置或查询可以并发执行的goroutine数目 fmt.Println("GOMAXPROCS=", runtime.GOMAXPROCS(0)) &#125; &#125;(i) &#125; time.Sleep(time.Minute) &#125; goroutine特性 go的执行是非阻塞的，不会等待。 go后面函数的返回值会被忽略。 调度器不能保证多个goroutine的执行次序，所有的goroutine是平等地调度和执行的。 Go程序会单独为main函数创建一个goroutine]]></content>
+      <tags>
+        <tag>Go</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Go语言的错误处理：panic, recocer, error, error wrapping]]></title>
     <url>%2F2019%2F10%2F17%2FpanicRecoverDefer%2F</url>
     <content type="text"><![CDATA[panic和recoverpanicfunc panic(v interface{})引发panic有两种情况，一种是程序主动调用panic函数（e.g. panic(xxx), panic的参数是一个空接口类型，任意类型的变量都可以传递给panic），另一种是程序产生运行时错误。发生panic后，程序会从调用panic的函数位置或发生panic的地方立即返回，逐层向上执行函数的defer语句，然后逐层打印函数调用堆栈，直到被recover捕获或运行到最外层函数而退出。12345678910111213141516package main import "fmt" func tryDefer()&#123; for i := 0; i &lt; 100; i++&#123; defer fmt.Println(i) if i == 30 &#123; panic("print end") &#125; &#125; &#125; func main() &#123; tryDefer() &#125; 当i循环到30时，系统会从30倒序进行Println操作，最后打印“panic: print end”。 recoverfunc recover() interface{}recover用来捕获panic，阻止panic继续向上传递。recover()只有在defer后面的函数体内被直接调用才能捕获panic终止异常，否则返回nil，异常继续向外传递。1234defer func()&#123; fmt.Println("function body") recover()&#125; 记得主动在程序的中使用recover()拦截运行时错误。 error12345678910111213141516// Package errors implements functions to manipulate errors. package errors // New returns an error that formats as the given text. func New(text string) error &#123; return &amp;errorString&#123;text&#125; &#125; // errorString is a trivial implementation of error. type errorString struct &#123; s string &#125;func (e *errorString) Error() string &#123; return e.s &#125; error的底层实现非常简单，所以功能也比较弱，只能返回一个字符串。Golang 1.13中引入了一个新功能Error Wrapping。]]></content>
@@ -64,9 +72,9 @@
     <url>%2F2019%2F04%2F10%2Flstm%2F</url>
     <content type="text"><![CDATA[LSTM网络Long short-term memory，即LSTM。在传统的RNN中，所有的RNN都具有一种重复神经网络模块的链接形式，例如一个tanh层。LSTM的重复模块有一个不同的结构。]]></content>
       <tags>
+        <tag>深度学习</tag>
         <tag>Python</tag>
         <tag>项目实训</tag>
-        <tag>深度学习</tag>
         <tag>LSTM</tag>
         <tag>RNN</tag>
       </tags>

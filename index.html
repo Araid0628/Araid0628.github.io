@@ -306,6 +306,139 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://araid0628.github.io/2019/10/22/goroutine/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Fu Hanlin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fu's Workshop">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/22/goroutine/" itemprop="url">goroutine</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-22T18:21:59+08:00">
+                2019年10月22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="并发和并行"><a href="#并发和并行" class="headerlink" title="并发和并行"></a>并发和并行</h3><p>并发意味着程序在任意时刻都是同时运行的，在规定时间内多个请求都得到执行和处理，分时操作系统就是一种并发设计。<br>并行意味着程序在单位时间内是同时运行的，在任一粒度时间内都具备同时执行的能力，最简单的例子就是多台机器并行处理。</p>
+<h3 id="协程-coroutine"><a href="#协程-coroutine" class="headerlink" title="协程 coroutine"></a>协程 coroutine</h3><p>协程是一种用户态的轻量级线程，操作执行者是用户自身程序。协程的执行是非抢占式多任务处理，由协程主动交出控制权，多个协程可能在一个或多个线程上面运行。<br>不同语言对协程的支持：  </p>
+<ol>
+<li>C++: Boost.Coroutine</li>
+<li>Java: 不支持</li>
+<li>Python: async def(e.g. Discord中向频道用户发送消息)<h3 id="goroutine"><a href="#goroutine" class="headerlink" title="goroutine"></a>goroutine</h3>操作系统本身具备并发处理能力，但是进程切换的代价过高。所以Go语言在语言层面再构筑一级调度，将并发的粒度降低（编译器/解释器/虚拟机层面）。<br>goroutine是建立在线程之上的轻量级的抽象，它允许我们以非常低的代价在同一个地址空间中并行地执行多个函数或者方法。在golang中创建一个goroutine只要使用go+匿名/有名函数的形式就可以启动。  <figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">import</span> (  </span><br><span class="line">	<span class="string">"fmt"</span>  </span><br><span class="line">	<span class="string">"runtime"</span>  </span><br><span class="line">	<span class="string">"time"</span>  </span><br><span class="line">)  </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++&#123;  </span><br><span class="line">		<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">(i <span class="keyword">int</span>)</span></span> &#123;  </span><br><span class="line">			<span class="keyword">for</span>&#123;  </span><br><span class="line">				fmt.Printf(<span class="string">"Hello from"</span> +  </span><br><span class="line">                    <span class="string">"goroutine from %d\n"</span>, i)  </span><br><span class="line"></span><br><span class="line">                <span class="comment">// 设置或查询可以并发执行的goroutine数目</span></span><br><span class="line">				fmt.Println(<span class="string">"GOMAXPROCS="</span>, runtime.GOMAXPROCS(<span class="number">0</span>))  </span><br><span class="line">			&#125;  </span><br><span class="line">		&#125;(i)  </span><br><span class="line">	&#125;  </span><br><span class="line">	time.Sleep(time.Minute)  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="goroutine特性"><a href="#goroutine特性" class="headerlink" title="goroutine特性"></a>goroutine特性</h3><ul>
+<li>go的执行是非阻塞的，不会等待。</li>
+<li>go后面函数的返回值会被忽略。</li>
+<li>调度器不能保证多个goroutine的执行次序，所有的goroutine是平等地调度和执行的。</li>
+<li>Go程序会单独为main函数创建一个goroutine</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://araid0628.github.io/2019/10/17/panicRecoverDefer/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1506,158 +1639,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://araid0628.github.io/2019/03/11/week2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Fu Hanlin">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fu's Workshop">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/11/week2/" itemprop="url">项目实训-第二周总结</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-11T21:40:06+08:00">
-                2019年03月11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/项目实训/" itemprop="url" rel="index">
-                    <span itemprop="name">项目实训</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>第二周结束项目的大部分简单需求已经实现，超过了预期的速度。两个组员在隔壁新国大实习，我周五也要去Bosch实习了，下周要加快进度。</p>
-<h3 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h3><p>网站的定位是面向购买新房的投资者或者有住房提升需求的买房者的功能性网站，数据分析＞房源展示。</p>
-<h3 id="已完成的需求"><a href="#已完成的需求" class="headerlink" title="已完成的需求"></a>已完成的需求</h3><ol>
-<li>按用户输入城市名称，爬取和显示城市不同小区，不同区域的房价，并用柱状图显示<br><img src="images/week2_1.png" alt="Fig.1显示">看了周一的模拟产品发布以后，发现隔壁组的UI做的很好看，扁平化设计，准备在产品功能实现后再调整。</li>
-<li>按年份，月份，显示和分析某区域房价走向和趋势<br><img src="images/week2_2.png" alt="Fig.2图表1">收集到的数据的粒度到月，住建局有到天的成交数据，但是很多特征都没有就没有采集。<br><img src="images/week2_3.png" alt="Fig.3图表2">ECharts确实很好用，提供了一些直观、易用的交互方式以方便对所展现数据的再加工。<h3 id="待完成的需求"><a href="#待完成的需求" class="headerlink" title="待完成的需求"></a>待完成的需求</h3>预测模型的训练已经完成，为了不和其他组撞车，准备加入两个预测模块。<br>1.新楼盘开盘价预测（博文会在第三周整理后发布）<br>输入：用户输入新楼盘的一些信息，城市+小区名称（在后台调用百度地图API返回小区周边信息数据）、绿化率、容积率、车位比等数据<br>输出：该新楼盘的开盘价格<br><img src="images/Figure_2.png" alt="Fig.4预测1">(基于XgBoost)图中的蓝色点是训练集中上海新楼盘的真实信息，但是训练的结果和Kaggle中波士顿房价预测那题的结果相差甚远，我想有几个原因：第一是上海主城区房价过高，但是新楼盘少，新城区房价较低，新楼盘多，这些离群点让模型产生了较大误差；第二，Kaggle比赛的数据集很全，虽然说有缺失值和部分错误值，但是用Pandas完全可以解决这些小错误，我们这次预测的数据集60%来自链家，40%是自己收集的，在专业性上相差较多，导致没有比赛数据集所呈现的统计规律。<br>2.房价走势预测（博文会在第三周整理后发布）<br>输入：数据库中某城市粒度位月的历史房价<br>输出：未来一个月的房价趋势<br><img src="images/Figure_1.png" alt="Fig.5预测2">（基于LSTM）</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1703,7 +1689,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

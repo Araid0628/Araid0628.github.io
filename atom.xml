@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://araid0628.github.io/"/>
-  <updated>2019-10-18T07:50:24.619Z</updated>
+  <updated>2019-10-23T06:27:34.209Z</updated>
   <id>https://araid0628.github.io/</id>
   
   <author>
@@ -17,11 +17,34 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>goroutine</title>
+    <link href="https://araid0628.github.io/2019/10/22/goroutine/"/>
+    <id>https://araid0628.github.io/2019/10/22/goroutine/</id>
+    <published>2019-10-22T10:21:59.000Z</published>
+    <updated>2019-10-23T06:27:34.209Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="并发和并行"><a href="#并发和并行" class="headerlink" title="并发和并行"></a>并发和并行</h3><p>并发意味着程序在任意时刻都是同时运行的，在规定时间内多个请求都得到执行和处理，分时操作系统就是一种并发设计。<br>并行意味着程序在单位时间内是同时运行的，在任一粒度时间内都具备同时执行的能力，最简单的例子就是多台机器并行处理。</p><h3 id="协程-coroutine"><a href="#协程-coroutine" class="headerlink" title="协程 coroutine"></a>协程 coroutine</h3><p>协程是一种用户态的轻量级线程，操作执行者是用户自身程序。协程的执行是非抢占式多任务处理，由协程主动交出控制权，多个协程可能在一个或多个线程上面运行。<br>不同语言对协程的支持：  </p><ol><li>C++: Boost.Coroutine</li><li>Java: 不支持</li><li>Python: async def(e.g. Discord中向频道用户发送消息)<h3 id="goroutine"><a href="#goroutine" class="headerlink" title="goroutine"></a>goroutine</h3>操作系统本身具备并发处理能力，但是进程切换的代价过高。所以Go语言在语言层面再构筑一级调度，将并发的粒度降低（编译器/解释器/虚拟机层面）。<br>goroutine是建立在线程之上的轻量级的抽象，它允许我们以非常低的代价在同一个地址空间中并行地执行多个函数或者方法。在golang中创建一个goroutine只要使用go+匿名/有名函数的形式就可以启动。  <figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">import</span> (  </span><br><span class="line"><span class="string">"fmt"</span>  </span><br><span class="line"><span class="string">"runtime"</span>  </span><br><span class="line"><span class="string">"time"</span>  </span><br><span class="line">)  </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++&#123;  </span><br><span class="line"><span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">(i <span class="keyword">int</span>)</span></span> &#123;  </span><br><span class="line"><span class="keyword">for</span>&#123;  </span><br><span class="line">fmt.Printf(<span class="string">"Hello from"</span> +  </span><br><span class="line">                    <span class="string">"goroutine from %d\n"</span>, i)  </span><br><span class="line"></span><br><span class="line">                <span class="comment">// 设置或查询可以并发执行的goroutine数目</span></span><br><span class="line">fmt.Println(<span class="string">"GOMAXPROCS="</span>, runtime.GOMAXPROCS(<span class="number">0</span>))  </span><br><span class="line">&#125;  </span><br><span class="line">&#125;(i)  </span><br><span class="line">&#125;  </span><br><span class="line">time.Sleep(time.Minute)  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ol><h3 id="goroutine特性"><a href="#goroutine特性" class="headerlink" title="goroutine特性"></a>goroutine特性</h3><ul><li>go的执行是非阻塞的，不会等待。</li><li>go后面函数的返回值会被忽略。</li><li>调度器不能保证多个goroutine的执行次序，所有的goroutine是平等地调度和执行的。</li><li>Go程序会单独为main函数创建一个goroutine</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;并发和并行&quot;&gt;&lt;a href=&quot;#并发和并行&quot; class=&quot;headerlink&quot; title=&quot;并发和并行&quot;&gt;&lt;/a&gt;并发和并行&lt;/h3&gt;&lt;p&gt;并发意味着程序在任意时刻都是同时运行的，在规定时间内多个请求都得到执行和处理，分时操作系统就是一种并发设计。&lt;br&gt;
+      
+    
+    </summary>
+    
+    
+      <category term="Go" scheme="https://araid0628.github.io/tags/Go/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Go语言的错误处理：panic, recocer, error, error wrapping</title>
     <link href="https://araid0628.github.io/2019/10/17/panicRecoverDefer/"/>
     <id>https://araid0628.github.io/2019/10/17/panicRecoverDefer/</id>
     <published>2019-10-17T06:52:49.000Z</published>
-    <updated>2019-10-18T07:50:24.619Z</updated>
+    <updated>2019-10-18T07:51:13.472Z</updated>
     
     <content type="html"><![CDATA[<h3 id="panic和recover"><a href="#panic和recover" class="headerlink" title="panic和recover"></a>panic和recover</h3><h2 id="panic"><a href="#panic" class="headerlink" title="panic"></a>panic</h2><p>func panic(v interface{})<br>引发panic有两种情况，一种是程序主动调用panic函数（e.g. panic(xxx), panic的参数是一个空接口类型，任意类型的变量都可以传递给panic），另一种是程序产生运行时错误。<br>发生panic后，程序会从调用panic的函数位置或发生panic的地方立即返回，逐层向上执行函数的defer语句，然后逐层打印函数调用堆栈，直到被recover捕获或运行到最外层函数而退出。<br><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main  </span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span>  </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">tryDefer</span><span class="params">()</span></span>&#123;  </span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">100</span>; i++&#123;  </span><br><span class="line"><span class="keyword">defer</span> fmt.Println(i)  </span><br><span class="line"><span class="keyword">if</span> i == <span class="number">30</span> &#123;  </span><br><span class="line"><span class="built_in">panic</span>(<span class="string">"print end"</span>)  </span><br><span class="line">&#125;  </span><br><span class="line">&#125;   </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">tryDefer()  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>当i循环到30时，系统会从30倒序进行Println操作，最后打印“panic: print end”。  </p><h2 id="recover"><a href="#recover" class="headerlink" title="recover"></a>recover</h2><p>func recover() interface{}<br>recover用来捕获panic，阻止panic继续向上传递。recover()只有在defer后面的函数体内被直接调用才能捕获panic终止异常，否则返回nil，异常继续向外传递。<br><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">    fmt.Println(<span class="string">"function body"</span>)</span><br><span class="line">    <span class="built_in">recover</span>()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>记得主动在程序的中使用recover()拦截运行时错误。</p><h3 id="error"><a href="#error" class="headerlink" title="error"></a>error</h3><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Package errors implements functions to manipulate errors.  </span></span><br><span class="line"><span class="keyword">package</span> errors  </span><br><span class="line"></span><br><span class="line"><span class="comment">// New returns an error that formats as the given text.  </span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">New</span><span class="params">(text <span class="keyword">string</span>)</span> <span class="title">error</span></span> &#123;  </span><br><span class="line"><span class="keyword">return</span> &amp;errorString&#123;text&#125;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="comment">// errorString is a trivial implementation of error.  </span></span><br><span class="line"><span class="keyword">type</span> errorString <span class="keyword">struct</span> &#123;  </span><br><span class="line">s <span class="keyword">string</span>  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(e *errorString)</span> <span class="title">Error</span><span class="params">()</span> <span class="title">string</span></span> &#123;  </span><br><span class="line"><span class="keyword">return</span> e.s  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>error的底层实现非常简单，所以功能也比较弱，只能返回一个字符串。Golang 1.13中引入了一个新功能Error Wrapping。  </p>]]></content>
     
@@ -191,11 +214,11 @@
     </summary>
     
     
+      <category term="深度学习" scheme="https://araid0628.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
       <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
     
       <category term="项目实训" scheme="https://araid0628.github.io/tags/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
-    
-      <category term="深度学习" scheme="https://araid0628.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
       <category term="LSTM" scheme="https://araid0628.github.io/tags/LSTM/"/>
     
