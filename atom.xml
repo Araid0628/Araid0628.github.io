@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://araid0628.github.io/"/>
-  <updated>2019-10-23T06:27:34.209Z</updated>
+  <updated>2019-11-07T08:52:45.634Z</updated>
   <id>https://araid0628.github.io/</id>
   
   <author>
@@ -17,11 +17,35 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>goroutine的优点与比较</title>
+    <link href="https://araid0628.github.io/2019/11/06/GMP/"/>
+    <id>https://araid0628.github.io/2019/11/06/GMP/</id>
+    <published>2019-11-06T05:32:07.000Z</published>
+    <updated>2019-11-07T08:52:45.634Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="goroutine的优点："><a href="#goroutine的优点：" class="headerlink" title="goroutine的优点："></a>goroutine的优点：</h3><ol><li>goroutine可以在用户空间调度，避免了内核态和用户态的切换导致的成本。  </li><li>goroutine是语言原生支持的，提供了非常简洁的语法，屏蔽了大部分底层实现。  </li><li>goroutine有更小的初始栈空间，goroutine消耗的资源更小，允许用户创建成千上万的实例。</li></ol><h3 id="Java-Thread"><a href="#Java-Thread" class="headerlink" title="Java Thread"></a>Java Thread</h3><p>Java里的Thread使用的是线程模型的一对一模型，每一个轻量级进程都对应着一个内核线程。Java使用的线程调度方式主要是抢占式调度。</p><h3 id="扩展点"><a href="#扩展点" class="headerlink" title="扩展点"></a>扩展点</h3><ol><li>用户态和内核态<br>内核态：进程能访问所有的内存空间和对象<br>用户态：进程能访问的内存空间和对象受到限制<br>用户态切换到内核态有三种方法：<br>(1) 系统调用，实质是中断机制，如Linux中的INT 80H<br>(2) 异常：如果当前进程运行在用户态，如果这个时候发生了异常事件，就会触发切换。如：缺页异常<br>(3) 中断：软中断硬中断</li><li>goroutine中的栈管理：  </li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;goroutine的优点：&quot;&gt;&lt;a href=&quot;#goroutine的优点：&quot; class=&quot;headerlink&quot; title=&quot;goroutine的优点：&quot;&gt;&lt;/a&gt;goroutine的优点：&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;goroutine可以在用户空间调度，避
+      
+    
+    </summary>
+    
+    
+      <category term="Go" scheme="https://araid0628.github.io/tags/Go/"/>
+    
+  </entry>
+  
+  <entry>
     <title>goroutine</title>
     <link href="https://araid0628.github.io/2019/10/22/goroutine/"/>
     <id>https://araid0628.github.io/2019/10/22/goroutine/</id>
     <published>2019-10-22T10:21:59.000Z</published>
-    <updated>2019-10-23T06:27:34.209Z</updated>
+    <updated>2019-10-23T06:28:44.494Z</updated>
     
     <content type="html"><![CDATA[<h3 id="并发和并行"><a href="#并发和并行" class="headerlink" title="并发和并行"></a>并发和并行</h3><p>并发意味着程序在任意时刻都是同时运行的，在规定时间内多个请求都得到执行和处理，分时操作系统就是一种并发设计。<br>并行意味着程序在单位时间内是同时运行的，在任一粒度时间内都具备同时执行的能力，最简单的例子就是多台机器并行处理。</p><h3 id="协程-coroutine"><a href="#协程-coroutine" class="headerlink" title="协程 coroutine"></a>协程 coroutine</h3><p>协程是一种用户态的轻量级线程，操作执行者是用户自身程序。协程的执行是非抢占式多任务处理，由协程主动交出控制权，多个协程可能在一个或多个线程上面运行。<br>不同语言对协程的支持：  </p><ol><li>C++: Boost.Coroutine</li><li>Java: 不支持</li><li>Python: async def(e.g. Discord中向频道用户发送消息)<h3 id="goroutine"><a href="#goroutine" class="headerlink" title="goroutine"></a>goroutine</h3>操作系统本身具备并发处理能力，但是进程切换的代价过高。所以Go语言在语言层面再构筑一级调度，将并发的粒度降低（编译器/解释器/虚拟机层面）。<br>goroutine是建立在线程之上的轻量级的抽象，它允许我们以非常低的代价在同一个地址空间中并行地执行多个函数或者方法。在golang中创建一个goroutine只要使用go+匿名/有名函数的形式就可以启动。  <figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">import</span> (  </span><br><span class="line"><span class="string">"fmt"</span>  </span><br><span class="line"><span class="string">"runtime"</span>  </span><br><span class="line"><span class="string">"time"</span>  </span><br><span class="line">)  </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++&#123;  </span><br><span class="line"><span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">(i <span class="keyword">int</span>)</span></span> &#123;  </span><br><span class="line"><span class="keyword">for</span>&#123;  </span><br><span class="line">fmt.Printf(<span class="string">"Hello from"</span> +  </span><br><span class="line">                    <span class="string">"goroutine from %d\n"</span>, i)  </span><br><span class="line"></span><br><span class="line">                <span class="comment">// 设置或查询可以并发执行的goroutine数目</span></span><br><span class="line">fmt.Println(<span class="string">"GOMAXPROCS="</span>, runtime.GOMAXPROCS(<span class="number">0</span>))  </span><br><span class="line">&#125;  </span><br><span class="line">&#125;(i)  </span><br><span class="line">&#125;  </span><br><span class="line">time.Sleep(time.Minute)  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ol><h3 id="goroutine特性"><a href="#goroutine特性" class="headerlink" title="goroutine特性"></a>goroutine特性</h3><ul><li>go的执行是非阻塞的，不会等待。</li><li>go后面函数的返回值会被忽略。</li><li>调度器不能保证多个goroutine的执行次序，所有的goroutine是平等地调度和执行的。</li><li>Go程序会单独为main函数创建一个goroutine</li></ul>]]></content>
     
@@ -110,9 +134,9 @@
       <category term="SnkrsMonitor" scheme="https://araid0628.github.io/categories/SnkrsMonitor/"/>
     
     
-      <category term="爬虫" scheme="https://araid0628.github.io/tags/%E7%88%AC%E8%99%AB/"/>
-    
       <category term="JSON" scheme="https://araid0628.github.io/tags/JSON/"/>
+    
+      <category term="爬虫" scheme="https://araid0628.github.io/tags/%E7%88%AC%E8%99%AB/"/>
     
   </entry>
   
@@ -214,11 +238,11 @@
     </summary>
     
     
-      <category term="深度学习" scheme="https://araid0628.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
       <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
     
       <category term="项目实训" scheme="https://araid0628.github.io/tags/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
+    
+      <category term="深度学习" scheme="https://araid0628.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
       <category term="LSTM" scheme="https://araid0628.github.io/tags/LSTM/"/>
     
@@ -325,9 +349,9 @@
       <category term="项目实训" scheme="https://araid0628.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
     
     
-      <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
-    
       <category term="房价预测" scheme="https://araid0628.github.io/tags/%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B/"/>
+    
+      <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
     
       <category term="Pandas" scheme="https://araid0628.github.io/tags/Pandas/"/>
     
@@ -379,6 +403,8 @@
       <category term="项目实训" scheme="https://araid0628.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
     
     
+      <category term="房价预测" scheme="https://araid0628.github.io/tags/%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B/"/>
+    
       <category term="百度" scheme="https://araid0628.github.io/tags/%E7%99%BE%E5%BA%A6/"/>
     
       <category term="API" scheme="https://araid0628.github.io/tags/API/"/>
@@ -386,8 +412,6 @@
       <category term="json" scheme="https://araid0628.github.io/tags/json/"/>
     
       <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
-    
-      <category term="房价预测" scheme="https://araid0628.github.io/tags/%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B/"/>
     
   </entry>
   
@@ -525,11 +549,11 @@
     
       <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
     
+      <category term="爬虫" scheme="https://araid0628.github.io/tags/%E7%88%AC%E8%99%AB/"/>
+    
       <category term="数据挖掘" scheme="https://araid0628.github.io/tags/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/"/>
     
       <category term="正则表达式" scheme="https://araid0628.github.io/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
-    
-      <category term="爬虫" scheme="https://araid0628.github.io/tags/%E7%88%AC%E8%99%AB/"/>
     
   </entry>
   
