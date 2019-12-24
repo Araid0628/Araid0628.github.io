@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Docker批量删除REPOSITORY、TAG为none的镜像]]></title>
+    <url>%2F2019%2F12%2F24%2Fdocker-delete-none%2F</url>
+    <content type="text"><![CDATA[第一次构建镜像时生成的镜像ID为A，此镜像会被标记为TAG-A 第二次构建镜像时生成的镜像ID为B，此镜像的标签仍为TAG-A Docker会移除ID为A的标签，此时A镜像就变成了dangling images，在docker images中显示为:官方给出的解决方案是：1docker image prune 还可以这样做：1docker images|grep none|awk ‘&#123;print $3&#125;’|xargs docker rmi grep: 查找images中符合none的字符串awk: 输出xargs: 给命令传递参数]]></content>
+      <tags>
+        <tag>Docker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[LeetCode 21 合并两个有序链表]]></title>
     <url>%2F2019%2F11%2F15%2Fleetcode-21%2F</url>
     <content type="text"><![CDATA[第一次在python里用到链表这个数据结构，和cpp里很像，但还是要借用cpp中指针的概念。题目的重点是合并两个链表的过程。非递归的答案：12345678910111213141516171819202122232425class ListNode: def __init__(self, x): self.val = x self.next = Noneclass Solution: def mergeTwoLists(self, l1, l2): newList = ListNode(-1) if l1 is None and l2 is None: return None pre = newList while l1 and l2: if l1.val &gt; l2.val: pre.next = l2 l2 = l2.next else: pre.next = l1 l1 = l1.next pre = pre.next if l1 is not None: pre.next = l1 if l2 is not None: pre.next = l2 return newList.next 如果把第一个判断条件的and改为or会有一个测试用例无法通过： Testcase[][0] Answer[] Expected Answer[0]]]></content>
@@ -51,8 +59,8 @@
         <category>SnkrsMonitor</category>
       </categories>
       <tags>
-        <tag>爬虫</tag>
         <tag>JSON</tag>
+        <tag>爬虫</tag>
       </tags>
   </entry>
   <entry>
@@ -89,8 +97,8 @@
     <url>%2F2019%2F04%2F10%2Flstm%2F</url>
     <content type="text"><![CDATA[LSTM网络Long short-term memory，即LSTM。在传统的RNN中，所有的RNN都具有一种重复神经网络模块的链接形式，例如一个tanh层。LSTM的重复模块有一个不同的结构。]]></content>
       <tags>
-        <tag>深度学习</tag>
         <tag>Python</tag>
+        <tag>深度学习</tag>
         <tag>项目实训</tag>
         <tag>LSTM</tag>
         <tag>RNN</tag>
@@ -221,9 +229,9 @@
       </categories>
       <tags>
         <tag>Python</tag>
+        <tag>爬虫</tag>
         <tag>数据挖掘</tag>
         <tag>正则表达式</tag>
-        <tag>爬虫</tag>
       </tags>
   </entry>
   <entry>
