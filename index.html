@@ -380,9 +380,9 @@
             <ol>
 <li>第一次构建镜像时生成的镜像ID为A，此镜像会被标记为TAG-A  </li>
 <li>第二次构建镜像时生成的镜像ID为B，此镜像的标签仍为TAG-A  </li>
-<li>Docker会移除ID为A的标签，此时A镜像就变成了dangling images，在docker images中显示为<none>:<none><br>官方给出的解决方案是：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker image prune</span><br></pre></td></tr></table></figure>
-</none></none></li>
+<li>Docker会移除ID为A的标签，此时A镜像就变成了dangling images，在docker images中显示为<none>:<none>  </none></none></li>
 </ol>
+<p>官方给出的解决方案是：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker image prune</span><br></pre></td></tr></table></figure></p>
 <p>还可以这样做：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images|grep none|awk ‘&#123;<span class="built_in">print</span> <span class="variable">$3</span>&#125;’|xargs docker rmi</span><br></pre></td></tr></table></figure></p>
 <p>grep: 查找images中符合none的字符串<br>awk: 输出<br>xargs: 给命令传递参数</p>
 
