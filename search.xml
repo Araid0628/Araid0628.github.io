@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[Docker批量删除REPOSITORY、TAG为none的镜像]]></title>
     <url>%2F2019%2F12%2F24%2Fdocker-delete-none%2F</url>
-    <content type="text"><![CDATA[第一次构建镜像时生成的镜像ID为A，此镜像会被标记为TAG-A 第二次构建镜像时生成的镜像ID为B，此镜像的标签仍为TAG-A Docker会移除ID为A的标签，此时A镜像就变成了dangling images，在docker images中显示为: 官方给出的解决方案是：1docker image prune 还可以这样做：1docker images|grep none|awk ‘&#123;print $3&#125;’|xargs docker rmi grep: 查找images中符合none的字符串awk: 输出xargs: 给命令传递参数]]></content>
+    <content type="text"><![CDATA[第一次构建镜像时生成的镜像ID为A，此镜像会被标记为TAG-A 第二次构建镜像时生成的镜像ID为B，此镜像的标签仍为TAG-A Docker会移除ID为A的标签，此时A镜像就变成了dangling images，在docker images中显示为&lt;/none>:&lt;/none> 官方给出的解决方案是：1docker image prune 还可以这样做：1docker images|grep none|awk ‘&#123;print $3&#125;’|xargs docker rmi grep: 查找images中符合none的字符串awk: 输出xargs: 给命令传递参数]]></content>
       <tags>
         <tag>Docker</tag>
       </tags>
@@ -142,8 +142,8 @@
         <category>项目实训</category>
       </categories>
       <tags>
-        <tag>Python</tag>
         <tag>房价预测</tag>
+        <tag>Python</tag>
         <tag>Pandas</tag>
       </tags>
   </entry>
@@ -166,11 +166,11 @@
         <category>项目实训</category>
       </categories>
       <tags>
+        <tag>房价预测</tag>
         <tag>百度</tag>
         <tag>API</tag>
         <tag>json</tag>
         <tag>Python</tag>
-        <tag>房价预测</tag>
       </tags>
   </entry>
   <entry>

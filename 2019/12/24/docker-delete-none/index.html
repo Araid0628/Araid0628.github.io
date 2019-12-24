@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="第一次构建镜像时生成的镜像ID为A，此镜像会被标记为TAG-A   第二次构建镜像时生成的镜像ID为B，此镜像的标签仍为TAG-A   Docker会移除ID为A的标签，此时A镜像就变成了dangling images，在docker images中显示为:    官方给出的解决方案是：1docker image prune 还可以这样做：1docker images|grep none|awk">
+<meta name="description" content="第一次构建镜像时生成的镜像ID为A，此镜像会被标记为TAG-A   第二次构建镜像时生成的镜像ID为B，此镜像的标签仍为TAG-A   Docker会移除ID为A的标签，此时A镜像就变成了dangling images，在docker images中显示为&amp;lt;/none&amp;gt;:&amp;lt;/none&amp;gt;    官方给出的解决方案是：1docker image prune 还可以这样做：1docker">
 <meta name="keywords" content="Docker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Docker批量删除REPOSITORY、TAG为none的镜像">
 <meta property="og:url" content="https://araid0628.github.io/2019/12/24/docker-delete-none/index.html">
 <meta property="og:site_name" content="Fu&#39;s Workshop">
-<meta property="og:description" content="第一次构建镜像时生成的镜像ID为A，此镜像会被标记为TAG-A   第二次构建镜像时生成的镜像ID为B，此镜像的标签仍为TAG-A   Docker会移除ID为A的标签，此时A镜像就变成了dangling images，在docker images中显示为:    官方给出的解决方案是：1docker image prune 还可以这样做：1docker images|grep none|awk">
+<meta property="og:description" content="第一次构建镜像时生成的镜像ID为A，此镜像会被标记为TAG-A   第二次构建镜像时生成的镜像ID为B，此镜像的标签仍为TAG-A   Docker会移除ID为A的标签，此时A镜像就变成了dangling images，在docker images中显示为&amp;lt;/none&amp;gt;:&amp;lt;/none&amp;gt;    官方给出的解决方案是：1docker image prune 还可以这样做：1docker">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-24T05:26:52.732Z">
+<meta property="og:updated_time" content="2019-12-24T05:54:10.407Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker批量删除REPOSITORY、TAG为none的镜像">
-<meta name="twitter:description" content="第一次构建镜像时生成的镜像ID为A，此镜像会被标记为TAG-A   第二次构建镜像时生成的镜像ID为B，此镜像的标签仍为TAG-A   Docker会移除ID为A的标签，此时A镜像就变成了dangling images，在docker images中显示为:    官方给出的解决方案是：1docker image prune 还可以这样做：1docker images|grep none|awk">
+<meta name="twitter:description" content="第一次构建镜像时生成的镜像ID为A，此镜像会被标记为TAG-A   第二次构建镜像时生成的镜像ID为B，此镜像的标签仍为TAG-A   Docker会移除ID为A的标签，此时A镜像就变成了dangling images，在docker images中显示为&amp;lt;/none&amp;gt;:&amp;lt;/none&amp;gt;    官方给出的解决方案是：1docker image prune 还可以这样做：1docker">
 
 
 
@@ -382,7 +382,7 @@
         <ol>
 <li>第一次构建镜像时生成的镜像ID为A，此镜像会被标记为TAG-A  </li>
 <li>第二次构建镜像时生成的镜像ID为B，此镜像的标签仍为TAG-A  </li>
-<li>Docker会移除ID为A的标签，此时A镜像就变成了dangling images，在docker images中显示为<none>:<none>  </none></none></li>
+<li>Docker会移除ID为A的标签，此时A镜像就变成了dangling images，在docker images中显示为&lt;/none>:&lt;/none>  </li>
 </ol>
 <p>官方给出的解决方案是：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker image prune</span><br></pre></td></tr></table></figure></p>
 <p>还可以这样做：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images|grep none|awk ‘&#123;<span class="built_in">print</span> <span class="variable">$3</span>&#125;’|xargs docker rmi</span><br></pre></td></tr></table></figure></p>
