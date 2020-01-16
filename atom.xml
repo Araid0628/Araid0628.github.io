@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://araid0628.github.io/"/>
-  <updated>2018-09-09T07:08:59.045Z</updated>
+  <updated>2019-12-24T05:54:10.407Z</updated>
   <id>https://araid0628.github.io/</id>
   
   <author>
@@ -15,6 +15,181 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Docker批量删除REPOSITORY、TAG为none的镜像</title>
+    <link href="https://araid0628.github.io/2019/12/24/docker-delete-none/"/>
+    <id>https://araid0628.github.io/2019/12/24/docker-delete-none/</id>
+    <published>2019-12-24T05:09:33.000Z</published>
+    <updated>2019-12-24T05:54:10.407Z</updated>
+    
+    <content type="html"><![CDATA[<ol><li>第一次构建镜像时生成的镜像ID为A，此镜像会被标记为TAG-A  </li><li>第二次构建镜像时生成的镜像ID为B，此镜像的标签仍为TAG-A  </li><li>Docker会移除ID为A的标签，此时A镜像就变成了dangling images，在docker images中显示为&lt;/none>:&lt;/none>  </li></ol><p>官方给出的解决方案是：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker image prune</span><br></pre></td></tr></table></figure></p><p>还可以这样做：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images|grep none|awk ‘&#123;<span class="built_in">print</span> <span class="variable">$3</span>&#125;’|xargs docker rmi</span><br></pre></td></tr></table></figure></p><p>grep: 查找images中符合none的字符串<br>awk: 输出<br>xargs: 给命令传递参数</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;ol&gt;
+&lt;li&gt;第一次构建镜像时生成的镜像ID为A，此镜像会被标记为TAG-A  &lt;/li&gt;
+&lt;li&gt;第二次构建镜像时生成的镜像ID为B，此镜像的标签仍为TAG-A  &lt;/li&gt;
+&lt;li&gt;Docker会移除ID为A的标签，此时A镜像就变成了dangling images，在do
+      
+    
+    </summary>
+    
+    
+      <category term="Docker" scheme="https://araid0628.github.io/tags/Docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode 21 合并两个有序链表</title>
+    <link href="https://araid0628.github.io/2019/11/15/leetcode-21/"/>
+    <id>https://araid0628.github.io/2019/11/15/leetcode-21/</id>
+    <published>2019-11-15T07:20:23.000Z</published>
+    <updated>2019-11-15T07:41:57.201Z</updated>
+    
+    <content type="html"><![CDATA[<p>第一次在python里用到链表这个数据结构，和cpp里很像，但还是要借用cpp中指针的概念。题目的重点是合并两个链表的过程。<br>非递归的答案：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ListNode</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        self.val = x</span><br><span class="line">        self.next = <span class="keyword">None</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">mergeTwoLists</span><span class="params">(self, l1, l2)</span>:</span></span><br><span class="line">        newList = ListNode(<span class="number">-1</span>)</span><br><span class="line">        <span class="keyword">if</span> l1 <span class="keyword">is</span> <span class="keyword">None</span> <span class="keyword">and</span> l2 <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">None</span></span><br><span class="line">        </span><br><span class="line">        pre = newList</span><br><span class="line">        <span class="keyword">while</span> l1 <span class="keyword">and</span> l2:</span><br><span class="line">            <span class="keyword">if</span> l1.val &gt; l2.val:</span><br><span class="line">                pre.next = l2</span><br><span class="line">                l2 = l2.next</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                pre.next = l1</span><br><span class="line">                l1 = l1.next</span><br><span class="line">            pre = pre.next</span><br><span class="line">        <span class="keyword">if</span> l1 <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            pre.next = l1</span><br><span class="line">        <span class="keyword">if</span> l2 <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            pre.next = l2</span><br><span class="line">        <span class="keyword">return</span> newList.next</span><br></pre></td></tr></table></figure></p><p>如果把第一个判断条件的and改为or会有一个测试用例无法通过：</p><h4 id="Testcase"><a href="#Testcase" class="headerlink" title="Testcase"></a>Testcase</h4><p>[]<br>[0]  </p><h4 id="Answer"><a href="#Answer" class="headerlink" title="Answer"></a>Answer</h4><p>[]  </p><h4 id="Expected-Answer"><a href="#Expected-Answer" class="headerlink" title="Expected Answer"></a>Expected Answer</h4><p>[0]  </p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;第一次在python里用到链表这个数据结构，和cpp里很像，但还是要借用cpp中指针的概念。题目的重点是合并两个链表的过程。&lt;br&gt;非递归的答案：&lt;br&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutte
+      
+    
+    </summary>
+    
+    
+      <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
+    
+      <category term="LeetCode" scheme="https://araid0628.github.io/tags/LeetCode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>goroutine的优点与比较</title>
+    <link href="https://araid0628.github.io/2019/11/06/GMP/"/>
+    <id>https://araid0628.github.io/2019/11/06/GMP/</id>
+    <published>2019-11-06T05:32:07.000Z</published>
+    <updated>2019-11-15T06:36:42.016Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="goroutine的优点："><a href="#goroutine的优点：" class="headerlink" title="goroutine的优点："></a>goroutine的优点：</h3><ol><li>goroutine可以在用户空间调度，避免了内核态和用户态的切换导致的成本。  </li><li>goroutine是语言原生支持的，提供了非常简洁的语法，屏蔽了大部分底层实现。  </li><li>goroutine有更小的初始栈空间，goroutine消耗的资源更小，允许用户创建成千上万的实例。</li></ol><h3 id="Java-Thread"><a href="#Java-Thread" class="headerlink" title="Java Thread"></a>Java Thread</h3><p>Java里的Thread使用的是线程模型的一对一模型，每一个轻量级进程都对应着一个内核线程。Java使用的线程调度方式主要是抢占式调度。</p><h3 id="扩展点"><a href="#扩展点" class="headerlink" title="扩展点"></a>扩展点</h3><ol><li>用户态和内核态<br>内核态：进程能访问所有的内存空间和对象<br>用户态：进程能访问的内存空间和对象受到限制<br>用户态切换到内核态有三种方法：<br>(1) 系统调用，实质是中断机制，如Linux中的INT 80H<br>(2) 异常：如果当前进程运行在用户态，如果这个时候发生了异常事件，就会触发切换。如：缺页异常<br>(3) 中断：软中断硬中断</li><li>goroutine中的栈管理：  </li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;goroutine的优点：&quot;&gt;&lt;a href=&quot;#goroutine的优点：&quot; class=&quot;headerlink&quot; title=&quot;goroutine的优点：&quot;&gt;&lt;/a&gt;goroutine的优点：&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;goroutine可以在用户空间调度，避
+      
+    
+    </summary>
+    
+    
+      <category term="Go" scheme="https://araid0628.github.io/tags/Go/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>goroutine</title>
+    <link href="https://araid0628.github.io/2019/10/22/goroutine/"/>
+    <id>https://araid0628.github.io/2019/10/22/goroutine/</id>
+    <published>2019-10-22T10:21:59.000Z</published>
+    <updated>2019-10-23T06:28:44.494Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="并发和并行"><a href="#并发和并行" class="headerlink" title="并发和并行"></a>并发和并行</h3><p>并发意味着程序在任意时刻都是同时运行的，在规定时间内多个请求都得到执行和处理，分时操作系统就是一种并发设计。<br>并行意味着程序在单位时间内是同时运行的，在任一粒度时间内都具备同时执行的能力，最简单的例子就是多台机器并行处理。</p><h3 id="协程-coroutine"><a href="#协程-coroutine" class="headerlink" title="协程 coroutine"></a>协程 coroutine</h3><p>协程是一种用户态的轻量级线程，操作执行者是用户自身程序。协程的执行是非抢占式多任务处理，由协程主动交出控制权，多个协程可能在一个或多个线程上面运行。<br>不同语言对协程的支持：  </p><ol><li>C++: Boost.Coroutine</li><li>Java: 不支持</li><li>Python: async def(e.g. Discord中向频道用户发送消息)<h3 id="goroutine"><a href="#goroutine" class="headerlink" title="goroutine"></a>goroutine</h3>操作系统本身具备并发处理能力，但是进程切换的代价过高。所以Go语言在语言层面再构筑一级调度，将并发的粒度降低（编译器/解释器/虚拟机层面）。<br>goroutine是建立在线程之上的轻量级的抽象，它允许我们以非常低的代价在同一个地址空间中并行地执行多个函数或者方法。在golang中创建一个goroutine只要使用go+匿名/有名函数的形式就可以启动。  <figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">import</span> (  </span><br><span class="line"><span class="string">"fmt"</span>  </span><br><span class="line"><span class="string">"runtime"</span>  </span><br><span class="line"><span class="string">"time"</span>  </span><br><span class="line">)  </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++&#123;  </span><br><span class="line"><span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">(i <span class="keyword">int</span>)</span></span> &#123;  </span><br><span class="line"><span class="keyword">for</span>&#123;  </span><br><span class="line">fmt.Printf(<span class="string">"Hello from"</span> +  </span><br><span class="line">                    <span class="string">"goroutine from %d\n"</span>, i)  </span><br><span class="line"></span><br><span class="line">                <span class="comment">// 设置或查询可以并发执行的goroutine数目</span></span><br><span class="line">fmt.Println(<span class="string">"GOMAXPROCS="</span>, runtime.GOMAXPROCS(<span class="number">0</span>))  </span><br><span class="line">&#125;  </span><br><span class="line">&#125;(i)  </span><br><span class="line">&#125;  </span><br><span class="line">time.Sleep(time.Minute)  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ol><h3 id="goroutine特性"><a href="#goroutine特性" class="headerlink" title="goroutine特性"></a>goroutine特性</h3><ul><li>go的执行是非阻塞的，不会等待。</li><li>go后面函数的返回值会被忽略。</li><li>调度器不能保证多个goroutine的执行次序，所有的goroutine是平等地调度和执行的。</li><li>Go程序会单独为main函数创建一个goroutine</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;并发和并行&quot;&gt;&lt;a href=&quot;#并发和并行&quot; class=&quot;headerlink&quot; title=&quot;并发和并行&quot;&gt;&lt;/a&gt;并发和并行&lt;/h3&gt;&lt;p&gt;并发意味着程序在任意时刻都是同时运行的，在规定时间内多个请求都得到执行和处理，分时操作系统就是一种并发设计。&lt;br&gt;
+      
+    
+    </summary>
+    
+    
+      <category term="Go" scheme="https://araid0628.github.io/tags/Go/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Go语言的错误处理：panic, recocer, error, error wrapping</title>
+    <link href="https://araid0628.github.io/2019/10/17/panicRecoverDefer/"/>
+    <id>https://araid0628.github.io/2019/10/17/panicRecoverDefer/</id>
+    <published>2019-10-17T06:52:49.000Z</published>
+    <updated>2019-10-18T07:51:13.472Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="panic和recover"><a href="#panic和recover" class="headerlink" title="panic和recover"></a>panic和recover</h3><h2 id="panic"><a href="#panic" class="headerlink" title="panic"></a>panic</h2><p>func panic(v interface{})<br>引发panic有两种情况，一种是程序主动调用panic函数（e.g. panic(xxx), panic的参数是一个空接口类型，任意类型的变量都可以传递给panic），另一种是程序产生运行时错误。<br>发生panic后，程序会从调用panic的函数位置或发生panic的地方立即返回，逐层向上执行函数的defer语句，然后逐层打印函数调用堆栈，直到被recover捕获或运行到最外层函数而退出。<br><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main  </span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span>  </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">tryDefer</span><span class="params">()</span></span>&#123;  </span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">100</span>; i++&#123;  </span><br><span class="line"><span class="keyword">defer</span> fmt.Println(i)  </span><br><span class="line"><span class="keyword">if</span> i == <span class="number">30</span> &#123;  </span><br><span class="line"><span class="built_in">panic</span>(<span class="string">"print end"</span>)  </span><br><span class="line">&#125;  </span><br><span class="line">&#125;   </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">tryDefer()  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>当i循环到30时，系统会从30倒序进行Println操作，最后打印“panic: print end”。  </p><h2 id="recover"><a href="#recover" class="headerlink" title="recover"></a>recover</h2><p>func recover() interface{}<br>recover用来捕获panic，阻止panic继续向上传递。recover()只有在defer后面的函数体内被直接调用才能捕获panic终止异常，否则返回nil，异常继续向外传递。<br><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">    fmt.Println(<span class="string">"function body"</span>)</span><br><span class="line">    <span class="built_in">recover</span>()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>记得主动在程序的中使用recover()拦截运行时错误。</p><h3 id="error"><a href="#error" class="headerlink" title="error"></a>error</h3><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Package errors implements functions to manipulate errors.  </span></span><br><span class="line"><span class="keyword">package</span> errors  </span><br><span class="line"></span><br><span class="line"><span class="comment">// New returns an error that formats as the given text.  </span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">New</span><span class="params">(text <span class="keyword">string</span>)</span> <span class="title">error</span></span> &#123;  </span><br><span class="line"><span class="keyword">return</span> &amp;errorString&#123;text&#125;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="comment">// errorString is a trivial implementation of error.  </span></span><br><span class="line"><span class="keyword">type</span> errorString <span class="keyword">struct</span> &#123;  </span><br><span class="line">s <span class="keyword">string</span>  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(e *errorString)</span> <span class="title">Error</span><span class="params">()</span> <span class="title">string</span></span> &#123;  </span><br><span class="line"><span class="keyword">return</span> e.s  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>error的底层实现非常简单，所以功能也比较弱，只能返回一个字符串。Golang 1.13中引入了一个新功能Error Wrapping。  </p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;panic和recover&quot;&gt;&lt;a href=&quot;#panic和recover&quot; class=&quot;headerlink&quot; title=&quot;panic和recover&quot;&gt;&lt;/a&gt;panic和recover&lt;/h3&gt;&lt;h2 id=&quot;panic&quot;&gt;&lt;a href=&quot;#pani
+      
+    
+    </summary>
+    
+    
+      <category term="Go" scheme="https://araid0628.github.io/tags/Go/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ubuntu服务器配置(tensorflow+cuda+cudnn+显卡驱动)</title>
+    <link href="https://araid0628.github.io/2019/07/26/gpu-server/"/>
+    <id>https://araid0628.github.io/2019/07/26/gpu-server/</id>
+    <published>2019-07-26T15:46:59.000Z</published>
+    <updated>2019-07-27T15:49:52.351Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h3><p>我们组有两台服务器一直在某个小房间里吃灰，光靠工作站里的两块1080Ti算力确实不够。某天和IT一起把线接好了可以启动了，但是一看开发环境还是两年多前的，各种软件版本都比较旧了。<br><img src="images/20190726235204.jpg" alt="GPU"><br>两块Tesla P100在里面积了不少灰，曾经想把他拆下来装在台式机上后来发现台式机电源不是全模组的根本没那个供电的接口，还是放回去吧。    </p><div class="table-container"><table><thead><tr><th>GPU</th><th>Compute Capability</th></tr></thead><tbody><tr><td>Tesla P100</td><td>6.0</td></tr><tr><td>GeForce GTX 1080 Ti</td><td>6.1</td></tr></tbody></table></div><p><center>Retrieved from https://developer.nvidia.com/cuda-gpus</center><br>三四万一张的P100计算能力怎么还没有1080Ti好使呢?这个计算能力应该只是在深度学习领域。Tesla系列的专业显卡相比Geforce显卡拥有更高的计算精度，对于航空航天、药物研发等领域提供双精度（FP64）进行更加精准的计算。Tesla的显存颗粒更贵，支持高精度计算不会在读写存储时出现误差。<br>建议立刻更新到Quadro RTX 8000或者Tesla T4（没funding）  </p><h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><h4 id="显卡驱动"><a href="#显卡驱动" class="headerlink" title="显卡驱动"></a>显卡驱动</h4><ol><li>禁用nouveau驱动<br>Ubuntu系统集成的显卡驱动程序是nouveau，我们需要先将nouveau从linux内核卸载掉才能安装NVIDIA官方驱动。我们的服务器是纯命令行，直接执行最后一步即可。<br>（1） 修改blacklist.conf 文件属性blacklist.conf<br>查看属性<br>•    ll /etc/modprobe.d/blacklist.conf<br>修改属性<br>•    sudo chmod 666 /etc/modprobe.d/blacklist.conf<br>用vi编辑器打开<br>•    sudo vi /etc/modprobe.d/blacklist.conf<br>•    在文件末尾添加如下几行：<br>blacklist vga16fb<br>blacklist nouveau<br>blacklist rivafb<br>blacklist rivatv<br>blacklist nvidiafb<br>（2）修改并保存文件后，记得把文件属性复原：<br>•    sudo chmod 644 /etc/modprobe.d/blacklist.conf<br>更新一下内核<br>•    sudo update-initramfs -u<br>修改后需要重启系统<br>•    reboot (重启)<br>重启系统确认nouveau是否已经被屏蔽掉，使用lsmod命令查看，lsmod命令用于显示已经加载到内核中的模块的状态信息<br>•    lsmod | grep nouveau<br>若已屏蔽没有任何信息  </li><li>手动安装驱动<br>提前载nvidia官网上下好了对应版本的驱动，直接用jupyter notebook传到服务器上就可以。<br>•    进入nvidia官网 <a href="https://www.geforce.cn/drivers" target="_blank" rel="noopener">https://www.geforce.cn/drivers</a><br>下载对应显卡的驱动程序，下载后的文件格式为run。<br>•    删除原有的NVIDIA驱动程序(若没有安装忽略)<br>•    sudo apt-get remove –purge nvidia*<br>•    进入命令行桌面<br>给驱动文件增加可执行权限<br>•    sudo chmod a+x NVIDIA-Linux-x86_64-418.74.run（cd到文件所在文件夹。）<br>安装<br>•    sudo sh ./NVIDIA-Linux-x86_64-418.74.run.run –no-opengl-files    </li><li>检查<br>输入nvidia-smi即可检查驱动是否安装成功。<br><img src="images/IMG_3714.PNG" alt="GPU"></li></ol><h4 id="安装CUDA"><a href="#安装CUDA" class="headerlink" title="安装CUDA"></a>安装CUDA</h4><ol><li>进入官网下载对应版本(<a href="https://developer.nvidia.com/cuda-downloads?target_os=Linux&amp;target_arch=x86_64&amp;target_distro=Ubuntu&amp;target_version=1804&amp;target_type=deblocal" target="_blank" rel="noopener">https://developer.nvidia.com/cuda-downloads?target_os=Linux&amp;target_arch=x86_64&amp;target_distro=Ubuntu&amp;target_version=1804&amp;target_type=deblocal</a>)<br>2.运行指令需要cd到包含该文件的文件夹目录下<br>根据官网提示指令安装即可<br>•    sudo dpkg -i  cuda-repo-ubuntu1804-10-1-local-10.1.168-418.67_1.0-1_amd64.deb<br>•    sudo apt-key add /var/cuda-repo-ubuntu1804-10-1-local-10.1.168/7fa2af80.pub<br>•    sudo apt-get update<br>•    sudo apt-get install cuda  </li></ol><h4 id="安装cuDnn"><a href="#安装cuDnn" class="headerlink" title="安装cuDnn"></a>安装cuDnn</h4><ol><li>进入官网注册并下载对应的cudnn版本。(<a href="https://developer.nvidia.com/rdp/cudnn-download" target="_blank" rel="noopener">https://developer.nvidia.com/rdp/cudnn-download</a>)</li><li>下载完成后解压文件<br>tar -zxvf cudnn-10.1-linux-x64-v7.5.1.10.tgz  </li><li>解压完成将相应的文件拷贝到对应的CUDA目录下即可（要cd到含cudnn文件的目录下）<br>• sudo cp cuda/include/cudnn.h /usr/local/cuda/include/<br>• sudo cp cuda/lib64/libcudnn<em> /usr/local/cuda/lib64/<br>• sudo chmod a+r /usr/local/cuda/include/cudnn.h<br>• sudo chmod a+r /usr/local/cuda/lib64/libcudnn</em>  </li><li>编辑环境变量<br>• sudo gedit ~/.bashrc<br>将cuda的环境变量加到打开的文件最后<br>• export LD_LIBRARY_PATH=”$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64”<br>• export CUDA_HOME=/usr/local/cuda<br>• export PATH=“CUDAHOME/bin:PATH”<br>保存后，终端输入<br>• source ~/.bashrc</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;服务器&quot;&gt;&lt;a href=&quot;#服务器&quot; class=&quot;headerlink&quot; title=&quot;服务器&quot;&gt;&lt;/a&gt;服务器&lt;/h3&gt;&lt;p&gt;我们组有两台服务器一直在某个小房间里吃灰，光靠工作站里的两块1080Ti算力确实不够。某天和IT一起把线接好了可以启动了，但是一看开
+      
+    
+    </summary>
+    
+    
+      <category term="深度学习" scheme="https://araid0628.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="配置" scheme="https://araid0628.github.io/tags/%E9%85%8D%E7%BD%AE/"/>
+    
+      <category term="Linux" scheme="https://araid0628.github.io/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SNKRS API变量解析</title>
+    <link href="https://araid0628.github.io/2019/07/14/nikeapi/"/>
+    <id>https://araid0628.github.io/2019/07/14/nikeapi/</id>
+    <published>2019-07-14T05:16:55.000Z</published>
+    <updated>2019-07-14T06:15:04.464Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>&emsp;&emsp;想做这个项目的原因是因为之前买的snkrs bot附带的Discord监控到期了，不能再提供各种球鞋上新监控。刚好有朋友在做球鞋定制和公众号，未来是希望把Discord和微信小程序集成在公众号下。第一步选择先做Discord端，考虑到Discord只要把后端和Discord Bot完成就行，刚好也能先熟悉一下Nike这个接口返回的各种信息。但是Discord因为某些原因被墙了，中国的开发者很少，花了很多时间研究国外开发者写的文档，进度还是比较理想的。希望暑假后能尽快开始微信小程序的开发，这才是重点！  </p><h3 id="SNKRS-API"><a href="#SNKRS-API" class="headerlink" title="SNKRS API"></a>SNKRS API</h3><p><a href="https://api.nike.com/snkrs/content/v1/?country=CN&amp;language=zh-Hans&amp;orderBy=lastUpdated&amp;offset=0" target="_blank" rel="noopener">https://api.nike.com/snkrs/content/v1/?country=CN&amp;language=zh-Hans&amp;orderBy=lastUpdated&amp;offset=0</a><br>URL其实比较容易拿到，用Wireshark对手机访问SNKRS APP时进行抓包操作就可以。当offset=0时，API会返回第1-50双球鞋的数据，offset=50时，API会返回第51-100双球鞋的数据，以此类推。通过totalRecords可以看到中国区SNKRS上一共有1468双球鞋。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">"country"</span>:<span class="string">"CN"</span>,<span class="string">"locale"</span>:<span class="string">"zh-Hans_CN"</span>,<span class="string">"channel"</span>:<span class="string">"snkrs"</span>,<span class="string">"totalRecords"</span>:<span class="number">1468</span>,<span class="string">"threads"</span>:[&#123;<span class="string">"id"</span>:<span class="string">"50307c93-04ef-4720-a5ba-d65f53595d5e"</span>,<span class="string">"threadId"</span>:<span class="string">"50307c93-04ef-4720-a5ba-d65f53595d5e"</span>,<span class="string">"interestId"</span>:<span class="string">"5c94b7ea-2a8a-3c70-97a1-e394f65c77f8"</span>,<span class="string">"name"</span>:<span class="string">"M2K Tekno"</span>,<span class="string">"lastUpdatedDate"</span>:<span class="string">"2019-07-14T04:30:25.997000"</span>,<span class="string">"lastUpdatedTime"</span>:<span class="string">"2019-07-14T04:30:25.997000"</span>,<span class="string">"publishedDate"</span>:<span class="string">"2019-06-11T02:02:43.000000"</span>,<span class="string">"restricted"</span>:false,<span class="string">"feed"</span>:<span class="string">"d879aa85-698c-41a1-b066-a8ecdf6b8a9c"</span>,<span class="string">"title"</span>:<span class="string">"Electric Volt"</span>,<span class="string">"subtitle"</span>:<span class="string">"M2K Tekno"</span>,<span class="string">"seoSlug"</span>:<span class="string">"m2k-tekno-electric-volt"</span>,<span class="string">"seoTitle"</span>:<span class="string">"Nike M2K Tekno 'Electric Volt' 发布日期"</span>,<span class="string">"seoDescription"</span>:<span class="string">"浏览并选购 Nike M2K Tekno 'Electric Volt'。抢先了解运动鞋发布新动态。"</span>,<span class="string">"tags"</span>:[<span class="string">"SPORTSWEAR"</span>,<span class="string">"M2K TEKNO GEL"</span>,<span class="string">"VOLT"</span>],<span class="string">"imageUrl"</span>:<span class="string">"https://c.static-nike.com/a/images/t_prod_ss/w_750,c_limit/itzc9whni67vdgvffry5/nike-m2k-tekno-electric-volt-release-date.jpg"</span>,<span class="string">"squareImageUrl"</span>:<span class="string">"https://c.static-nike.com/a/images/t_prod_ss/w_750,c_limit/itzc9whni67vdgvffry5/nike-m2k-tekno-electric-volt-release-date.jpg"</span>,<span class="string">"portraitImageUrl"</span>:<span class="string">"https://c.static-nike.com/a/images/t_prod_ps/w_750,c_limit/itzc9whni67vdgvffry5/nike-m2k-tekno-electric-volt-release-date.jpg"</span>,<span class="string">"relations"</span>:[&#123;<span class="string">"name"</span>:<span class="string">"RELATED"</span>,<span class="string">"threads"</span>:[<span class="string">"295a2e30-e337-4d16-a7dc-6ed37efdf6cb"</span>,<span class="string">"54b800b9-2457-4f2d-973e-0f77502cb19f"</span>]&#125;],<span class="string">"product"</span>:&#123;<span class="string">"id"</span>:<span class="string">"a13e8a5d-eed0-5a05-bac7-96913b8528eb"</span>,<span class="string">"interestId"</span>:<span class="string">"5c94b7ea-2a8a-3c70-97a1-e394f65c77f8"</span>,<span class="string">"style"</span>:<span class="string">"CI5749"</span>,<span class="string">"colorCode"</span>:<span class="string">"777"</span>,<span class="string">"globalPid"</span>:<span class="string">"12697014"</span>,<span class="string">"title"</span>:<span class="string">"Nike M2K Tekno"</span>,<span class="string">"subtitle"</span>:<span class="string">"男子运动鞋"</span>,<span class="string">"imageUrl"</span>:<span class="string">"https://secure-images.nike.com/is/image/DotCom/CI5749_777"</span>,<span class="string">"genders"</span>:[<span class="string">"MEN"</span>],<span class="string">"quantityLimit"</span>:<span class="number">10</span>,<span class="string">"merchStatus"</span>:<span class="string">"ACTIVE"</span>,<span class="string">"colorDescription"</span>:<span class="string">"荧光黄/荧光黄/荧光黄"</span>,<span class="string">"available"</span>:true,<span class="string">"publishType"</span>:<span class="string">"FLOW"</span>,<span class="string">"productType"</span>:<span class="string">"FOOTWEAR"</span>,<span class="string">"upcoming"</span>:true,<span class="string">"price"</span>:&#123;<span class="string">"msrp"</span>:<span class="number">799</span>,<span class="string">"fullRetailPrice"</span>:<span class="number">799</span>,<span class="string">"currentRetailPrice"</span>:<span class="number">799</span>,<span class="string">"onSale"</span>:false&#125;,<span class="string">"startSellDate"</span>:<span class="string">"2019-06-12T01:00:00.000000"</span>,<span class="string">"skus"</span>:[&#123;<span class="string">"id"</span>:<span class="string">"af4e2d70-66b7-5b8f-b1cd-6f25118412ec"</span>,<span class="string">"localizedSize"</span>:<span class="string">"38.5"</span>,<span class="string">"localizedSizePrefix"</span>:null,<span class="string">"nikeSize"</span>:<span class="string">"6"</span>,<span class="string">"available"</span>:false&#125;,&#123;<span class="string">"id"</span>:<span class="string">"a6198452-cea8-52b1-b4e8-9b7330ce1738"</span>,<span class="string">"localizedSize"</span>:<span class="string">"39"</span>,<span class="string">"localizedSizePrefix"</span>:null,<span class="string">"nikeSize"</span>:<span class="string">"6.5"</span>,<span class="string">"available"</span>:false&#125;,&#123;<span class="string">"id"</span>:<span class="string">"0ffd3b93-6f33-56c4-9150-e8399d48a925"</span>,<span class="string">"localizedSize"</span>:<span class="string">"40"</span>,<span class="string">"localizedSizePrefix"</span>:null,<span class="string">"nikeSize"</span>:<span class="string">"7"</span>,<span class="string">"available"</span>:true&#125;,&#123;<span class="string">"id"</span>:<span class="string">"2288c661-37d8-58d2-9420-073e84d94d42"</span>,<span class="string">"localizedSize"</span>:<span class="string">"40.5"</span>,<span class="string">"localizedSizePrefix"</span>:null,<span class="string">"nikeSize"</span>:<span class="string">"7.5"</span>,<span class="string">"available"</span>:true&#125;,&#123;<span class="string">"id"</span>:<span class="string">"61a76fb0-9f4b-5415-831d-79a7d95aacd0"</span>,<span class="string">"localizedSize"</span>:<span class="string">"41"</span>,<span class="string">"localizedSizePrefix"</span>:null,<span class="string">"nikeSize"</span>:<span class="string">"8"</span>,<span class="string">"available"</span>:true&#125;,&#123;<span class="string">"id"</span>:<span class="string">"ce9e61be-1a77-5612-9da5-d3d7c7e1b474"</span>,<span class="string">"localizedSize"</span>:<span class="string">"42"</span>,<span class="string">"localizedSizePrefix"</span>:null,<span class="string">"nikeSize"</span>:<span class="string">"8.5"</span>,<span class="string">"available"</span>:false&#125;,&#123;<span class="string">"id"</span>:<span class="string">"05d73ea3-ba82-5d5e-8272-c3c855f4eee0"</span>,<span class="string">"localizedSize"</span>:<span class="string">"42.5"</span>,<span class="string">"localizedSizePrefix"</span>:null,<span class="string">"nikeSize"</span>:<span class="string">"9"</span>,<span class="string">"available"</span>:true&#125;,&#123;<span class="string">"id"</span>:<span class="string">"d14e0a6b-2e5a-5950-a616-19354ae727d0"</span>,<span class="string">"localizedSize"</span>:<span class="string">"43"</span>,<span class="string">"localizedSizePrefix"</span>:null,<span class="string">"nikeSize"</span>:<span class="string">"9.5"</span>,<span class="string">"available"</span>:true&#125;,&#123;<span class="string">"id"</span>:<span class="string">"509c830c-d527-5836-9047-998a504e044e"</span>,<span class="string">"localizedSize"</span>:<span class="string">"44"</span>,<span class="string">"localizedSizePrefix"</span>:null,<span class="string">"nikeSize"</span>:<span class="string">"10"</span>,<span class="string">"available"</span>:true&#125;,&#123;<span class="string">"id"</span>:<span class="string">"1949e1fb-c5d5-503b-9d57-13a1b4722c10"</span>,<span class="string">"localizedSize"</span>:<span class="string">"44.5"</span>,<span class="string">"localizedSizePrefix"</span>:null,<span class="string">"nikeSize"</span>:<span class="string">"10.5"</span>,<span class="string">"available"</span>:true&#125;,&#123;<span class="string">"id"</span>:<span class="string">"d47d9cf2-08d7-5d8a-8621-924fae3bc22a"</span>,<span class="string">"localizedSize"</span>:<span class="string">"45"</span>,<span class="string">"localizedSizePrefix"</span>:null,<span class="string">"nikeSize"</span>:<span class="string">"11"</span>,<span class="string">"available"</span>:true&#125;,&#123;<span class="string">"id"</span>:<span class="string">"9f7ddf99-b7b8-5768-9311-7aed805526e9"</span>,<span class="string">"localizedSize"</span>:<span class="string">"46"</span>,<span class="string">"localizedSizePrefix"</span>:null,<span class="string">"nikeSize"</span>:<span class="string">"12"</span>,<span class="string">"available"</span>:true&#125;,&#123;<span class="string">"id"</span>:<span class="string">"9ea19342-cf46-50cd-a9f9-5dcbb45cd2fa"</span>,<span class="string">"localizedSize"</span>:<span class="string">"47.5"</span>,<span class="string">"localizedSizePrefix"</span>:null,<span class="string">"nikeSize"</span>:<span class="string">"13"</span>,<span class="string">"available"</span>:false&#125;],<span class="string">"expireDate"</span>:<span class="string">"3000-01-01T20:00:00.000000"</span>&#125;</span><br></pre></td></tr></table></figure></p><h3 id="变量解析"><a href="#变量解析" class="headerlink" title="变量解析"></a>变量解析</h3><p>country: CN 中国区<br>totalRecords: 1468 SNKRS APP中记录总量<br>threads: 球鞋的所有信息，一个很长的list，中间存储的是dict。<br>以第一双鞋为例：<br><img src="images/IMG_3569.PNG" alt="Fig.1AJ13"><br>是一双AJ13，这双鞋在threads中的dict中有一些重要的信息：  </p><ol><li>id<br>API中标记一双球鞋的编号，主键   </li><li>name<br>球鞋名称  </li><li>restricted<br>是否受限，有些新球鞋是锁住的  </li><li>imageUrl<br>球鞋图片，Discord中推送会用到  </li><li>selectionEngine<br>LEO和DAN，2分钟和15分钟抽签模式，现在已经没有先到先得的FLOW模式了  </li><li>skus<br>尺码  </li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h3&gt;&lt;p&gt;&amp;emsp;&amp;emsp;想做这个项目的原因是因为之前买的snkrs bot附带的Discord监控到期了，不能再提供各种球鞋上新监控。刚好有
+      
+    
+    </summary>
+    
+      <category term="SnkrsMonitor" scheme="https://araid0628.github.io/categories/SnkrsMonitor/"/>
+    
+    
+      <category term="JSON" scheme="https://araid0628.github.io/tags/JSON/"/>
+    
+      <category term="爬虫" scheme="https://araid0628.github.io/tags/%E7%88%AC%E8%99%AB/"/>
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
@@ -31,6 +206,443 @@
       
         &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
       
+    
+    </summary>
+    
+      <category term="杂谈" scheme="https://araid0628.github.io/categories/%E6%9D%82%E8%B0%88/"/>
+    
+    
+      <category term="杂谈" scheme="https://araid0628.github.io/tags/%E6%9D%82%E8%B0%88/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>一个面试问题（字节跳动）</title>
+    <link href="https://araid0628.github.io/2019/04/14/interview1/"/>
+    <id>https://araid0628.github.io/2019/04/14/interview1/</id>
+    <published>2019-04-14T04:43:35.000Z</published>
+    <updated>2019-04-14T06:45:43.411Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>如果现在有十三个特征，把其中一个特征复制了再加进去变成第十四个特征，对权重有什么影响？</p><h3 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h3><p>面试结束忘记问答案了，自己做了个实验看不出任何规律。<br>在Dataframe中复制一列已有的特征<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data_train[<span class="string">'ByteDance'</span>] = data_train[<span class="string">'avgprice'</span>]</span><br></pre></td></tr></table></figure></p><p><img src="images/int1.png" alt="结果1"><br>画出特征权重直方图<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xgb.plot_importance(model)</span><br></pre></td></tr></table></figure></p><p><img src="images/int2.png" alt="结果2"></p><script type="math/tex; mode=display">f_{12} = 625, f_{13} = 132</script><p><img src="images/int3.png" alt="结果3"></p><script type="math/tex; mode=display">f_{12} = 643</script><script type="math/tex; mode=display">\widehat{f_{12}} < f_{12}+f_{13}</script><p>？？？</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;问题&quot;&gt;&lt;a href=&quot;#问题&quot; class=&quot;headerlink&quot; title=&quot;问题&quot;&gt;&lt;/a&gt;问题&lt;/h3&gt;&lt;p&gt;如果现在有十三个特征，把其中一个特征复制了再加进去变成第十四个特征，对权重有什么影响？&lt;/p&gt;
+&lt;h3 id=&quot;实验&quot;&gt;&lt;a href=&quot;#
+      
+    
+    </summary>
+    
+    
+      <category term="机器学习" scheme="https://araid0628.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="面试" scheme="https://araid0628.github.io/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Introduction to XGboost</title>
+    <link href="https://araid0628.github.io/2019/04/11/xgboostppt/"/>
+    <id>https://araid0628.github.io/2019/04/11/xgboostppt/</id>
+    <published>2019-04-11T13:11:22.000Z</published>
+    <updated>2019-04-11T13:29:01.817Z</updated>
+    
+    <content type="html"><![CDATA[<p>实习的时候主管布置的任务：<br>Pls. help to prepare some material to us a training in your area.</p><ol><li>AI in picture recognition.</li><li>Model algorithm use case in different area.<br>至今还没机会讲，就当帮自己从底层梳理了一遍XGboost原理。<div class="row">    <embed src="images/quickstart.pdf" width="100%" height="550" type="application/pdf"></div></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;实习的时候主管布置的任务：&lt;br&gt;Pls. help to prepare some material to us a training in your area.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;AI in picture recognition.&lt;/li&gt;
+&lt;li&gt;Model
+      
+    
+    </summary>
+    
+    
+      <category term="机器学习" scheme="https://araid0628.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="xgboost" scheme="https://araid0628.github.io/tags/xgboost/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>项目实训-利用LSTM进行房价走势预测</title>
+    <link href="https://araid0628.github.io/2019/04/10/lstm/"/>
+    <id>https://araid0628.github.io/2019/04/10/lstm/</id>
+    <published>2019-04-10T02:23:43.000Z</published>
+    <updated>2019-04-11T13:10:46.859Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="LSTM网络"><a href="#LSTM网络" class="headerlink" title="LSTM网络"></a>LSTM网络</h3><p>Long short-term memory，即LSTM。在传统的RNN中，所有的RNN都具有一种重复神经网络模块的链接形式，例如一个tanh层。<br><img src="images/rnn1.jpg" alt="Fig1.RNN"><br>LSTM的重复模块有一个不同的结构。<br><img src="images/lstm1.jpg" alt="Fig2.LSTM"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;LSTM网络&quot;&gt;&lt;a href=&quot;#LSTM网络&quot; class=&quot;headerlink&quot; title=&quot;LSTM网络&quot;&gt;&lt;/a&gt;LSTM网络&lt;/h3&gt;&lt;p&gt;Long short-term memory，即LSTM。在传统的RNN中，所有的RNN都具有一种重复神经网
+      
+    
+    </summary>
+    
+    
+      <category term="深度学习" scheme="https://araid0628.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="项目实训" scheme="https://araid0628.github.io/tags/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
+    
+      <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
+    
+      <category term="LSTM" scheme="https://araid0628.github.io/tags/LSTM/"/>
+    
+      <category term="RNN" scheme="https://araid0628.github.io/tags/RNN/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>机器学习知识点总结</title>
+    <link href="https://araid0628.github.io/2019/04/03/Introduction/"/>
+    <id>https://araid0628.github.io/2019/04/03/Introduction/</id>
+    <published>2019-04-03T14:08:47.000Z</published>
+    <updated>2019-04-10T02:37:21.674Z</updated>
+    
+    <content type="html"><![CDATA[<p><center>机器学习知识点总结</center><br>整理了一些机器学习的知识点，在公司用TexStudio写的，持续更新中。<br>如果pdf无法显示请打开Google Drive的<a href="https://drive.google.com/file/d/1_jf56rfrX1LpQks8DNC1e4gpfHIIpyly/view?usp=sharing" title="With a Title" target="_blank" rel="noopener">分享链接</a>。</p><div class="row">    <embed src="images/main.pdf" width="100%" height="550" type="application/pdf"></div> ]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;center&gt;机器学习知识点总结&lt;/center&gt;&lt;br&gt;整理了一些机器学习的知识点，在公司用TexStudio写的，持续更新中。&lt;br&gt;如果pdf无法显示请打开Google Drive的&lt;a href=&quot;https://drive.google.com/file/d/1
+      
+    
+    </summary>
+    
+    
+      <category term="机器学习" scheme="https://araid0628.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>项目实训-利用XGboost进行新楼盘价格预测</title>
+    <link href="https://araid0628.github.io/2019/03/23/xgboost/"/>
+    <id>https://araid0628.github.io/2019/03/23/xgboost/</id>
+    <published>2019-03-23T10:41:24.000Z</published>
+    <updated>2019-04-08T13:16:27.616Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>本来这个需求不在列表中，受到Kaggle比赛：Kaggle Boston Housing(<a href="https://www.kaggle.com/c/boston-housing)的启发，加入了这个功能。因为数据全部靠自己收集，特征也远不如比赛中的数据集多，最终预测的效果我觉得虽然误差比较大，但是也有一定的参考价值。" target="_blank" rel="noopener">https://www.kaggle.com/c/boston-housing)的启发，加入了这个功能。因为数据全部靠自己收集，特征也远不如比赛中的数据集多，最终预测的效果我觉得虽然误差比较大，但是也有一定的参考价值。</a></p><h3 id="数据清洗和特征工程"><a href="#数据清洗和特征工程" class="headerlink" title="数据清洗和特征工程"></a>数据清洗和特征工程</h3><p>从数据库中抽取了一部分好量化的上海市数据作为基本信息，<br><img src="images/xgboost1.png" alt="Fig.1原始数据">在此基础之上，引入了该楼盘周边1km范围内地铁站数量、医院数量、学校数量、商场数量（数据来自百度API，可以参见另一篇blog）和该楼盘所在区域的区域均价。<br>从Figure1中可以看到从某壳网上爬取下来的数据中包含很多汉字、符号，还有缺失值需要填补，另外还有格式不统一的情况，所以在数据清洗上花了很多时间。对数据中的字符型数据转换：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数据预处理，填充缺失值以及特征中含有字符的转换为数值型</span></span><br><span class="line"><span class="comment"># "price","propertyType","landscapingRatio","siteArea","floorAreaRatio","buildingArea","yearofpropertyRights",</span></span><br><span class="line"><span class="comment"># "numPlan","parkingRatio","propertycosts","parkingSpace","hospital","metro","school","mall","id"</span></span><br><span class="line"><span class="comment"># 住宅：1 写字楼：2 别墅：3 商业：4</span></span><br><span class="line">train.loc[train[<span class="string">"propertyType"</span>] == <span class="string">"住宅"</span>, <span class="string">"propertyType"</span>] = <span class="number">1</span></span><br><span class="line">train.loc[train[<span class="string">"propertyType"</span>] == <span class="string">"写字楼"</span>, <span class="string">"propertyType"</span>] = <span class="number">2</span></span><br><span class="line">train.loc[train[<span class="string">"propertyType"</span>] == <span class="string">"别墅"</span>, <span class="string">"propertyType"</span>] = <span class="number">3</span></span><br><span class="line">train.loc[train[<span class="string">"propertyType"</span>] == <span class="string">"商业"</span>, <span class="string">"propertyType"</span>] = <span class="number">4</span></span><br></pre></td></tr></table></figure></p><p>对部分特征统一数据格式后，缺失值用均值进行填补：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">train[<span class="string">'landscapingRatio'</span>] = train[<span class="string">'landscapingRatio'</span>].fillna(train.groupby(<span class="string">'propertyType'</span>)[<span class="string">'landscapingRatio'</span>].transform(<span class="string">'mean'</span>))</span><br><span class="line">train[<span class="string">'siteArea'</span>] = train[<span class="string">'siteArea'</span>].fillna(train.groupby(<span class="string">'propertyType'</span>)[<span class="string">'siteArea'</span>].transform(<span class="string">'mean'</span>))</span><br><span class="line">train[<span class="string">'floorAreaRatio'</span>] = train[<span class="string">'floorAreaRatio'</span>].fillna(train.groupby(<span class="string">'propertyType'</span>)[<span class="string">'floorAreaRatio'</span>].transform(<span class="string">'mean'</span>))</span><br><span class="line">train[<span class="string">'buildingArea'</span>] = train[<span class="string">'buildingArea'</span>].fillna(train.groupby(<span class="string">'propertyType'</span>)[<span class="string">'buildingArea'</span>].transform(<span class="string">'mean'</span>))</span><br><span class="line">train = train.fillna(<span class="number">0</span>)</span><br><span class="line">train[<span class="string">'yearofpropertyRights'</span>] = train[<span class="string">'yearofpropertyRights'</span>].astype(float)</span><br><span class="line">train[<span class="string">'numPlan'</span>] = train[<span class="string">'numPlan'</span>].astype(int)</span><br><span class="line">train[<span class="string">'parkingRatio'</span>] = train[<span class="string">'parkingRatio'</span>].astype(float)</span><br><span class="line">train[<span class="string">'propertycosts'</span>] = train[<span class="string">'propertycosts'</span>].astype(float)</span><br><span class="line">train[<span class="string">'parkingSpace'</span>] = train[<span class="string">'parkingSpace'</span>].astype(int)</span><br><span class="line">train[<span class="string">'yearofpropertyRights'</span>] = train[<span class="string">'yearofpropertyRights'</span>].fillna(train.groupby(<span class="string">'propertyType'</span>)[<span class="string">'yearofpropertyRights'</span>].transform(<span class="string">'mean'</span>))</span><br><span class="line">train[<span class="string">'numPlan'</span>] = train[<span class="string">'numPlan'</span>].fillna(train.groupby(<span class="string">'propertyType'</span>)[<span class="string">'numPlan'</span>].transform(<span class="string">'mean'</span>))</span><br><span class="line">train[<span class="string">'parkingRatio'</span>] = train[<span class="string">'parkingRatio'</span>].fillna(train.groupby(<span class="string">'propertyType'</span>)[<span class="string">'parkingRatio'</span>].transform(<span class="string">'mean'</span>))</span><br><span class="line">train[<span class="string">'propertycosts'</span>] = train[<span class="string">'propertycosts'</span>].fillna(train.groupby(<span class="string">'propertyType'</span>)[<span class="string">'propertycosts'</span>].transform(<span class="string">'mean'</span>))</span><br><span class="line">train[<span class="string">'parkingSpace'</span>] = train[<span class="string">'parkingSpace'</span>].fillna(train.groupby(<span class="string">'propertyType'</span>)[<span class="string">'parkingSpace'</span>].transform(<span class="string">'mean'</span>))</span><br></pre></td></tr></table></figure></p><p><img src="images/xgboost2.png" alt="Fig.1清洗完成"></p><h3 id="XGboost简介"><a href="#XGboost简介" class="headerlink" title="XGboost简介"></a>XGboost简介</h3><p>后期会把在公司做的seminar的ppt放上来</p><h3 id="建模"><a href="#建模" class="headerlink" title="建模"></a>建模</h3><p>Step 1<br>读取数据集，为了增强模型的泛化能力，筛掉了单价超过50000元/平方米的数据，实验结果证明效果对二三线城市的预测效果比较好，但在像上海、北京这样房价过高的城市表现一般。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">dataset_train = <span class="string">'house_trainset2.csv'</span></span><br><span class="line">data_train = pd.read_csv(dataset_train)</span><br><span class="line">data_train = data_train[data_train[<span class="string">'price'</span>] &lt;= <span class="number">49999</span>]</span><br><span class="line">scaler = MinMaxScaler(feature_range=(<span class="number">0</span>, <span class="number">1</span>))</span><br><span class="line">pd.set_option(<span class="string">'display.width'</span>, <span class="keyword">None</span>)</span><br><span class="line">X = data_train.drop([<span class="string">'id'</span>, <span class="string">'price'</span>, <span class="string">'Unnamed: 0'</span>, <span class="string">'numPlan'</span>], axis=<span class="number">1</span>)</span><br><span class="line">X = scaler.fit_transform(X)</span><br><span class="line">y = data_train.price</span><br></pre></td></tr></table></figure></p><p>随机拆分训练集和测试集后，fit到模型中，模型的参数调整用了Sklearn中的GridSearchCV,它存在的意义就是自动调参，只要把参数输进去，就能给出最优化的结果和参数。但是这个方法适合于小数据集，一旦数据的量级上去了，很难得出结果。数据量比较大的时候可以使用一个快速调优的方法——坐标下降。它其实是一种贪心算法：拿当前对模型影响最大的参数调优，直到最优化；再拿下一个影响最大的参数调优，如此下去，直到所有的参数调整完毕。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">0.3</span>, random_state=<span class="number">123</span>)</span><br><span class="line">cv_params = &#123;<span class="string">'n_estimators'</span>: [<span class="number">400</span>, <span class="number">500</span>, <span class="number">600</span>, <span class="number">700</span>, <span class="number">800</span>]&#125;</span><br><span class="line">other_params = &#123;<span class="string">'learning_rate'</span>: <span class="number">0.1</span>, <span class="string">'n_estimators'</span>: <span class="number">400</span>, <span class="string">'max_depth'</span>: <span class="number">5</span>, <span class="string">'min_child_weight'</span>: <span class="number">1</span>, <span class="string">'seed'</span>: <span class="number">0</span>, <span class="string">'subsample'</span>: <span class="number">0.8</span>, <span class="string">'colsample_bytree'</span>: <span class="number">0.8</span>, <span class="string">'gamma'</span>: <span class="number">0</span>, <span class="string">'reg_alpha'</span>: <span class="number">0</span>, <span class="string">'reg_lambda'</span>: <span class="number">1</span>&#125;</span><br><span class="line">optimized_GBM = GridSearchCV(estimator=model, param_grid=cv_params, scoring=<span class="string">'r2'</span>, cv=<span class="number">5</span>, verbose=<span class="number">1</span>, n_jobs=<span class="number">5</span>)</span><br><span class="line">optimized_GBM.fit(X_train, y_train)</span><br><span class="line">evalute_result = optimized_GBM.grid_scores_</span><br><span class="line">print(<span class="string">'每轮迭代运行结果:&#123;0&#125;'</span>.format(evalute_result))</span><br><span class="line">print(<span class="string">'参数的最佳取值：&#123;0&#125;'</span>.format(optimized_GBM.best_params_))</span><br><span class="line">print(<span class="string">'最佳模型得分:&#123;0&#125;'</span>.format(optimized_GBM.best_score_))</span><br><span class="line">print(xg_reg.feature_importances_)</span><br></pre></td></tr></table></figure></p><h3 id="预测结果"><a href="#预测结果" class="headerlink" title="预测结果"></a>预测结果</h3><p><img src="images/xgb.png" alt="结果1"><br><img src="images/web.png" alt="结果2"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;本来这个需求不在列表中，受到Kaggle比赛：Kaggle Boston Housing(&lt;a href=&quot;https://www.kagg
+      
+    
+    </summary>
+    
+    
+      <category term="机器学习" scheme="https://araid0628.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="项目实训" scheme="https://araid0628.github.io/tags/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
+    
+      <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
+    
+      <category term="XGboost" scheme="https://araid0628.github.io/tags/XGboost/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>项目实训-第二周总结</title>
+    <link href="https://araid0628.github.io/2019/03/11/week2/"/>
+    <id>https://araid0628.github.io/2019/03/11/week2/</id>
+    <published>2019-03-11T13:40:06.000Z</published>
+    <updated>2019-03-23T11:02:01.433Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>第二周结束项目的大部分简单需求已经实现，超过了预期的速度。两个组员在隔壁新国大实习，我周五也要去Bosch实习了，下周要加快进度。</p><h3 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h3><p>网站的定位是面向购买新房的投资者或者有住房提升需求的买房者的功能性网站，数据分析＞房源展示。</p><h3 id="已完成的需求"><a href="#已完成的需求" class="headerlink" title="已完成的需求"></a>已完成的需求</h3><ol><li>按用户输入城市名称，爬取和显示城市不同小区，不同区域的房价，并用柱状图显示<br><img src="images/week2_1.png" alt="Fig.1显示">看了周一的模拟产品发布以后，发现隔壁组的UI做的很好看，扁平化设计，准备在产品功能实现后再调整。</li><li>按年份，月份，显示和分析某区域房价走向和趋势<br><img src="images/week2_2.png" alt="Fig.2图表1">收集到的数据的粒度到月，住建局有到天的成交数据，但是很多特征都没有就没有采集。<br><img src="images/week2_3.png" alt="Fig.3图表2">ECharts确实很好用，提供了一些直观、易用的交互方式以方便对所展现数据的再加工。<h3 id="待完成的需求"><a href="#待完成的需求" class="headerlink" title="待完成的需求"></a>待完成的需求</h3>预测模型的训练已经完成，为了不和其他组撞车，准备加入两个预测模块。<br>1.新楼盘开盘价预测（博文会在第三周整理后发布）<br>输入：用户输入新楼盘的一些信息，城市+小区名称（在后台调用百度地图API返回小区周边信息数据）、绿化率、容积率、车位比等数据<br>输出：该新楼盘的开盘价格<br><img src="images/Figure_2.png" alt="Fig.4预测1">(基于XgBoost)图中的蓝色点是训练集中上海新楼盘的真实信息，但是训练的结果和Kaggle中波士顿房价预测那题的结果相差甚远，我想有几个原因：第一是上海主城区房价过高，但是新楼盘少，新城区房价较低，新楼盘多，这些离群点让模型产生了较大误差；第二，Kaggle比赛的数据集很全，虽然说有缺失值和部分错误值，但是用Pandas完全可以解决这些小错误，我们这次预测的数据集60%来自链家，40%是自己收集的，在专业性上相差较多，导致没有比赛数据集所呈现的统计规律。<br>2.房价走势预测（博文会在第三周整理后发布）<br>输入：数据库中某城市粒度位月的历史房价<br>输出：未来一个月的房价趋势<br><img src="images/Figure_1.png" alt="Fig.5预测2">（基于LSTM）</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;第二周结束项目的大部分简单需求已经实现，超过了预期的速度。两个组员在隔壁新国大实习，我周五也要去Bosch实习了，下周要加快进度。&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+      <category term="项目实训" scheme="https://araid0628.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
+    
+    
+      <category term="项目实训" scheme="https://araid0628.github.io/tags/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Pandas处理数据时replace方法失效</title>
+    <link href="https://araid0628.github.io/2019/03/05/week123/"/>
+    <id>https://araid0628.github.io/2019/03/05/week123/</id>
+    <published>2019-03-05T13:04:48.000Z</published>
+    <updated>2019-03-05T13:24:28.002Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="BUG复现"><a href="#BUG复现" class="headerlink" title="BUG复现"></a>BUG复现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train.replace(<span class="string">'%'</span>, <span class="string">''</span>, inplace=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure><p>使用replace函数的目的是：在清洗房价数据时替换掉不需要的单位，如“%”，“元/m²/月”等。但在使用函数时发现无法生效，查了网上相关信息后试了多种方法也无法解决这个问题，如先取列之后再进行replace。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train[<span class="string">"landscapingRatio"</span>].replace(<span class="string">'%'</span>, <span class="string">''</span>, inplace=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure></p><h3 id="原因推测"><a href="#原因推测" class="headerlink" title="原因推测"></a>原因推测</h3><p>dataframe中每个列中值的dtypes不同，导致无法replace。</p><h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>使用map()和lambda函数<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train[<span class="string">"landscapingRatio"</span>] = train[<span class="string">"landscapingRatio"</span>].map(<span class="keyword">lambda</span> x: x.replace(<span class="string">'%'</span>, <span class="string">''</span>))</span><br></pre></td></tr></table></figure></p><p>map() 会根据提供的函数对指定序列做映射。<br>第一个参数 function 以参数序列中的每一个元素调用 function 函数，返回包含每次 function 函数返回值的新列表。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;BUG复现&quot;&gt;&lt;a href=&quot;#BUG复现&quot; class=&quot;headerlink&quot; title=&quot;BUG复现&quot;&gt;&lt;/a&gt;BUG复现&lt;/h3&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter
+      
+    
+    </summary>
+    
+      <category term="项目实训" scheme="https://araid0628.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
+    
+    
+      <category term="房价预测" scheme="https://araid0628.github.io/tags/%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B/"/>
+    
+      <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
+    
+      <category term="Pandas" scheme="https://araid0628.github.io/tags/Pandas/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>项目实训第一周总结</title>
+    <link href="https://araid0628.github.io/2019/03/03/housepricingweek1/"/>
+    <id>https://araid0628.github.io/2019/03/03/housepricingweek1/</id>
+    <published>2019-03-03T13:22:38.000Z</published>
+    <updated>2019-03-12T14:29:37.644Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>寒假前已经定好了这次项目实训的题目，放假的时候群里关于房价数据爬虫的讨论随着一句“过完年再说”戛然而止，然而第一周已经结束了才空出时间来写总结。</p><h3 id="项目需求"><a href="#项目需求" class="headerlink" title="项目需求"></a>项目需求</h3><p>城市房价分析系统<br>技术类别：<br>Web，网络爬虫，数据分析<br>基本功能：<br>通过爬取链家网，我爱我家等中介机构，以及城市建设局网站数据，实现对指定城市的房价进行排序和分析，并结合一定规律进行预测<br>难易程度：中等<br>需求实现：</p><ol><li>按用户输入城市名称，爬取和显示城市不同小区，不同区域的房价，并用柱状图显示</li><li>按年份，月份，显示和分析某区域房价走向和趋势</li><li>对比相同价格下不同城市的房产品牌</li><li>对比不同城市房价走向，并进行归类分析</li><li>实现房价波动的简单预测</li></ol><h3 id="需求理解"><a href="#需求理解" class="headerlink" title="需求理解"></a>需求理解</h3><p>1.项目是什么？<br>一个Web，可以向用户展示粒度从市—行政区—具体楼盘的统计数据，可以根据用户提供的新楼盘数据做预测。<br>2.项目怎么做？<br>Java Web(Spring bot, vue.js, Echarts)<br>Python(bs4, sklearn, pandas等)<br>MySQL<br>百度API（POI相关信息获取）<br>预测模型XgBoost + LR/DT, 是否采用Deep Learning视项目进度决定</p><h3 id="开发模式"><a href="#开发模式" class="headerlink" title="开发模式"></a>开发模式</h3><p>Scrum敏捷开发模式，lm担任产品经理，ltz担任技术主管，我是master。作为master在项目中要负责管理上的事务很多，经理日报，进度控制，每日组会，团建等等，对人际沟通能力是个很好的提升。组员都很自觉，分工我和lm负责数据和预测部分，另外三位负责Web。</p><h3 id="第一周进度"><a href="#第一周进度" class="headerlink" title="第一周进度"></a>第一周进度</h3><ol><li>数据部分：爬虫完成，爬取了某壳网上一线城市和二线城市的数据</li><li>Web部分：通过百度地图的控件可以在地图上显示城市和行政区的统计数据，校对经纬度花了挺久。</li><li>预测部分：数据清洗中，第二周预测模块应该能实现。</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;寒假前已经定好了这次项目实训的题目，放假的时候群里关于房价数据爬虫的讨论随着一句“过完年再说”戛然而止，然而第一周已经结束了才空出时间来写总
+      
+    
+    </summary>
+    
+      <category term="项目实训" scheme="https://araid0628.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
+    
+    
+      <category term="房价预测" scheme="https://araid0628.github.io/tags/%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>百度地图API解析</title>
+    <link href="https://araid0628.github.io/2019/02/28/baiduAPI/"/>
+    <id>https://araid0628.github.io/2019/02/28/baiduAPI/</id>
+    <published>2019-02-28T13:46:30.000Z</published>
+    <updated>2019-03-23T11:59:52.504Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="功能简介"><a href="#功能简介" class="headerlink" title="功能简介"></a>功能简介</h3><p>百度地图Web服务API为开发者提供http/https接口，即开发者通过http/https形式发起检索请求，获取返回json或xml格式的检索数据。用户可以基于此开发JavaScript、C#、C++、Java等语言的地图应用。<br><a href="http://lbsyun.baidu.com/index.php?title=webapi" target="_blank" rel="noopener">http://lbsyun.baidu.com/index.php?title=webapi</a><br>文档非常全面，可以获得很多信息，包括经纬度，经纬度周边任意距离任意类型场所信息，如医院、地铁站等，为预测做准备。<br>以正/逆地理编码服务为例。</p><h3 id="Python如何解析API返回的json"><a href="#Python如何解析API返回的json" class="headerlink" title="Python如何解析API返回的json"></a>Python如何解析API返回的json</h3><p>所用到的库<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">from</span> urllib.request <span class="keyword">import</span> urlopen, quote</span><br></pre></td></tr></table></figure></p><h3 id="获得API传回的json信息"><a href="#获得API传回的json信息" class="headerlink" title="获得API传回的json信息"></a>获得API传回的json信息</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">showLocation&amp;&amp;showLocation(&#123;"status":0,"result":&#123;"location":&#123;"lng":120.75204667293927,"lat":31.27628928466111&#125;,"precise":1,"confidence":80,"comprehension":100,"level":"道路"&#125;&#125;)</span><br></pre></td></tr></table></figure><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getlnglat</span><span class="params">(address)</span>:</span></span><br><span class="line">    url = <span class="string">'http://api.map.baidu.com/geocoder/v2/'</span></span><br><span class="line">    output = <span class="string">'json'</span></span><br><span class="line">    ak = <span class="string">'你的密钥'</span></span><br><span class="line">    add = quote(address) <span class="comment"># 由于本文城市变量为中文，为防止乱码，先用quote进行编码</span></span><br><span class="line">    uri = url + <span class="string">'?'</span> + <span class="string">'address='</span> + add  + <span class="string">'&amp;output='</span> + output + <span class="string">'&amp;ak='</span> + ak</span><br><span class="line">    print(uri)</span><br><span class="line">    req = urlopen(uri)</span><br><span class="line">    res = req.read().decode() <span class="comment"># 将其他编码的字符串解码成unicode</span></span><br><span class="line">    responseInfo = json.loads(res) <span class="comment"># 对json数据进行解析</span></span><br><span class="line">    <span class="keyword">return</span> responseInfo</span><br></pre></td></tr></table></figure><h3 id="取得所需的信息"><a href="#取得所需的信息" class="headerlink" title="取得所需的信息"></a>取得所需的信息</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">add = <span class="string">"江苏省苏州市苏州工业园区林泉街399号东南大学软件学院"</span>  <span class="comment"># 你所要查询的地址</span></span><br><span class="line">lat = getlnglat(add)[<span class="string">'result'</span>][<span class="string">'location'</span>][<span class="string">'lat'</span>]  <span class="comment"># 获得纬度</span></span><br><span class="line">lng = getlnglat(add)[<span class="string">'result'</span>][<span class="string">'location'</span>][<span class="string">'lng'</span>]  <span class="comment"># 获得经度</span></span><br></pre></td></tr></table></figure><h3 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h3><p>lat = 31.27628928466111<br>lng = 120.75204667293927</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;功能简介&quot;&gt;&lt;a href=&quot;#功能简介&quot; class=&quot;headerlink&quot; title=&quot;功能简介&quot;&gt;&lt;/a&gt;功能简介&lt;/h3&gt;&lt;p&gt;百度地图Web服务API为开发者提供http/https接口，即开发者通过http/https形式发起检索请求，获取返回js
+      
+    
+    </summary>
+    
+      <category term="项目实训" scheme="https://araid0628.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
+    
+    
+      <category term="房价预测" scheme="https://araid0628.github.io/tags/%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B/"/>
+    
+      <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
+    
+      <category term="百度" scheme="https://araid0628.github.io/tags/%E7%99%BE%E5%BA%A6/"/>
+    
+      <category term="API" scheme="https://araid0628.github.io/tags/API/"/>
+    
+      <category term="json" scheme="https://araid0628.github.io/tags/json/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>贝叶斯估计与最大似然估计</title>
+    <link href="https://araid0628.github.io/2018/12/02/%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1%E4%B8%8E%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+    <id>https://araid0628.github.io/2018/12/02/贝叶斯估计与极大似然估计的区别/</id>
+    <published>2018-12-02T07:50:19.000Z</published>
+    <updated>2018-12-02T08:29:55.139Z</updated>
+    
+    <content type="html"><![CDATA[<p>贝叶斯估计：估计参数$\theta$是随机变量，根据观测数据对参数的分布进行估计，考虑先验分布。</p><p>最大似然估计：参数$\theta$是未知的，根据真实数据通过最大化似然函数$\mathop{\arg\max}_{\theta}L(\theta|D)$来估计$\theta$的值</p><div class="table-container"><table><thead><tr><th></th><th>最大似然估计</th><th>贝叶斯估计</th></tr></thead><tbody><tr><td>计算复杂度</td><td>微分</td><td>多重积分</td></tr><tr><td>先验信息的信任程度</td><td>不准确</td><td>准确</td></tr><tr><td>例如$p(x丨\theta)$</td><td>与初始假设一致</td><td>与初始假设不一致</td></tr></tbody></table></div>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;贝叶斯估计：估计参数$\theta$是随机变量，根据观测数据对参数的分布进行估计，考虑先验分布。&lt;/p&gt;
+&lt;p&gt;最大似然估计：参数$\theta$是未知的，根据真实数据通过最大化似然函数$\mathop{\arg\max}_{\theta}L(\theta|D)$来估计$\
+      
+    
+    </summary>
+    
+      <category term="机器学习" scheme="https://araid0628.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="贝叶斯" scheme="https://araid0628.github.io/tags/%E8%B4%9D%E5%8F%B6%E6%96%AF/"/>
+    
+      <category term="最大似然估计" scheme="https://araid0628.github.io/tags/%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>算法导论4.5-主方法</title>
+    <link href="https://araid0628.github.io/2018/11/12/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA4-5-%E4%B8%BB%E6%96%B9%E6%B3%95/"/>
+    <id>https://araid0628.github.io/2018/11/12/算法导论4-5-主方法/</id>
+    <published>2018-11-12T14:25:12.000Z</published>
+    <updated>2018-11-12T14:33:54.301Z</updated>
+    
+    <content type="html"><![CDATA[<p>算法导论练习4.5-1<br>对下列递归式，使用主方法求出渐进紧缺界:</p><h4 id="T-n-2T-n-4-1"><a href="#T-n-2T-n-4-1" class="headerlink" title="$T(n) = 2T(n/4) + 1$"></a>$T(n) = 2T(n/4) + 1$</h4><h4 id="T-n-2T-n-4-sqrt-n"><a href="#T-n-2T-n-4-sqrt-n" class="headerlink" title="$T(n) = 2T(n/4) + \sqrt{n}$"></a>$T(n) = 2T(n/4) + \sqrt{n}$</h4><h4 id="T-n-2T-n-4-n"><a href="#T-n-2T-n-4-n" class="headerlink" title="$T(n) = 2T(n/4) + n$"></a>$T(n) = 2T(n/4) + n$</h4><h4 id="T-n-2T-n-4-n-2"><a href="#T-n-2T-n-4-n-2" class="headerlink" title="$T(n) = 2T(n/4) + n^2$"></a>$T(n) = 2T(n/4) + n^2$</h4><p>Answer：</p><h4 id="Theta-n-log-4-2-Theta-sqrt-n"><a href="#Theta-n-log-4-2-Theta-sqrt-n" class="headerlink" title="$\Theta(n^{\log_4{2}}) = \Theta(\sqrt{n})$"></a>$\Theta(n^{\log_4{2}}) = \Theta(\sqrt{n})$</h4><h4 id="Theta-n-log-4-2-lg-n-Theta-sqrt-n-lg-n"><a href="#Theta-n-log-4-2-lg-n-Theta-sqrt-n-lg-n" class="headerlink" title="$\Theta(n^{\log_4{2}}\lg{n}) = \Theta(\sqrt{n}\lg{n})$"></a>$\Theta(n^{\log_4{2}}\lg{n}) = \Theta(\sqrt{n}\lg{n})$</h4><h4 id="Theta-n"><a href="#Theta-n" class="headerlink" title="$\Theta(n)$"></a>$\Theta(n)$</h4><h4 id="Theta-n-2"><a href="#Theta-n-2" class="headerlink" title="$\Theta(n^2)$"></a>$\Theta(n^2)$</h4>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;算法导论练习4.5-1&lt;br&gt;对下列递归式，使用主方法求出渐进紧缺界:&lt;/p&gt;
+&lt;h4 id=&quot;T-n-2T-n-4-1&quot;&gt;&lt;a href=&quot;#T-n-2T-n-4-1&quot; class=&quot;headerlink&quot; title=&quot;$T(n) = 2T(n/4) + 1$&quot;&gt;&lt;/a
+      
+    
+    </summary>
+    
+      <category term="笔记" scheme="https://araid0628.github.io/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="算法导论" scheme="https://araid0628.github.io/tags/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA/"/>
+    
+      <category term="递归" scheme="https://araid0628.github.io/tags/%E9%80%92%E5%BD%92/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>《机器学习实战》SVM补充内容</title>
+    <link href="https://araid0628.github.io/2018/10/21/%E3%80%8A%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98%E3%80%8BSVM%E8%A1%A5%E5%85%85%E5%86%85%E5%AE%B9/"/>
+    <id>https://araid0628.github.io/2018/10/21/《机器学习实战》SVM补充内容/</id>
+    <published>2018-10-21T12:28:49.000Z</published>
+    <updated>2018-10-21T13:07:58.260Z</updated>
+    
+    <content type="html"><![CDATA[<p>对于《机器学习实战》一书SVM章节程序清单6-2 简化版SVM算法中部分代码的数学原理补充</p><p><pre><code>    if(labelMat[i] != labelMat[j]):        L = max(0, alphas[j]-alphas[i])        H = min(C, C+alphas[j]-alphas[i])    else:        L = max(0, alphas[j]+alphas[i]-C)        H = min(C, C+alphas[j]-alphas[i])</code></pre><br>这段代码在《机器学习实战》书中只说明了保证alpha在0与C之间，根据约束条件$0\leq\alpha_i\leq C\;i=1,2$，实际上是单变量的最优化问题。<br><img src="images/SVM1_p1.png" alt="李航《统计学习实战》P130"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;对于《机器学习实战》一书SVM章节程序清单6-2 简化版SVM算法中部分代码的数学原理补充&lt;/p&gt;
+&lt;p&gt;&lt;pre&gt;&lt;code&gt;
+    if(labelMat[i] != labelMat[j]):
+        L = max(0, alphas[j]-alphas[
+      
+    
+    </summary>
+    
+      <category term="机器学习" scheme="https://araid0628.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="机器学习" scheme="https://araid0628.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="SVM" scheme="https://araid0628.github.io/tags/SVM/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用Hexo进行Latex公式渲染测试</title>
+    <link href="https://araid0628.github.io/2018/10/12/Latex%E6%B8%B2%E6%9F%93%E6%B5%8B%E8%AF%95/"/>
+    <id>https://araid0628.github.io/2018/10/12/Latex渲染测试/</id>
+    <published>2018-10-12T02:06:12.000Z</published>
+    <updated>2018-10-21T12:45:57.461Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><p>首先需要安装Mathjax插件，MathJax是一款运行在浏览器中的开源的数学符号渲染引擎，使用MathJax可以方便的在浏览器中显示数学公式，不需要使用图片。目前，MathJax可以解析Latex、MathML和ASCIIMathML的标记语言。(Wiki)</p><pre><code> npm install hexo-math –save</code></pre><h3 id="更换渲染引擎"><a href="#更换渲染引擎" class="headerlink" title="更换渲染引擎"></a>更换渲染引擎</h3><p>接着要更换Hexo的markdown渲染引擎</p><pre><code> npm uninstall hexo-renderer-marked –save npm install hexo-renderer-kramed –save</code></pre><h3 id="更改配置文件"><a href="#更改配置文件" class="headerlink" title="更改配置文件"></a>更改配置文件</h3><p>进入到主题目录，找到_config.yml文件，把mathjax默认的值改为true</p><pre><code> # MathJax Supportmathjax:  enable: true  per_page: true  #cdn: //cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML  cdn: //cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML</code></pre><h3 id="写博客"><a href="#写博客" class="headerlink" title="写博客"></a>写博客</h3><p>在每次编写需要使用LaTeX渲染的博客文章中，需要在Front-matter里打开mathjax开关</p><pre><code> title: testabbrlink: 7717490fdate: 2018-10-12 10:06:12tags:mathjax: true</code></pre><h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p><pre><code> $T(n) = \Theta(n)$</code></pre><br>$T(n) = \Theta(n)$</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;安装插件&quot;&gt;&lt;a href=&quot;#安装插件&quot; class=&quot;headerlink&quot; title=&quot;安装插件&quot;&gt;&lt;/a&gt;安装插件&lt;/h3&gt;&lt;p&gt;首先需要安装Mathjax插件，MathJax是一款运行在浏览器中的开源的数学符号渲染引擎，使用MathJax可以方便的在浏
+      
+    
+    </summary>
+    
+      <category term="技巧" scheme="https://araid0628.github.io/categories/%E6%8A%80%E5%B7%A7/"/>
+    
+    
+      <category term="Hexo" scheme="https://araid0628.github.io/tags/Hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数据挖掘 Week1作业</title>
+    <link href="https://araid0628.github.io/2018/09/19/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98WEEK1%E4%BD%9C%E4%B8%9A/"/>
+    <id>https://araid0628.github.io/2018/09/19/数据挖掘WEEK1作业/</id>
+    <published>2018-09-19T12:46:29.000Z</published>
+    <updated>2018-10-11T09:29:01.411Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="第一周作业要求"><a href="#第一周作业要求" class="headerlink" title="第一周作业要求"></a>第一周作业要求</h3><p>2组<br>人工搜集中国科学院院士、中国工程院院士的名单，在百度自动获取院士个人主页url，编写爬虫采集院士人类学、学位、研究方向和国家科技奖数据，设计数据库表，保存数据。</p><h3 id="小组分工"><a href="#小组分工" class="headerlink" title="小组分工"></a>小组分工</h3><p>CHY：科学院院士信息抓取<br>ZBC：数据到MySQL<br>me：工程院院士信息抓取</p><h3 id="Step1-网站分析"><a href="#Step1-网站分析" class="headerlink" title="Step1 网站分析"></a>Step1 网站分析</h3><p>中国工程院院士名单：<a href="http://www.cae.cn/cae/html/main/col48/column_48_1.html" target="_blank" rel="noopener">http://www.cae.cn/cae/html/main/col48/column_48_1.html</a> 可以看到所有学部的院士信息已经汇总在一个网页中，后续编写爬虫抓取个人主页url很方便。<br><img src="images/week1_p1.png" alt="view-sourse"></p><h3 id="Step2-抓取url"><a href="#Step2-抓取url" class="headerlink" title="Step2 抓取url"></a>Step2 抓取url</h3><p>在编写爬虫时用到了XPath，XPath 是一门在 XML 文档中查找信息的语言。XPath 用于在 XML 文档中通过元素和属性进行导航。</p><ul><li>XPath 使用路径表达式在 XML 文档中进行导航</li><li>XPath 包含一个标准函数库</li><li>XPath 是 XSLT 中的主要元素</li><li>XPath 是一个 W3C 标准<br>在这里通过XPath的语法分别抓取li标签下的herf的内容和text的内容，以获得院士个人主页的url和院士的姓名，存储在list中。<pre><code> def getURL():                #抓取工程院院士的URL和姓名  page = urllib.request.urlopen('http://www.cae.cn/cae/html/main/col48/column_48_1.html')  html = page.read()  urlList = []  sel = Selector(text=html, type="html")  urlList = sel.xpath('//li[re:test(@class, "name_list")]//@href').extract()  nameList = sel.xpath('//li[re:test(@class, "name_list")]//a/text()').extract()  #print(url)  i = 0  for i in range(len(urlList)):      urlList[i] = "http://www.cae.cn" + urlList[i]  return urlList, nameList  #print(url)</code></pre></li></ul><h3 id="Step3-抓取个人信息"><a href="#Step3-抓取个人信息" class="headerlink" title="Step3 抓取个人信息"></a>Step3 抓取个人信息</h3><p>接着仍使用XPath语法从urlList中依次爬取院士主页的个人信息。<br><img src="images/week1_p2.png" alt="view-sourse2"></p><pre><code>    infoPage = urllib.request.urlopen(academyURL)    infoHTML = infoPage.read()    infoSelect = Selector(text=infoHTML, type="html")    info = infoSelect.xpath('//div[@class="intro"]/p/text()').extract()[0]    return info</code></pre><h3 id="Step4-信息提取"><a href="#Step4-信息提取" class="headerlink" title="Step4 信息提取"></a>Step4 信息提取</h3><p>可以发现院士信息页中大部分信息描述具有某些规律，比如描述院士在某个专业方面的成就时的描述会采用“金属材料及粉末冶金专家”、“耳鼻咽喉学专家”等以“专家”、“学家”结尾的格式，可以通过正则表达式和findall()函数找出对应的描述。</p><pre><code>    pattern = re.compile(r'(\d{4}年(?:\d{1,2}月)?(?:\d{0,2}日)?)(?:(?:出生)|(?:生，)|(?:生于)|(?:出生于))')    birthday = pattern.findall(c)    pattern2 = re.compile(r'^.*?(?:(?:学家)|(?:专家))')    direction = pattern2.findall(c)    pattern3 = re.compile(r'(?:获)[^(?:。)]+(?:奖)')    award = pattern3.findall(c)    pattern4 = re.compile(r'博士|硕士|学士')    degree = pattern4.findall(c)</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;第一周作业要求&quot;&gt;&lt;a href=&quot;#第一周作业要求&quot; class=&quot;headerlink&quot; title=&quot;第一周作业要求&quot;&gt;&lt;/a&gt;第一周作业要求&lt;/h3&gt;&lt;p&gt;2组&lt;br&gt;人工搜集中国科学院院士、中国工程院院士的名单，在百度自动获取院士个人主页url，编写爬虫
+      
+    
+    </summary>
+    
+      <category term="作业" scheme="https://araid0628.github.io/categories/%E4%BD%9C%E4%B8%9A/"/>
+    
+    
+      <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
+    
+      <category term="爬虫" scheme="https://araid0628.github.io/tags/%E7%88%AC%E8%99%AB/"/>
+    
+      <category term="数据挖掘" scheme="https://araid0628.github.io/tags/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/"/>
+    
+      <category term="正则表达式" scheme="https://araid0628.github.io/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用插件和IDM下载百度云盘</title>
+    <link href="https://araid0628.github.io/2018/09/10/%E4%BD%BF%E7%94%A8%E6%8F%92%E4%BB%B6%E5%92%8CIDM%E4%B8%8B%E8%BD%BD%E7%99%BE%E5%BA%A6%E4%BA%91%E7%9B%98/"/>
+    <id>https://araid0628.github.io/2018/09/10/使用插件和IDM下载百度云盘/</id>
+    <published>2018-09-10T04:58:54.000Z</published>
+    <updated>2018-09-19T12:53:52.835Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>在某度云上保存了很多课程，但因为某度对于网盘速度的限制，只能寻找破解版某度云盘下载文件。听说破解版最近不好使了，在网上查找了很多方法，发现只有利用Chrome的插件和IDM才能达到最理想的下载效果。</p><h3 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h3><ul><li>Chrome浏览器</li><li>IDM下载器（(Integrated Data Multiplexer）</li><li>扩展程序 BaiduPan Explorer</li></ul><h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ul><li>安装上述软件</li><li>使用插件抓取链接<br><img src="images/idm1.png" alt="链接"></li><li>使用IDM下载即可</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h3&gt;&lt;p&gt;在某度云上保存了很多课程，但因为某度对于网盘速度的限制，只能寻找破解版某度云盘下载文件。听说破解版最近不好使了，在网上查找了很多方法，发现只
+      
+    
+    </summary>
+    
+      <category term="技巧" scheme="https://araid0628.github.io/categories/%E6%8A%80%E5%B7%A7/"/>
+    
+    
+      <category term="IDM" scheme="https://araid0628.github.io/tags/IDM/"/>
+    
+      <category term="插件" scheme="https://araid0628.github.io/tags/%E6%8F%92%E4%BB%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>你好，Hexo</title>
+    <link href="https://araid0628.github.io/2018/09/09/%E4%BD%A0%E5%A5%BD%EF%BC%8CHexo/"/>
+    <id>https://araid0628.github.io/2018/09/09/你好，Hexo/</id>
+    <published>2018-09-09T02:25:49.000Z</published>
+    <updated>2018-09-09T07:07:47.559Z</updated>
+    
+    <summary type="html">
     
     </summary>
     
