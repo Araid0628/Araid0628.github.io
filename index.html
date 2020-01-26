@@ -306,6 +306,139 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://araid0628.github.io/2020/01/24/httpcode/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Fu Hanlin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fu's Workshop">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/01/24/httpcode/" itemprop="url">HTTP状态码及扩展</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-24T12:17:16+08:00">
+                2020年01月24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在Snrks Discord Monitor中的日志截取到如下，对中间一些知识点做整理。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2020</span><span class="number">-01</span><span class="number">-23</span> <span class="number">15</span>:<span class="number">01</span>:<span class="number">54</span>,<span class="number">486</span> - /home/araid/.local/lib/python3<span class="number">.6</span>/site-packages/urllib3/connectionpool.py[line:<span class="number">959</span>] - DEBUG: Starting new HTTPS connection (<span class="number">1</span>): api.nike.com:<span class="number">443</span></span><br><span class="line"><span class="number">2020</span><span class="number">-01</span><span class="number">-23</span> <span class="number">15</span>:<span class="number">01</span>:<span class="number">54</span>,<span class="number">891</span> - /home/araid/.local/lib/python3<span class="number">.6</span>/site-packages/urllib3/connectionpool.py[line:<span class="number">437</span>] - DEBUG: https://api.nike.com:<span class="number">443</span> <span class="string">"GET /snkrs/content/v1/?country=CN&amp;language=zh-Hans&amp;orderBy=published&amp;offset=0 HTTP/1.1"</span> <span class="number">400</span> <span class="number">127</span></span><br><span class="line"><span class="number">2020</span><span class="number">-01</span><span class="number">-23</span> <span class="number">15</span>:<span class="number">02</span>:<span class="number">04</span>,<span class="number">904</span> - /home/araid/.local/lib/python3<span class="number">.6</span>/site-packages/urllib3/connectionpool.py[line:<span class="number">959</span>] - DEBUG: Starting new HTTPS connection (<span class="number">1</span>): api.nike.com:<span class="number">443</span></span><br><span class="line"><span class="number">2020</span><span class="number">-01</span><span class="number">-23</span> <span class="number">15</span>:<span class="number">02</span>:<span class="number">05</span>,<span class="number">013</span> - /home/araid/.local/lib/python3<span class="number">.6</span>/site-packages/urllib3/connectionpool.py[line:<span class="number">437</span>] - DEBUG: https://api.nike.com:<span class="number">443</span> <span class="string">"GET /snkrs/content/v1/?country=CN&amp;language=zh-Hans&amp;orderBy=published&amp;offset=0 HTTP/1.1"</span> <span class="number">200</span> <span class="number">96165</span></span><br></pre></td></tr></table></figure></p>
+<ol>
+<li><p>GET请求<br>整个Monitor的原理是经抓包得到的Nike Snkrs的API，通过URL发起GET请求。Query String Parameters包括四个：country(国家), lanuage(语言), offset(偏移量，一页有50条数据), orderBy(排序方式published和lastUpdated)。GET用于请求指定的页面信息，并返回实体主体。</p>
+</li>
+<li><p>HTTP状态码<br>当浏览者访问一个网页时，浏览者的浏览器会向网页所在服务器发出请求。当浏览器接收并显示网页前，此网页所在的服务器会返回一个包含HTTP状态码的信息头（server header）用以响应浏览器的请求。日志中出现的有200(请求成功), 400(Bad Request 客户端请求的语法错误)。还有其他常见的如404 Not Found(服务器无法根据客户端的请求找到资源), 403 Forbidden(服务器拒绝执行客户端请求), 500 Internal Server Error(服务器内部错误，无法完成请求), 504 Gateway Time-out(充当网关或代理的服务器，未及时从远端服务器获取请求)。 </p>
+</li>
+<li><p>HTTP/1.0和HTTP/1.1的区别</p>
+</li>
+</ol>
+<ul>
+<li>HTTP/1.0 每次请求都需要建立新的TCP连接，连接不能复用。HTTP/1.1 新的请求可以在上次请求建立的TCP连接之上发送，连接可以复用。优点是减少重复进行TCP三次握手的开销，提高效率。</li>
+<li>HTTP1.1在Request消息头里头多了一个Host域, HTTP1.0则没有这个域。</li>
+<li>HTTP1.1增加了OPTIONS, PUT, DELETE, TRACE, CONNECT这些Request方法。<br>等</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://araid0628.github.io/2019/12/24/docker-delete-none/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1513,137 +1646,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://araid0628.github.io/2019/04/11/xgboostppt/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Fu Hanlin">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fu's Workshop">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/11/xgboostppt/" itemprop="url">Introduction to XGboost</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-11T21:11:22+08:00">
-                2019年04月11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>实习的时候主管布置的任务：<br>Pls. help to prepare some material to us a training in your area.</p>
-<ol>
-<li>AI in picture recognition.</li>
-<li>Model algorithm use case in different area.<br>至今还没机会讲，就当帮自己从底层梳理了一遍XGboost原理。
-
-	<div class="row">
-    <embed src="images/quickstart.pdf" width="100%" height="550" type="application/pdf">
-	</div>
-
-
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1694,7 +1696,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1716,7 +1718,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

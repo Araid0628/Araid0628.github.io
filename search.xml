@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[HTTP状态码及扩展]]></title>
+    <url>%2F2020%2F01%2F24%2Fhttpcode%2F</url>
+    <content type="text"><![CDATA[在Snrks Discord Monitor中的日志截取到如下，对中间一些知识点做整理。12342020-01-23 15:01:54,486 - /home/araid/.local/lib/python3.6/site-packages/urllib3/connectionpool.py[line:959] - DEBUG: Starting new HTTPS connection (1): api.nike.com:4432020-01-23 15:01:54,891 - /home/araid/.local/lib/python3.6/site-packages/urllib3/connectionpool.py[line:437] - DEBUG: https://api.nike.com:443 "GET /snkrs/content/v1/?country=CN&amp;language=zh-Hans&amp;orderBy=published&amp;offset=0 HTTP/1.1" 400 1272020-01-23 15:02:04,904 - /home/araid/.local/lib/python3.6/site-packages/urllib3/connectionpool.py[line:959] - DEBUG: Starting new HTTPS connection (1): api.nike.com:4432020-01-23 15:02:05,013 - /home/araid/.local/lib/python3.6/site-packages/urllib3/connectionpool.py[line:437] - DEBUG: https://api.nike.com:443 "GET /snkrs/content/v1/?country=CN&amp;language=zh-Hans&amp;orderBy=published&amp;offset=0 HTTP/1.1" 200 96165 GET请求整个Monitor的原理是经抓包得到的Nike Snkrs的API，通过URL发起GET请求。Query String Parameters包括四个：country(国家), lanuage(语言), offset(偏移量，一页有50条数据), orderBy(排序方式published和lastUpdated)。GET用于请求指定的页面信息，并返回实体主体。 HTTP状态码当浏览者访问一个网页时，浏览者的浏览器会向网页所在服务器发出请求。当浏览器接收并显示网页前，此网页所在的服务器会返回一个包含HTTP状态码的信息头（server header）用以响应浏览器的请求。日志中出现的有200(请求成功), 400(Bad Request 客户端请求的语法错误)。还有其他常见的如404 Not Found(服务器无法根据客户端的请求找到资源), 403 Forbidden(服务器拒绝执行客户端请求), 500 Internal Server Error(服务器内部错误，无法完成请求), 504 Gateway Time-out(充当网关或代理的服务器，未及时从远端服务器获取请求)。 HTTP/1.0和HTTP/1.1的区别 HTTP/1.0 每次请求都需要建立新的TCP连接，连接不能复用。HTTP/1.1 新的请求可以在上次请求建立的TCP连接之上发送，连接可以复用。优点是减少重复进行TCP三次握手的开销，提高效率。 HTTP1.1在Request消息头里头多了一个Host域, HTTP1.0则没有这个域。 HTTP1.1增加了OPTIONS, PUT, DELETE, TRACE, CONNECT这些Request方法。等]]></content>
+      <tags>
+        <tag>HTTP</tag>
+        <tag>Discord</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Docker批量删除REPOSITORY、TAG为none的镜像]]></title>
     <url>%2F2019%2F12%2F24%2Fdocker-delete-none%2F</url>
     <content type="text"><![CDATA[第一次构建镜像时生成的镜像ID为A，此镜像会被标记为TAG-A 第二次构建镜像时生成的镜像ID为B，此镜像的标签仍为TAG-A Docker会移除ID为A的标签，此时A镜像就变成了dangling images，在docker images中显示为&lt;/none>:&lt;/none> 官方给出的解决方案是：1docker image prune 还可以这样做：1docker images|grep none|awk ‘&#123;print $3&#125;’|xargs docker rmi grep: 查找images中符合none的字符串awk: 输出xargs: 给命令传递参数]]></content>
@@ -59,8 +68,8 @@
         <category>SnkrsMonitor</category>
       </categories>
       <tags>
-        <tag>JSON</tag>
         <tag>爬虫</tag>
+        <tag>JSON</tag>
       </tags>
   </entry>
   <entry>
@@ -97,9 +106,9 @@
     <url>%2F2019%2F04%2F10%2Flstm%2F</url>
     <content type="text"><![CDATA[LSTM网络Long short-term memory，即LSTM。在传统的RNN中，所有的RNN都具有一种重复神经网络模块的链接形式，例如一个tanh层。LSTM的重复模块有一个不同的结构。]]></content>
       <tags>
+        <tag>Python</tag>
         <tag>深度学习</tag>
         <tag>项目实训</tag>
-        <tag>Python</tag>
         <tag>LSTM</tag>
         <tag>RNN</tag>
       </tags>
@@ -118,8 +127,8 @@
     <content type="text"><![CDATA[前言本来这个需求不在列表中，受到Kaggle比赛：Kaggle Boston Housing(https://www.kaggle.com/c/boston-housing)的启发，加入了这个功能。因为数据全部靠自己收集，特征也远不如比赛中的数据集多，最终预测的效果我觉得虽然误差比较大，但是也有一定的参考价值。 数据清洗和特征工程从数据库中抽取了一部分好量化的上海市数据作为基本信息，在此基础之上，引入了该楼盘周边1km范围内地铁站数量、医院数量、学校数量、商场数量（数据来自百度API，可以参见另一篇blog）和该楼盘所在区域的区域均价。从Figure1中可以看到从某壳网上爬取下来的数据中包含很多汉字、符号，还有缺失值需要填补，另外还有格式不统一的情况，所以在数据清洗上花了很多时间。对数据中的字符型数据转换：12345678# 数据预处理，填充缺失值以及特征中含有字符的转换为数值型# "price","propertyType","landscapingRatio","siteArea","floorAreaRatio","buildingArea","yearofpropertyRights",# "numPlan","parkingRatio","propertycosts","parkingSpace","hospital","metro","school","mall","id"# 住宅：1 写字楼：2 别墅：3 商业：4train.loc[train["propertyType"] == "住宅", "propertyType"] = 1train.loc[train["propertyType"] == "写字楼", "propertyType"] = 2train.loc[train["propertyType"] == "别墅", "propertyType"] = 3train.loc[train["propertyType"] == "商业", "propertyType"] = 4 对部分特征统一数据格式后，缺失值用均值进行填补：123456789101112131415train['landscapingRatio'] = train['landscapingRatio'].fillna(train.groupby('propertyType')['landscapingRatio'].transform('mean'))train['siteArea'] = train['siteArea'].fillna(train.groupby('propertyType')['siteArea'].transform('mean'))train['floorAreaRatio'] = train['floorAreaRatio'].fillna(train.groupby('propertyType')['floorAreaRatio'].transform('mean'))train['buildingArea'] = train['buildingArea'].fillna(train.groupby('propertyType')['buildingArea'].transform('mean'))train = train.fillna(0)train['yearofpropertyRights'] = train['yearofpropertyRights'].astype(float)train['numPlan'] = train['numPlan'].astype(int)train['parkingRatio'] = train['parkingRatio'].astype(float)train['propertycosts'] = train['propertycosts'].astype(float)train['parkingSpace'] = train['parkingSpace'].astype(int)train['yearofpropertyRights'] = train['yearofpropertyRights'].fillna(train.groupby('propertyType')['yearofpropertyRights'].transform('mean'))train['numPlan'] = train['numPlan'].fillna(train.groupby('propertyType')['numPlan'].transform('mean'))train['parkingRatio'] = train['parkingRatio'].fillna(train.groupby('propertyType')['parkingRatio'].transform('mean'))train['propertycosts'] = train['propertycosts'].fillna(train.groupby('propertyType')['propertycosts'].transform('mean'))train['parkingSpace'] = train['parkingSpace'].fillna(train.groupby('propertyType')['parkingSpace'].transform('mean')) XGboost简介后期会把在公司做的seminar的ppt放上来 建模Step 1读取数据集，为了增强模型的泛化能力，筛掉了单价超过50000元/平方米的数据，实验结果证明效果对二三线城市的预测效果比较好，但在像上海、北京这样房价过高的城市表现一般。12345678dataset_train = 'house_trainset2.csv'data_train = pd.read_csv(dataset_train)data_train = data_train[data_train['price'] &lt;= 49999]scaler = MinMaxScaler(feature_range=(0, 1))pd.set_option('display.width', None)X = data_train.drop(['id', 'price', 'Unnamed: 0', 'numPlan'], axis=1)X = scaler.fit_transform(X)y = data_train.price 随机拆分训练集和测试集后，fit到模型中，模型的参数调整用了Sklearn中的GridSearchCV,它存在的意义就是自动调参，只要把参数输进去，就能给出最优化的结果和参数。但是这个方法适合于小数据集，一旦数据的量级上去了，很难得出结果。数据量比较大的时候可以使用一个快速调优的方法——坐标下降。它其实是一种贪心算法：拿当前对模型影响最大的参数调优，直到最优化；再拿下一个影响最大的参数调优，如此下去，直到所有的参数调整完毕。12345678910X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=123)cv_params = &#123;'n_estimators': [400, 500, 600, 700, 800]&#125;other_params = &#123;'learning_rate': 0.1, 'n_estimators': 400, 'max_depth': 5, 'min_child_weight': 1, 'seed': 0, 'subsample': 0.8, 'colsample_bytree': 0.8, 'gamma': 0, 'reg_alpha': 0, 'reg_lambda': 1&#125;optimized_GBM = GridSearchCV(estimator=model, param_grid=cv_params, scoring='r2', cv=5, verbose=1, n_jobs=5)optimized_GBM.fit(X_train, y_train)evalute_result = optimized_GBM.grid_scores_print('每轮迭代运行结果:&#123;0&#125;'.format(evalute_result))print('参数的最佳取值：&#123;0&#125;'.format(optimized_GBM.best_params_))print('最佳模型得分:&#123;0&#125;'.format(optimized_GBM.best_score_))print(xg_reg.feature_importances_) 预测结果]]></content>
       <tags>
         <tag>机器学习</tag>
-        <tag>项目实训</tag>
         <tag>Python</tag>
+        <tag>项目实训</tag>
         <tag>XGboost</tag>
       </tags>
   </entry>
@@ -142,8 +151,8 @@
         <category>项目实训</category>
       </categories>
       <tags>
-        <tag>房价预测</tag>
         <tag>Python</tag>
+        <tag>房价预测</tag>
         <tag>Pandas</tag>
       </tags>
   </entry>
@@ -166,11 +175,11 @@
         <category>项目实训</category>
       </categories>
       <tags>
-        <tag>房价预测</tag>
-        <tag>Python</tag>
         <tag>百度</tag>
         <tag>API</tag>
         <tag>json</tag>
+        <tag>Python</tag>
+        <tag>房价预测</tag>
       </tags>
   </entry>
   <entry>
@@ -229,9 +238,9 @@
       </categories>
       <tags>
         <tag>Python</tag>
-        <tag>爬虫</tag>
         <tag>数据挖掘</tag>
         <tag>正则表达式</tag>
+        <tag>爬虫</tag>
       </tags>
   </entry>
   <entry>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://araid0628.github.io/"/>
-  <updated>2019-12-24T05:54:10.407Z</updated>
+  <updated>2020-01-26T06:55:08.332Z</updated>
   <id>https://araid0628.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>HTTP状态码及扩展</title>
+    <link href="https://araid0628.github.io/2020/01/24/httpcode/"/>
+    <id>https://araid0628.github.io/2020/01/24/httpcode/</id>
+    <published>2020-01-24T04:17:16.000Z</published>
+    <updated>2020-01-26T06:55:08.332Z</updated>
+    
+    <content type="html"><![CDATA[<p>在Snrks Discord Monitor中的日志截取到如下，对中间一些知识点做整理。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2020</span><span class="number">-01</span><span class="number">-23</span> <span class="number">15</span>:<span class="number">01</span>:<span class="number">54</span>,<span class="number">486</span> - /home/araid/.local/lib/python3<span class="number">.6</span>/site-packages/urllib3/connectionpool.py[line:<span class="number">959</span>] - DEBUG: Starting new HTTPS connection (<span class="number">1</span>): api.nike.com:<span class="number">443</span></span><br><span class="line"><span class="number">2020</span><span class="number">-01</span><span class="number">-23</span> <span class="number">15</span>:<span class="number">01</span>:<span class="number">54</span>,<span class="number">891</span> - /home/araid/.local/lib/python3<span class="number">.6</span>/site-packages/urllib3/connectionpool.py[line:<span class="number">437</span>] - DEBUG: https://api.nike.com:<span class="number">443</span> <span class="string">"GET /snkrs/content/v1/?country=CN&amp;language=zh-Hans&amp;orderBy=published&amp;offset=0 HTTP/1.1"</span> <span class="number">400</span> <span class="number">127</span></span><br><span class="line"><span class="number">2020</span><span class="number">-01</span><span class="number">-23</span> <span class="number">15</span>:<span class="number">02</span>:<span class="number">04</span>,<span class="number">904</span> - /home/araid/.local/lib/python3<span class="number">.6</span>/site-packages/urllib3/connectionpool.py[line:<span class="number">959</span>] - DEBUG: Starting new HTTPS connection (<span class="number">1</span>): api.nike.com:<span class="number">443</span></span><br><span class="line"><span class="number">2020</span><span class="number">-01</span><span class="number">-23</span> <span class="number">15</span>:<span class="number">02</span>:<span class="number">05</span>,<span class="number">013</span> - /home/araid/.local/lib/python3<span class="number">.6</span>/site-packages/urllib3/connectionpool.py[line:<span class="number">437</span>] - DEBUG: https://api.nike.com:<span class="number">443</span> <span class="string">"GET /snkrs/content/v1/?country=CN&amp;language=zh-Hans&amp;orderBy=published&amp;offset=0 HTTP/1.1"</span> <span class="number">200</span> <span class="number">96165</span></span><br></pre></td></tr></table></figure></p><ol><li><p>GET请求<br>整个Monitor的原理是经抓包得到的Nike Snkrs的API，通过URL发起GET请求。Query String Parameters包括四个：country(国家), lanuage(语言), offset(偏移量，一页有50条数据), orderBy(排序方式published和lastUpdated)。GET用于请求指定的页面信息，并返回实体主体。</p></li><li><p>HTTP状态码<br>当浏览者访问一个网页时，浏览者的浏览器会向网页所在服务器发出请求。当浏览器接收并显示网页前，此网页所在的服务器会返回一个包含HTTP状态码的信息头（server header）用以响应浏览器的请求。日志中出现的有200(请求成功), 400(Bad Request 客户端请求的语法错误)。还有其他常见的如404 Not Found(服务器无法根据客户端的请求找到资源), 403 Forbidden(服务器拒绝执行客户端请求), 500 Internal Server Error(服务器内部错误，无法完成请求), 504 Gateway Time-out(充当网关或代理的服务器，未及时从远端服务器获取请求)。 </p></li><li><p>HTTP/1.0和HTTP/1.1的区别</p></li></ol><ul><li>HTTP/1.0 每次请求都需要建立新的TCP连接，连接不能复用。HTTP/1.1 新的请求可以在上次请求建立的TCP连接之上发送，连接可以复用。优点是减少重复进行TCP三次握手的开销，提高效率。</li><li>HTTP1.1在Request消息头里头多了一个Host域, HTTP1.0则没有这个域。</li><li>HTTP1.1增加了OPTIONS, PUT, DELETE, TRACE, CONNECT这些Request方法。<br>等</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;在Snrks Discord Monitor中的日志截取到如下，对中间一些知识点做整理。&lt;br&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;
+      
+    
+    </summary>
+    
+    
+      <category term="HTTP" scheme="https://araid0628.github.io/tags/HTTP/"/>
+    
+      <category term="Discord" scheme="https://araid0628.github.io/tags/Discord/"/>
+    
+  </entry>
   
   <entry>
     <title>Docker批量删除REPOSITORY、TAG为none的镜像</title>
@@ -185,9 +210,9 @@
       <category term="SnkrsMonitor" scheme="https://araid0628.github.io/categories/SnkrsMonitor/"/>
     
     
-      <category term="JSON" scheme="https://araid0628.github.io/tags/JSON/"/>
-    
       <category term="爬虫" scheme="https://araid0628.github.io/tags/%E7%88%AC%E8%99%AB/"/>
+    
+      <category term="JSON" scheme="https://araid0628.github.io/tags/JSON/"/>
     
   </entry>
   
@@ -289,11 +314,11 @@
     </summary>
     
     
+      <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
+    
       <category term="深度学习" scheme="https://araid0628.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
       <category term="项目实训" scheme="https://araid0628.github.io/tags/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
-    
-      <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
     
       <category term="LSTM" scheme="https://araid0628.github.io/tags/LSTM/"/>
     
@@ -345,9 +370,9 @@
     
       <category term="机器学习" scheme="https://araid0628.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="项目实训" scheme="https://araid0628.github.io/tags/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
-    
       <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
+    
+      <category term="项目实训" scheme="https://araid0628.github.io/tags/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
     
       <category term="XGboost" scheme="https://araid0628.github.io/tags/XGboost/"/>
     
@@ -400,9 +425,9 @@
       <category term="项目实训" scheme="https://araid0628.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
     
     
-      <category term="房价预测" scheme="https://araid0628.github.io/tags/%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B/"/>
-    
       <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
+    
+      <category term="房价预测" scheme="https://araid0628.github.io/tags/%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B/"/>
     
       <category term="Pandas" scheme="https://araid0628.github.io/tags/Pandas/"/>
     
@@ -454,15 +479,15 @@
       <category term="项目实训" scheme="https://araid0628.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%AD/"/>
     
     
-      <category term="房价预测" scheme="https://araid0628.github.io/tags/%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B/"/>
-    
-      <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
-    
       <category term="百度" scheme="https://araid0628.github.io/tags/%E7%99%BE%E5%BA%A6/"/>
     
       <category term="API" scheme="https://araid0628.github.io/tags/API/"/>
     
       <category term="json" scheme="https://araid0628.github.io/tags/json/"/>
+    
+      <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
+    
+      <category term="房价预测" scheme="https://araid0628.github.io/tags/%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B/"/>
     
   </entry>
   
@@ -600,11 +625,11 @@
     
       <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
     
-      <category term="爬虫" scheme="https://araid0628.github.io/tags/%E7%88%AC%E8%99%AB/"/>
-    
       <category term="数据挖掘" scheme="https://araid0628.github.io/tags/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/"/>
     
       <category term="正则表达式" scheme="https://araid0628.github.io/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    
+      <category term="爬虫" scheme="https://araid0628.github.io/tags/%E7%88%AC%E8%99%AB/"/>
     
   </entry>
   
