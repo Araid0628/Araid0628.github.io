@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Python,房价预测,Pandas,">
+  <meta name="keywords" content="Linux,Discord,">
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="BUG复现1train.replace(&apos;%&apos;, &apos;&apos;, inplace=True) 使用replace函数的目的是：在清洗房价数据时替换掉不需要的单位，如“%”，“元/m²/月”等。但在使用函数时发现无法生效，查了网上相关信息后试了多种方法也无法解决这个问题，如先取列之后再进行replace。1train[&quot;landscapingRatio&quot;].replace(&apos;%&apos;, &apos;&apos;, inplace=">
-<meta name="keywords" content="Python,房价预测,Pandas">
+<meta name="description" content="nohup的缺陷在开发Discord Monitor过程中需要将Monitor挂起到后台，最开始使用的是nohup命令：1nohup python3 *.py &amp;gt; *.log 2&amp;gt;&amp;amp;1 &amp;amp; 将标准错误(2)重定向到标准输出(&amp;amp;1)，标准输出(&amp;amp;1)再被重定向到指定的log文件中。&amp;amp;指在后台运行，但当用户退出（挂起）的时候，命令也跟着退出。将noh">
+<meta name="keywords" content="Linux,Discord">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Pandas处理数据时replace方法失效">
-<meta property="og:url" content="https://araid0628.github.io/2019/03/05/week123/index.html">
+<meta property="og:title" content="nohup缺陷及screen命令">
+<meta property="og:url" content="https://araid0628.github.io/2020/01/29/nohup-screen/index.html">
 <meta property="og:site_name" content="Fu&#39;s Workshop">
-<meta property="og:description" content="BUG复现1train.replace(&apos;%&apos;, &apos;&apos;, inplace=True) 使用replace函数的目的是：在清洗房价数据时替换掉不需要的单位，如“%”，“元/m²/月”等。但在使用函数时发现无法生效，查了网上相关信息后试了多种方法也无法解决这个问题，如先取列之后再进行replace。1train[&quot;landscapingRatio&quot;].replace(&apos;%&apos;, &apos;&apos;, inplace=">
+<meta property="og:description" content="nohup的缺陷在开发Discord Monitor过程中需要将Monitor挂起到后台，最开始使用的是nohup命令：1nohup python3 *.py &amp;gt; *.log 2&amp;gt;&amp;amp;1 &amp;amp; 将标准错误(2)重定向到标准输出(&amp;amp;1)，标准输出(&amp;amp;1)再被重定向到指定的log文件中。&amp;amp;指在后台运行，但当用户退出（挂起）的时候，命令也跟着退出。将noh">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-05T13:24:28.002Z">
+<meta property="og:updated_time" content="2020-01-29T10:13:32.969Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Pandas处理数据时replace方法失效">
-<meta name="twitter:description" content="BUG复现1train.replace(&apos;%&apos;, &apos;&apos;, inplace=True) 使用replace函数的目的是：在清洗房价数据时替换掉不需要的单位，如“%”，“元/m²/月”等。但在使用函数时发现无法生效，查了网上相关信息后试了多种方法也无法解决这个问题，如先取列之后再进行replace。1train[&quot;landscapingRatio&quot;].replace(&apos;%&apos;, &apos;&apos;, inplace=">
+<meta name="twitter:title" content="nohup缺陷及screen命令">
+<meta name="twitter:description" content="nohup的缺陷在开发Discord Monitor过程中需要将Monitor挂起到后台，最开始使用的是nohup命令：1nohup python3 *.py &amp;gt; *.log 2&amp;gt;&amp;amp;1 &amp;amp; 将标准错误(2)重定向到标准输出(&amp;amp;1)，标准输出(&amp;amp;1)再被重定向到指定的log文件中。&amp;amp;指在后台运行，但当用户退出（挂起）的时候，命令也跟着退出。将noh">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://araid0628.github.io/2019/03/05/week123/">
+  <link rel="canonical" href="https://araid0628.github.io/2020/01/29/nohup-screen/">
 
 
 
 
 
-  <title>Pandas处理数据时replace方法失效 | Fu's Workshop</title>
+  <title>nohup缺陷及screen命令 | Fu's Workshop</title>
   
 
 
@@ -307,7 +307,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://araid0628.github.io/2019/03/05/week123/">
+    <link itemprop="mainEntityOfPage" href="https://araid0628.github.io/2020/01/29/nohup-screen/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Fu Hanlin">
@@ -324,7 +324,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Pandas处理数据时replace方法失效</h1>
+          <h1 class="post-title" itemprop="name headline">nohup缺陷及screen命令</h1>
         
 
         <div class="post-meta">
@@ -336,8 +336,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-05T21:04:48+08:00">
-                2019年03月05
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-29T16:54:03+08:00">
+                2020年01月29
               </time>
             
 
@@ -346,28 +346,6 @@
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/项目实训/" itemprop="url" rel="index">
-                    <span itemprop="name">项目实训</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -401,11 +379,12 @@
       
 
       
-        <h3 id="BUG复现"><a href="#BUG复现" class="headerlink" title="BUG复现"></a>BUG复现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train.replace(<span class="string">'%'</span>, <span class="string">''</span>, inplace=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
-<p>使用replace函数的目的是：在清洗房价数据时替换掉不需要的单位，如“%”，“元/m²/月”等。但在使用函数时发现无法生效，查了网上相关信息后试了多种方法也无法解决这个问题，如先取列之后再进行replace。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train[<span class="string">"landscapingRatio"</span>].replace(<span class="string">'%'</span>, <span class="string">''</span>, inplace=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure></p>
-<h3 id="原因推测"><a href="#原因推测" class="headerlink" title="原因推测"></a>原因推测</h3><p>dataframe中每个列中值的dtypes不同，导致无法replace。</p>
-<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>使用map()和lambda函数<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train[<span class="string">"landscapingRatio"</span>] = train[<span class="string">"landscapingRatio"</span>].map(<span class="keyword">lambda</span> x: x.replace(<span class="string">'%'</span>, <span class="string">''</span>))</span><br></pre></td></tr></table></figure></p>
-<p>map() 会根据提供的函数对指定序列做映射。<br>第一个参数 function 以参数序列中的每一个元素调用 function 函数，返回包含每次 function 函数返回值的新列表。</p>
+        <h3 id="nohup的缺陷"><a href="#nohup的缺陷" class="headerlink" title="nohup的缺陷"></a>nohup的缺陷</h3><p>在开发Discord Monitor过程中需要将Monitor挂起到后台，最开始使用的是nohup命令：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup python3 *.py &gt; *.log 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure></p>
+<p>将标准错误(2)重定向到标准输出(&amp;1)，标准输出(&amp;1)再被重定向到指定的log文件中。<br>&amp;指在后台运行，但当用户退出（挂起）的时候，命令也跟着退出。将nohup和&amp;组合在一起：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup COMMAND &amp;</span><br></pre></td></tr></table></figure></p>
+<p>理论上是可以将命令永久的放在后台执行，但是在实际中不是这样。因为是租用的Azure，必须使用SSH远程登录后进行操作，在使用nohup命令中发现关闭SSH后程序依旧挂断了，即使使用exit退出帐号再用<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jobs</span><br></pre></td></tr></table></figure></p>
+<p>命令查看刚刚nohup的操作都被结束了。<br>原因是当网络断开或终端窗口关闭后，控制进程收到SIGHUP信号(挂断信号，默认的动作是终止程序)退出，会导致该会话期(Session, 一个或多个进程组的集合)内其他进程退出。</p>
+<h3 id="screen"><a href="#screen" class="headerlink" title="screen"></a>screen</h3><p><a href="https://www.ibm.com/developerworks/cn/linux/l-cn-screen/" target="_blank" rel="noopener">screen</a>是一个可以在多个进程之间多路复用一个物理终端的窗口管理器。screen中有会话的概念，用户可以在一个screen会话中创建多个screen窗口，在每一个screen窗口中就像操作一个真实的telnet/SSH连接窗口那样。<br>可以通过直接输入<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">screen</span><br></pre></td></tr></table></figure></p>
+<p>创建一个窗口。如果想要将窗口挂起，可以使用Ctrl+a d命令。<br>常用的命令还有：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">screen -ls // 查看screen会话</span><br><span class="line">screen -list // 同 -ls</span><br><span class="line">screen -r * // 重新连接screen会话</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -423,11 +402,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Python/" rel="tag"># Python</a>
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
           
-            <a href="/tags/房价预测/" rel="tag"># 房价预测</a>
-          
-            <a href="/tags/Pandas/" rel="tag"># Pandas</a>
+            <a href="/tags/Discord/" rel="tag"># Discord</a>
           
         </div>
       
@@ -440,8 +417,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/03/housepricingweek1/" rel="next" title="项目实训第一周总结">
-                <i class="fa fa-chevron-left"></i> 项目实训第一周总结
+              <a href="/2020/01/24/httpcode/" rel="next" title="HTTP状态码及扩展">
+                <i class="fa fa-chevron-left"></i> HTTP状态码及扩展
               </a>
             
           </div>
@@ -449,10 +426,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/11/week2/" rel="prev" title="项目实训-第二周总结">
-                项目实训-第二周总结 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -619,7 +592,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#BUG复现"><span class="nav-number">1.</span> <span class="nav-text">BUG复现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原因推测"><span class="nav-number">2.</span> <span class="nav-text">原因推测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方法"><span class="nav-number">3.</span> <span class="nav-text">解决方法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#nohup的缺陷"><span class="nav-number">1.</span> <span class="nav-text">nohup的缺陷</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#screen"><span class="nav-number">2.</span> <span class="nav-text">screen</span></a></li></ol></div>
             
 
           </div>

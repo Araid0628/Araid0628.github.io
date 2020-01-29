@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://araid0628.github.io/"/>
-  <updated>2020-01-26T06:55:08.332Z</updated>
+  <updated>2020-01-29T10:13:32.969Z</updated>
   <id>https://araid0628.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>nohup缺陷及screen命令</title>
+    <link href="https://araid0628.github.io/2020/01/29/nohup-screen/"/>
+    <id>https://araid0628.github.io/2020/01/29/nohup-screen/</id>
+    <published>2020-01-29T08:54:03.000Z</published>
+    <updated>2020-01-29T10:13:32.969Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="nohup的缺陷"><a href="#nohup的缺陷" class="headerlink" title="nohup的缺陷"></a>nohup的缺陷</h3><p>在开发Discord Monitor过程中需要将Monitor挂起到后台，最开始使用的是nohup命令：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup python3 *.py &gt; *.log 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure></p><p>将标准错误(2)重定向到标准输出(&amp;1)，标准输出(&amp;1)再被重定向到指定的log文件中。<br>&amp;指在后台运行，但当用户退出（挂起）的时候，命令也跟着退出。将nohup和&amp;组合在一起：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup COMMAND &amp;</span><br></pre></td></tr></table></figure></p><p>理论上是可以将命令永久的放在后台执行，但是在实际中不是这样。因为是租用的Azure，必须使用SSH远程登录后进行操作，在使用nohup命令中发现关闭SSH后程序依旧挂断了，即使使用exit退出帐号再用<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jobs</span><br></pre></td></tr></table></figure></p><p>命令查看刚刚nohup的操作都被结束了。<br>原因是当网络断开或终端窗口关闭后，控制进程收到SIGHUP信号(挂断信号，默认的动作是终止程序)退出，会导致该会话期(Session, 一个或多个进程组的集合)内其他进程退出。</p><h3 id="screen"><a href="#screen" class="headerlink" title="screen"></a>screen</h3><p><a href="https://www.ibm.com/developerworks/cn/linux/l-cn-screen/" target="_blank" rel="noopener">screen</a>是一个可以在多个进程之间多路复用一个物理终端的窗口管理器。screen中有会话的概念，用户可以在一个screen会话中创建多个screen窗口，在每一个screen窗口中就像操作一个真实的telnet/SSH连接窗口那样。<br>可以通过直接输入<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">screen</span><br></pre></td></tr></table></figure></p><p>创建一个窗口。如果想要将窗口挂起，可以使用Ctrl+a d命令。<br>常用的命令还有：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">screen -ls // 查看screen会话</span><br><span class="line">screen -list // 同 -ls</span><br><span class="line">screen -r * // 重新连接screen会话</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;nohup的缺陷&quot;&gt;&lt;a href=&quot;#nohup的缺陷&quot; class=&quot;headerlink&quot; title=&quot;nohup的缺陷&quot;&gt;&lt;/a&gt;nohup的缺陷&lt;/h3&gt;&lt;p&gt;在开发Discord Monitor过程中需要将Monitor挂起到后台，最开始使用的是no
+      
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="https://araid0628.github.io/tags/Linux/"/>
+    
+      <category term="Discord" scheme="https://araid0628.github.io/tags/Discord/"/>
+    
+  </entry>
   
   <entry>
     <title>HTTP状态码及扩展</title>
@@ -210,9 +235,9 @@
       <category term="SnkrsMonitor" scheme="https://araid0628.github.io/categories/SnkrsMonitor/"/>
     
     
-      <category term="爬虫" scheme="https://araid0628.github.io/tags/%E7%88%AC%E8%99%AB/"/>
-    
       <category term="JSON" scheme="https://araid0628.github.io/tags/JSON/"/>
+    
+      <category term="爬虫" scheme="https://araid0628.github.io/tags/%E7%88%AC%E8%99%AB/"/>
     
   </entry>
   
@@ -625,11 +650,11 @@
     
       <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
     
+      <category term="爬虫" scheme="https://araid0628.github.io/tags/%E7%88%AC%E8%99%AB/"/>
+    
       <category term="数据挖掘" scheme="https://araid0628.github.io/tags/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/"/>
     
       <category term="正则表达式" scheme="https://araid0628.github.io/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
-    
-      <category term="爬虫" scheme="https://araid0628.github.io/tags/%E7%88%AC%E8%99%AB/"/>
     
   </entry>
   

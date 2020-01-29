@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[nohup缺陷及screen命令]]></title>
+    <url>%2F2020%2F01%2F29%2Fnohup-screen%2F</url>
+    <content type="text"><![CDATA[nohup的缺陷在开发Discord Monitor过程中需要将Monitor挂起到后台，最开始使用的是nohup命令：1nohup python3 *.py &gt; *.log 2&gt;&amp;1 &amp; 将标准错误(2)重定向到标准输出(&amp;1)，标准输出(&amp;1)再被重定向到指定的log文件中。&amp;指在后台运行，但当用户退出（挂起）的时候，命令也跟着退出。将nohup和&amp;组合在一起：1nohup COMMAND &amp; 理论上是可以将命令永久的放在后台执行，但是在实际中不是这样。因为是租用的Azure，必须使用SSH远程登录后进行操作，在使用nohup命令中发现关闭SSH后程序依旧挂断了，即使使用exit退出帐号再用1jobs 命令查看刚刚nohup的操作都被结束了。原因是当网络断开或终端窗口关闭后，控制进程收到SIGHUP信号(挂断信号，默认的动作是终止程序)退出，会导致该会话期(Session, 一个或多个进程组的集合)内其他进程退出。 screenscreen是一个可以在多个进程之间多路复用一个物理终端的窗口管理器。screen中有会话的概念，用户可以在一个screen会话中创建多个screen窗口，在每一个screen窗口中就像操作一个真实的telnet/SSH连接窗口那样。可以通过直接输入1screen 创建一个窗口。如果想要将窗口挂起，可以使用Ctrl+a d命令。常用的命令还有：123screen -ls // 查看screen会话screen -list // 同 -lsscreen -r * // 重新连接screen会话]]></content>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Discord</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[HTTP状态码及扩展]]></title>
     <url>%2F2020%2F01%2F24%2Fhttpcode%2F</url>
     <content type="text"><![CDATA[在Snrks Discord Monitor中的日志截取到如下，对中间一些知识点做整理。12342020-01-23 15:01:54,486 - /home/araid/.local/lib/python3.6/site-packages/urllib3/connectionpool.py[line:959] - DEBUG: Starting new HTTPS connection (1): api.nike.com:4432020-01-23 15:01:54,891 - /home/araid/.local/lib/python3.6/site-packages/urllib3/connectionpool.py[line:437] - DEBUG: https://api.nike.com:443 "GET /snkrs/content/v1/?country=CN&amp;language=zh-Hans&amp;orderBy=published&amp;offset=0 HTTP/1.1" 400 1272020-01-23 15:02:04,904 - /home/araid/.local/lib/python3.6/site-packages/urllib3/connectionpool.py[line:959] - DEBUG: Starting new HTTPS connection (1): api.nike.com:4432020-01-23 15:02:05,013 - /home/araid/.local/lib/python3.6/site-packages/urllib3/connectionpool.py[line:437] - DEBUG: https://api.nike.com:443 "GET /snkrs/content/v1/?country=CN&amp;language=zh-Hans&amp;orderBy=published&amp;offset=0 HTTP/1.1" 200 96165 GET请求整个Monitor的原理是经抓包得到的Nike Snkrs的API，通过URL发起GET请求。Query String Parameters包括四个：country(国家), lanuage(语言), offset(偏移量，一页有50条数据), orderBy(排序方式published和lastUpdated)。GET用于请求指定的页面信息，并返回实体主体。 HTTP状态码当浏览者访问一个网页时，浏览者的浏览器会向网页所在服务器发出请求。当浏览器接收并显示网页前，此网页所在的服务器会返回一个包含HTTP状态码的信息头（server header）用以响应浏览器的请求。日志中出现的有200(请求成功), 400(Bad Request 客户端请求的语法错误)。还有其他常见的如404 Not Found(服务器无法根据客户端的请求找到资源), 403 Forbidden(服务器拒绝执行客户端请求), 500 Internal Server Error(服务器内部错误，无法完成请求), 504 Gateway Time-out(充当网关或代理的服务器，未及时从远端服务器获取请求)。 HTTP/1.0和HTTP/1.1的区别 HTTP/1.0 每次请求都需要建立新的TCP连接，连接不能复用。HTTP/1.1 新的请求可以在上次请求建立的TCP连接之上发送，连接可以复用。优点是减少重复进行TCP三次握手的开销，提高效率。 HTTP1.1在Request消息头里头多了一个Host域, HTTP1.0则没有这个域。 HTTP1.1增加了OPTIONS, PUT, DELETE, TRACE, CONNECT这些Request方法。等]]></content>
@@ -68,8 +77,8 @@
         <category>SnkrsMonitor</category>
       </categories>
       <tags>
-        <tag>爬虫</tag>
         <tag>JSON</tag>
+        <tag>爬虫</tag>
       </tags>
   </entry>
   <entry>
@@ -238,9 +247,9 @@
       </categories>
       <tags>
         <tag>Python</tag>
+        <tag>爬虫</tag>
         <tag>数据挖掘</tag>
         <tag>正则表达式</tag>
-        <tag>爬虫</tag>
       </tags>
   </entry>
   <entry>
