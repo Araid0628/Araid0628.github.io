@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[LeetCode review 1 LinkedList]]></title>
     <url>%2F2020%2F02%2F20%2Fleetcode-review-1%2F</url>
-    <content type="text"><![CDATA[lc2 两数相加给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。您可以假设除了数字 0 之外，这两个数都不会以 0 开头。123456789101112131415161718192021222324class Solution: def addTwoNumbers(self, l1: ListNode, l2: ListNode) -&gt; ListNode: if not l1: return l2 if not l2: return l1 res = ListNode(0) temp = res flag = 0 while l1 or l2: temp_sum = 0 if l1: temp_sum += l1.val l1 = l1.next if l2: temp_sum += l2.val l2 = l2.next temp_res = (temp_sum+flag) % 10 flag = (temp_sum+flag) // 10 res.next = ListNode(temp_res) res = res.next if flag: res.next = ListNode(1) return temp.next temp_sum计算每一位，flag计算进位，注意进位的处理。]]></content>
+    <content type="text"><![CDATA[lc2 两数相加给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。您可以假设除了数字 0 之外，这两个数都不会以 0 开头。temp_sum计算每一位，flag计算进位，注意进位的处理。 123456789101112131415161718192021222324class Solution: def addTwoNumbers(self, l1: ListNode, l2: ListNode) -&gt; ListNode: if not l1: return l2 if not l2: return l1 res = ListNode(0) temp = res flag = 0 while l1 or l2: temp_sum = 0 if l1: temp_sum += l1.val l1 = l1.next if l2: temp_sum += l2.val l2 = l2.next temp_res = (temp_sum+flag) % 10 flag = (temp_sum+flag) // 10 res.next = ListNode(temp_res) res = res.next if flag: res.next = ListNode(1) return temp.next lc19 删除链表的倒数第N个节点给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。双指针的next指向head，第一个指针先向后移动n个位置，然后两个指针同时移动直到第一个指针移动到链表末端，此时第二个指针指向倒数第n+1个数，删除第二个指针的next节点即可。class Solution: def removeNthFromEnd(self, head: ListNode, n: int) -&gt; ListNode: res = ListNode(0) res.next = head p, q = res, res for _ in range(n): q = q.next while q.next: q = q.next p = p.next p.next = p.next.next return res.next]]></content>
       <tags>
         <tag>LeetCode</tag>
       </tags>
@@ -132,8 +132,8 @@
     <url>%2F2019%2F04%2F10%2Flstm%2F</url>
     <content type="text"><![CDATA[LSTM网络Long short-term memory，即LSTM。在传统的RNN中，所有的RNN都具有一种重复神经网络模块的链接形式，例如一个tanh层。LSTM的重复模块有一个不同的结构。]]></content>
       <tags>
-        <tag>Python</tag>
         <tag>深度学习</tag>
+        <tag>Python</tag>
         <tag>项目实训</tag>
         <tag>LSTM</tag>
         <tag>RNN</tag>
