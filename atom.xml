@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://araid0628.github.io/"/>
-  <updated>2020-02-20T07:32:18.023Z</updated>
+  <updated>2020-05-22T12:41:39.613Z</updated>
   <id>https://araid0628.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>不平衡样本的样本均衡问题</title>
+    <link href="https://araid0628.github.io/2020/05/22/imblearn/"/>
+    <id>https://araid0628.github.io/2020/05/22/imblearn/</id>
+    <published>2020-05-22T09:12:17.000Z</published>
+    <updated>2020-05-22T12:41:39.613Z</updated>
+    
+    <content type="html"><![CDATA[<p>样本分布不均衡将导致样本量少的分类所包含的特征过少，并很难从中提取规律；即使得到分类模型，也容易产生过度依赖于有限的数据样本而导致过拟合的问题，当模型应用到新的数据上时，模型的准确性和鲁棒性将很差。<br>样本分布不平衡主要在于不同类别间的样本比例差异，如果不同分类间的样本量差异达到超过10倍就需要引起警觉并考虑处理该问题，超过20倍就要一定要解决该问题。  </p><h3 id="哪些场景容易出现样本不平衡"><a href="#哪些场景容易出现样本不平衡" class="headerlink" title="哪些场景容易出现样本不平衡"></a>哪些场景容易出现样本不平衡</h3><ol><li>异常场景的检测 恶意刷单、信用卡欺诈等</li><li>罕见事件、低频事件</li></ol><h3 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h3><ol><li>上采样和下采样<br>上采样：通过增加分类中少数类样本的数量来实现样本均衡，最直接的方法是简单复制少数类样本形成多条记录，这种方法的缺点是如果样本特征少而可能导致过拟合的问题；经过改进的过抽样方法通过在少数类中加入随机噪声、干扰数据或通过一定规则产生新的合成样本，例如SMOTE算法。<br>下采样：通过减少分类中多数类样本的样本数量来实现样本均衡，最直接的方法是随机地去掉一些多数类样本来减小多数类的规模，缺点是会丢失多数类样本中的一些重要信息。</li><li>通过组合/集成方法解决样本不平衡<br>组合/集成方法指的是在每次生成训练集时使用所有分类中的小样本量，同时从分类中的大样本量中随机抽取数据来与小样本量合并构成训练集，这样反复多次会得到很多训练集和训练模型。最后在应用时，使用组合方法（例如投票、加权投票等）产生分类预测结果。</li><li>通过特征选择解决样本不均衡<br>上述几种方法都是基于数据行的操作，通过多种途径来使得不同类别的样本数据行记录均衡。除此以外，还可以考虑使用或辅助于基于列的特征选择方法。<br>一般情况下，样本不均衡也会导致特征分布不均衡，但如果小类别样本量具有一定的规模，那么意味着其特征值的分布较为均匀，可通过选择具有显著型的特征配合参与解决样本不均衡问题，也能在一定程度上提高模型效果。</li><li>无监督<br>对于从大规模数据中寻找罕见数据的应用场景，亦可使用非监督式的学习方法，例如使用One-class SVM、高斯分布进行异常检测。<br>大多数数据挖掘或数据工作中，异常点都会在数据的预处理过程中被认为是“噪音”而剔除，以避免其对总体数据评估和分析挖掘的影响。但某些情况下，如果数据工作的目标就是围绕异常点，那么这些异常点会成为数据工作的焦点。 数据集中的异常数据通常被成为异常点、离群点或孤立点等，典型特征是这些数据的特征或规则与大多数数据不一致，呈现出“异常”的特点，而检测这些数据的方法被称为异常检测。 “噪音”的出现有多种原因，例如业务操作的影响（典型案例如网站广告费用增加10倍，导致流量激增）、数据采集问题（典型案例如数据缺失、不全、溢出、格式匹配等问题）、数据同步问题（异构数据库同步过程中的丢失、连接错误等导致的数据异常），而对离群点进行挖掘分析之前，需要从中区分出真正的“离群数据”，而非“垃圾数据”。</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;样本分布不均衡将导致样本量少的分类所包含的特征过少，并很难从中提取规律；即使得到分类模型，也容易产生过度依赖于有限的数据样本而导致过拟合的问题，当模型应用到新的数据上时，模型的准确性和鲁棒性将很差。&lt;br&gt;样本分布不平衡主要在于不同类别间的样本比例差异，如果不同分类间的样本
+      
+    
+    </summary>
+    
+    
+      <category term="机器学习" scheme="https://araid0628.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode review 1 LinkedList</title>
@@ -285,9 +310,9 @@
       <category term="SnkrsMonitor" scheme="https://araid0628.github.io/categories/SnkrsMonitor/"/>
     
     
-      <category term="JSON" scheme="https://araid0628.github.io/tags/JSON/"/>
-    
       <category term="爬虫" scheme="https://araid0628.github.io/tags/%E7%88%AC%E8%99%AB/"/>
+    
+      <category term="JSON" scheme="https://araid0628.github.io/tags/JSON/"/>
     
   </entry>
   
@@ -700,11 +725,11 @@
     
       <category term="Python" scheme="https://araid0628.github.io/tags/Python/"/>
     
-      <category term="爬虫" scheme="https://araid0628.github.io/tags/%E7%88%AC%E8%99%AB/"/>
-    
       <category term="数据挖掘" scheme="https://araid0628.github.io/tags/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/"/>
     
       <category term="正则表达式" scheme="https://araid0628.github.io/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    
+      <category term="爬虫" scheme="https://araid0628.github.io/tags/%E7%88%AC%E8%99%AB/"/>
     
   </entry>
   

@@ -306,6 +306,163 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://araid0628.github.io/2019/03/03/housepricingweek1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Fu Hanlin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fu's Workshop">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/03/housepricingweek1/" itemprop="url">项目实训第一周总结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-03T21:22:38+08:00">
+                2019年03月03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/项目实训/" itemprop="url" rel="index">
+                    <span itemprop="name">项目实训</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>寒假前已经定好了这次项目实训的题目，放假的时候群里关于房价数据爬虫的讨论随着一句“过完年再说”戛然而止，然而第一周已经结束了才空出时间来写总结。</p>
+<h3 id="项目需求"><a href="#项目需求" class="headerlink" title="项目需求"></a>项目需求</h3><p>城市房价分析系统<br>技术类别：<br>Web，网络爬虫，数据分析<br>基本功能：<br>通过爬取链家网，我爱我家等中介机构，以及城市建设局网站数据，实现对指定城市的房价进行排序和分析，并结合一定规律进行预测<br>难易程度：中等<br>需求实现：</p>
+<ol>
+<li>按用户输入城市名称，爬取和显示城市不同小区，不同区域的房价，并用柱状图显示</li>
+<li>按年份，月份，显示和分析某区域房价走向和趋势</li>
+<li>对比相同价格下不同城市的房产品牌</li>
+<li>对比不同城市房价走向，并进行归类分析</li>
+<li>实现房价波动的简单预测</li>
+</ol>
+<h3 id="需求理解"><a href="#需求理解" class="headerlink" title="需求理解"></a>需求理解</h3><p>1.项目是什么？<br>一个Web，可以向用户展示粒度从市—行政区—具体楼盘的统计数据，可以根据用户提供的新楼盘数据做预测。<br>2.项目怎么做？<br>Java Web(Spring bot, vue.js, Echarts)<br>Python(bs4, sklearn, pandas等)<br>MySQL<br>百度API（POI相关信息获取）<br>预测模型XgBoost + LR/DT, 是否采用Deep Learning视项目进度决定</p>
+<h3 id="开发模式"><a href="#开发模式" class="headerlink" title="开发模式"></a>开发模式</h3><p>Scrum敏捷开发模式，lm担任产品经理，ltz担任技术主管，我是master。作为master在项目中要负责管理上的事务很多，经理日报，进度控制，每日组会，团建等等，对人际沟通能力是个很好的提升。组员都很自觉，分工我和lm负责数据和预测部分，另外三位负责Web。</p>
+<h3 id="第一周进度"><a href="#第一周进度" class="headerlink" title="第一周进度"></a>第一周进度</h3><ol>
+<li>数据部分：爬虫完成，爬取了某壳网上一线城市和二线城市的数据</li>
+<li>Web部分：通过百度地图的控件可以在地图上显示城市和行政区的统计数据，校对经纬度花了挺久。</li>
+<li>预测部分：数据清洗中，第二周预测模块应该能实现。</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://araid0628.github.io/2019/02/28/baiduAPI/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1610,7 +1767,7 @@ def getURL():                #抓取工程院院士的URL和姓名
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

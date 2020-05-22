@@ -306,6 +306,136 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://araid0628.github.io/2020/05/22/imblearn/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Fu Hanlin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fu's Workshop">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/22/imblearn/" itemprop="url">不平衡样本的样本均衡问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-22T17:12:17+08:00">
+                2020年05月22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>样本分布不均衡将导致样本量少的分类所包含的特征过少，并很难从中提取规律；即使得到分类模型，也容易产生过度依赖于有限的数据样本而导致过拟合的问题，当模型应用到新的数据上时，模型的准确性和鲁棒性将很差。<br>样本分布不平衡主要在于不同类别间的样本比例差异，如果不同分类间的样本量差异达到超过10倍就需要引起警觉并考虑处理该问题，超过20倍就要一定要解决该问题。  </p>
+<h3 id="哪些场景容易出现样本不平衡"><a href="#哪些场景容易出现样本不平衡" class="headerlink" title="哪些场景容易出现样本不平衡"></a>哪些场景容易出现样本不平衡</h3><ol>
+<li>异常场景的检测 恶意刷单、信用卡欺诈等</li>
+<li>罕见事件、低频事件</li>
+</ol>
+<h3 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h3><ol>
+<li>上采样和下采样<br>上采样：通过增加分类中少数类样本的数量来实现样本均衡，最直接的方法是简单复制少数类样本形成多条记录，这种方法的缺点是如果样本特征少而可能导致过拟合的问题；经过改进的过抽样方法通过在少数类中加入随机噪声、干扰数据或通过一定规则产生新的合成样本，例如SMOTE算法。<br>下采样：通过减少分类中多数类样本的样本数量来实现样本均衡，最直接的方法是随机地去掉一些多数类样本来减小多数类的规模，缺点是会丢失多数类样本中的一些重要信息。</li>
+<li>通过组合/集成方法解决样本不平衡<br>组合/集成方法指的是在每次生成训练集时使用所有分类中的小样本量，同时从分类中的大样本量中随机抽取数据来与小样本量合并构成训练集，这样反复多次会得到很多训练集和训练模型。最后在应用时，使用组合方法（例如投票、加权投票等）产生分类预测结果。</li>
+<li>通过特征选择解决样本不均衡<br>上述几种方法都是基于数据行的操作，通过多种途径来使得不同类别的样本数据行记录均衡。除此以外，还可以考虑使用或辅助于基于列的特征选择方法。<br>一般情况下，样本不均衡也会导致特征分布不均衡，但如果小类别样本量具有一定的规模，那么意味着其特征值的分布较为均匀，可通过选择具有显著型的特征配合参与解决样本不均衡问题，也能在一定程度上提高模型效果。</li>
+<li>无监督<br>对于从大规模数据中寻找罕见数据的应用场景，亦可使用非监督式的学习方法，例如使用One-class SVM、高斯分布进行异常检测。<br>大多数数据挖掘或数据工作中，异常点都会在数据的预处理过程中被认为是“噪音”而剔除，以避免其对总体数据评估和分析挖掘的影响。但某些情况下，如果数据工作的目标就是围绕异常点，那么这些异常点会成为数据工作的焦点。 数据集中的异常数据通常被成为异常点、离群点或孤立点等，典型特征是这些数据的特征或规则与大多数数据不一致，呈现出“异常”的特点，而检测这些数据的方法被称为异常检测。 “噪音”的出现有多种原因，例如业务操作的影响（典型案例如网站广告费用增加10倍，导致流量激增）、数据采集问题（典型案例如数据缺失、不全、溢出、格式匹配等问题）、数据同步问题（异构数据库同步过程中的丢失、连接错误等导致的数据异常），而对离群点进行挖掘分析之前，需要从中区分出真正的“离群数据”，而非“垃圾数据”。</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://araid0628.github.io/2020/02/20/leetcode-review-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1443,161 +1573,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://araid0628.github.io/2019/07/26/gpu-server/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Fu Hanlin">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fu's Workshop">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/26/gpu-server/" itemprop="url">ubuntu服务器配置(tensorflow+cuda+cudnn+显卡驱动)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-26T23:46:59+08:00">
-                2019年07月26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h3><p>我们组有两台服务器一直在某个小房间里吃灰，光靠工作站里的两块1080Ti算力确实不够。某天和IT一起把线接好了可以启动了，但是一看开发环境还是两年多前的，各种软件版本都比较旧了。<br><img src="images/20190726235204.jpg" alt="GPU"><br>两块Tesla P100在里面积了不少灰，曾经想把他拆下来装在台式机上后来发现台式机电源不是全模组的根本没那个供电的接口，还是放回去吧。    </p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>GPU</th>
-<th>Compute Capability</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Tesla P100</td>
-<td>6.0</td>
-</tr>
-<tr>
-<td>GeForce GTX 1080 Ti</td>
-<td>6.1</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><center>Retrieved from https://developer.nvidia.com/cuda-gpus</center><br>三四万一张的P100计算能力怎么还没有1080Ti好使呢?这个计算能力应该只是在深度学习领域。Tesla系列的专业显卡相比Geforce显卡拥有更高的计算精度，对于航空航天、药物研发等领域提供双精度（FP64）进行更加精准的计算。Tesla的显存颗粒更贵，支持高精度计算不会在读写存储时出现误差。<br>建议立刻更新到Quadro RTX 8000或者Tesla T4（没funding）  </p>
-<h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><h4 id="显卡驱动"><a href="#显卡驱动" class="headerlink" title="显卡驱动"></a>显卡驱动</h4><ol>
-<li>禁用nouveau驱动<br>Ubuntu系统集成的显卡驱动程序是nouveau，我们需要先将nouveau从linux内核卸载掉才能安装NVIDIA官方驱动。我们的服务器是纯命令行，直接执行最后一步即可。<br>（1） 修改blacklist.conf 文件属性blacklist.conf<br>查看属性<br>•    ll /etc/modprobe.d/blacklist.conf<br>修改属性<br>•    sudo chmod 666 /etc/modprobe.d/blacklist.conf<br>用vi编辑器打开<br>•    sudo vi /etc/modprobe.d/blacklist.conf<br>•    在文件末尾添加如下几行：<br>blacklist vga16fb<br>blacklist nouveau<br>blacklist rivafb<br>blacklist rivatv<br>blacklist nvidiafb<br>（2）修改并保存文件后，记得把文件属性复原：<br>•    sudo chmod 644 /etc/modprobe.d/blacklist.conf<br>更新一下内核<br>•    sudo update-initramfs -u<br>修改后需要重启系统<br>•    reboot (重启)<br>重启系统确认nouveau是否已经被屏蔽掉，使用lsmod命令查看，lsmod命令用于显示已经加载到内核中的模块的状态信息<br>•    lsmod | grep nouveau<br>若已屏蔽没有任何信息  </li>
-<li>手动安装驱动<br>提前载nvidia官网上下好了对应版本的驱动，直接用jupyter notebook传到服务器上就可以。<br>•    进入nvidia官网 <a href="https://www.geforce.cn/drivers" target="_blank" rel="noopener">https://www.geforce.cn/drivers</a><br>下载对应显卡的驱动程序，下载后的文件格式为run。<br>•    删除原有的NVIDIA驱动程序(若没有安装忽略)<br>•    sudo apt-get remove –purge nvidia*<br>•    进入命令行桌面<br>给驱动文件增加可执行权限<br>•    sudo chmod a+x NVIDIA-Linux-x86_64-418.74.run（cd到文件所在文件夹。）<br>安装<br>•    sudo sh ./NVIDIA-Linux-x86_64-418.74.run.run –no-opengl-files    </li>
-<li>检查<br>输入nvidia-smi即可检查驱动是否安装成功。<br><img src="images/IMG_3714.PNG" alt="GPU"></li>
-</ol>
-<h4 id="安装CUDA"><a href="#安装CUDA" class="headerlink" title="安装CUDA"></a>安装CUDA</h4><ol>
-<li>进入官网下载对应版本(<a href="https://developer.nvidia.com/cuda-downloads?target_os=Linux&amp;target_arch=x86_64&amp;target_distro=Ubuntu&amp;target_version=1804&amp;target_type=deblocal" target="_blank" rel="noopener">https://developer.nvidia.com/cuda-downloads?target_os=Linux&amp;target_arch=x86_64&amp;target_distro=Ubuntu&amp;target_version=1804&amp;target_type=deblocal</a>)<br>2.运行指令需要cd到包含该文件的文件夹目录下<br>根据官网提示指令安装即可<br>•    sudo dpkg -i  cuda-repo-ubuntu1804-10-1-local-10.1.168-418.67_1.0-1_amd64.deb<br>•    sudo apt-key add /var/cuda-repo-ubuntu1804-10-1-local-10.1.168/7fa2af80.pub<br>•    sudo apt-get update<br>•    sudo apt-get install cuda  </li>
-</ol>
-<h4 id="安装cuDnn"><a href="#安装cuDnn" class="headerlink" title="安装cuDnn"></a>安装cuDnn</h4><ol>
-<li>进入官网注册并下载对应的cudnn版本。(<a href="https://developer.nvidia.com/rdp/cudnn-download" target="_blank" rel="noopener">https://developer.nvidia.com/rdp/cudnn-download</a>)</li>
-<li>下载完成后解压文件<br>tar -zxvf cudnn-10.1-linux-x64-v7.5.1.10.tgz  </li>
-<li>解压完成将相应的文件拷贝到对应的CUDA目录下即可（要cd到含cudnn文件的目录下）<br>• sudo cp cuda/include/cudnn.h /usr/local/cuda/include/<br>• sudo cp cuda/lib64/libcudnn<em> /usr/local/cuda/lib64/<br>• sudo chmod a+r /usr/local/cuda/include/cudnn.h<br>• sudo chmod a+r /usr/local/cuda/lib64/libcudnn</em>  </li>
-<li>编辑环境变量<br>• sudo gedit ~/.bashrc<br>将cuda的环境变量加到打开的文件最后<br>• export LD_LIBRARY_PATH=”$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64”<br>• export CUDA_HOME=/usr/local/cuda<br>• export PATH=“CUDAHOME/bin:PATH”<br>保存后，终端输入<br>• source ~/.bashrc</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1648,7 +1623,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
